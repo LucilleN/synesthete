@@ -26,7 +26,7 @@ const Homepage = props => {
   const { classes } = props
   return (
     <div className={classes.root}>
-      <Typography classname={classes.title}>
+      <Typography className={classes.title}>
         synesthete
       </Typography>
       <StartButton />
