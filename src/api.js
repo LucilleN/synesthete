@@ -1,5 +1,113 @@
 const apiHost = () => { } // No-op in our mock version.
 
+const getAudioFeatures = () => Promise.resolve({
+  "danceability": 0.441,
+  "energy": 0.379,
+  "key": 2,
+  "loudness": -9.545,
+  "mode": 1,
+  "speechiness": 0.0449,
+  "acousticness": 0.968,
+  "instrumentalness": 0.262,
+  "liveness": 0.639,
+  "valence": 0.105,
+  "tempo": 174.118,
+  "type": "audio_features",
+  "id": "0QZ5yyl6B6utIWkxeBDxQN",
+  "uri": "spotify:track:0QZ5yyl6B6utIWkxeBDxQN",
+  "track_href": "https://api.spotify.com/v1/tracks/0QZ5yyl6B6utIWkxeBDxQN",
+  "analysis_url": "https://api.spotify.com/v1/audio-analysis/0QZ5yyl6B6utIWkxeBDxQN",
+  "duration_ms": 208227,
+  "time_signature": 3
+})
+
+const getRecommendation = () => Promise.resolve({
+  "tracks" : [ {
+    "album" : {
+      "album_type" : "ALBUM",
+      "artists" : [ {
+        "external_urls" : {
+          "spotify" : "https://open.spotify.com/artist/0XHM5ZNJDU8e4CfbWMeSzC"
+        },
+        "href" : "https://api.spotify.com/v1/artists/0XHM5ZNJDU8e4CfbWMeSzC",
+        "id" : "0XHM5ZNJDU8e4CfbWMeSzC",
+        "name" : "Roo Panes",
+        "type" : "artist",
+        "uri" : "spotify:artist:0XHM5ZNJDU8e4CfbWMeSzC"
+      } ],
+      "available_markets" : [ "AD", "AE", "AR", "AT", "AU", "BE", "BG", "BH", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "DZ", "EC", "EE", "EG", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "ID", "IE", "IL", "IN", "IS", "IT", "JO", "JP", "KW", "LB", "LI", "LT", "LU", "LV", "MA", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "OM", "PA", "PE", "PH", "PL", "PS", "PT", "PY", "QA", "RO", "SA", "SE", "SG", "SK", "SV", "TH", "TN", "TR", "TW", "US", "UY", "VN", "ZA" ],
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/album/3ZTS2uxdWAkBnIXzsCY8PZ"
+      },
+      "href" : "https://api.spotify.com/v1/albums/3ZTS2uxdWAkBnIXzsCY8PZ",
+      "id" : "3ZTS2uxdWAkBnIXzsCY8PZ",
+      "images" : [ {
+        "height" : 640,
+        "url" : "https://i.scdn.co/image/ab67616d0000b2731763012ab9a170a56bf0542a",
+        "width" : 640
+      }, {
+        "height" : 300,
+        "url" : "https://i.scdn.co/image/ab67616d00001e021763012ab9a170a56bf0542a",
+        "width" : 300
+      }, {
+        "height" : 64,
+        "url" : "https://i.scdn.co/image/ab67616d000048511763012ab9a170a56bf0542a",
+        "width" : 64
+      } ],
+      "name" : "Little Giant",
+      "release_date" : "2014-10-06",
+      "release_date_precision" : "day",
+      "total_tracks" : 0,
+      "type" : "album",
+      "uri" : "spotify:album:3ZTS2uxdWAkBnIXzsCY8PZ"
+    },
+    "artists" : [ {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/0XHM5ZNJDU8e4CfbWMeSzC"
+      },
+      "href" : "https://api.spotify.com/v1/artists/0XHM5ZNJDU8e4CfbWMeSzC",
+      "id" : "0XHM5ZNJDU8e4CfbWMeSzC",
+      "name" : "Roo Panes",
+      "type" : "artist",
+      "uri" : "spotify:artist:0XHM5ZNJDU8e4CfbWMeSzC"
+    } ],
+    "available_markets" : [ "AD", "AE", "AR", "AT", "AU", "BE", "BG", "BH", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "DZ", "EC", "EE", "EG", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "ID", "IE", "IL", "IN", "IS", "IT", "JO", "JP", "KW", "LB", "LI", "LT", "LU", "LV", "MA", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "OM", "PA", "PE", "PH", "PL", "PS", "PT", "PY", "QA", "RO", "SA", "SE", "SG", "SK", "SV", "TH", "TN", "TR", "TW", "US", "UY", "VN", "ZA" ],
+    "disc_number" : 1,
+    "duration_ms" : 241720,
+    "explicit" : false,
+    "external_ids" : {
+      "isrc" : "GB5UQ1400018"
+    },
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/track/4C2aiAVTTVyZbCQZst5Xu1"
+    },
+    "href" : "https://api.spotify.com/v1/tracks/4C2aiAVTTVyZbCQZst5Xu1",
+    "id" : "4C2aiAVTTVyZbCQZst5Xu1",
+    "is_local" : false,
+    "name" : "Tiger Striped Sky",
+    "popularity" : 68,
+    "preview_url" : null,
+    "track_number" : 6,
+    "type" : "track",
+    "uri" : "spotify:track:4C2aiAVTTVyZbCQZst5Xu1"
+  } ],
+  "seeds" : [ {
+    "initialPoolSize" : 250,
+    "afterFilteringSize" : 250,
+    "afterRelinkingSize" : 250,
+    "id" : "6ltzsmQQbmdoHHbLZ4ZN25",
+    "type" : "ARTIST",
+    "href" : "https://api.spotify.com/v1/artists/6ltzsmQQbmdoHHbLZ4ZN25"
+  }, {
+    "initialPoolSize" : 249,
+    "afterFilteringSize" : 249,
+    "afterRelinkingSize" : 249,
+    "id" : "0QZ5yyl6B6utIWkxeBDxQN",
+    "type" : "TRACK",
+    "href" : "https://api.spotify.com/v1/tracks/0QZ5yyl6B6utIWkxeBDxQN"
+  } ]
+})
+
 const searchSongs = () => Promise.resolve({
   // data: [
   //   {
