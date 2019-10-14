@@ -44,7 +44,6 @@ const styles = () => ({
   root: {
     width: '100vw',
     height: '100vh',
-    // background: `linear-gradient(0deg, ${theme.palette.dark.pink} 0%, ${theme.palette.dark.purple} 70%)`
     background: `linear-gradient(0deg, ${theme.palette.dark.pink} -25%, ${theme.palette.dark.purple} 80%)`
   }
 })
