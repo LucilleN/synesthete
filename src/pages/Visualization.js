@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
@@ -49,15 +49,29 @@ const styles = theme => ({
   '@keyframes bg': {
     from: { backgroundPosition: '0 0' },
     to: { backgroundPosition: '8px 8px' }
+  },
+  title: {
+    color: theme.palette.white,
+    fontSize: '2rem'
   }
 })
 
 const Visualization = props => {
   const { classes } = props
+
+  const [songID, setSongID] = useState(null)
+
+  // is this how you do a componentDidMount with hooks?
+  useEffect(() => {
+    const { songID } = props.match.params
+    setSongID(songID)
+    // Use this later for real API stuff
+  })
+
   return (
     <div className={classes.root}>
-      <Typography>
-        Visualization Page
+      <Typography className={classes.title}>
+        Visualization Page, song ID is {songID}
       </Typography>
       <input type="file" id="file-input" accept="audio/*,video/*,image/*" className={classes.fileInput}/>
       <canvas id="canvas" width="300" height="300" className={classes.canvas}></canvas>
