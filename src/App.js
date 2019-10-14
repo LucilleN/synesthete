@@ -4,8 +4,6 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { withStyles } from '@material-ui/core/styles'
 
-import './App.css'
-
 import AppHeader from './AppHeader'
 import SearchForm from './SearchForm'
 
@@ -54,6 +52,7 @@ const routes = (
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route exact path="/search" component={Search} />
+        <Route exact path="/visualization" component={Visualization} />
         <Route exact path="/visualization/:songID" component={Visualization} />
       </Switch>
     </div>
