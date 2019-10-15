@@ -33,7 +33,11 @@ const styles = theme => ({
     width: '150px',
     borderRadius: '30px',
     border: 'none',
-    margin: 5
+    margin: 5,
+    '&:hover': {
+       background: theme.palette.white,
+       color: theme.palette.dark.pink
+    },
   },
   buttonDisabled: {
     color: theme.palette.white,
@@ -45,6 +49,27 @@ const styles = theme => ({
     border: 'none',
     margin: 5,
     opacity: '0.3'
+  },
+  resultsContainer: {
+    maxHeight: '65vh',
+    minHeight: '65vh',
+    overflow: 'auto',
+    marginTop: 10,
+    padding: '0px 15px 15px',
+    background: theme.palette.dark.purple,
+    // This doesn't work
+    '@global': {
+      '*::-webkit-scrollbar': {
+        width: '0.4em'
+      },
+      '*::-webkit-scrollbar-track': {
+        '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.00)'
+      },
+      '*::-webkit-scrollbar-thumb': {
+        backgroundColor: 'rgba(0,0,0,.1)',
+        outline: '1px solid slategrey'
+      }
+    }
   }
 })
 
@@ -77,15 +102,17 @@ const SearchForm = (props) => {
     }
   }
 
-  const handleTrackSelect = (event) => {
+  const handleTrackSelect = async event => {
     // do api stuff
     console.log(`CALLED HANDLE TRACK SELECT: selected track id ${event.target.id}`)
     setSongSelected(true)
     setSongID(event.target.id)
+
+    // put a try catch here
   }
 
   if (!songSelected) {
-
+    // put whole thing in a Grid with justify="flex-end"
     return (
       <form className={classes.searchForm} onSubmit={performQuery}>
         <Typography className={classes.title}>
@@ -106,7 +133,7 @@ const SearchForm = (props) => {
           </div>
         )}
 
-        <Grid container xs={10}>
+        <Grid container xs={10} className={classes.resultsContainer}>
           <SearchResults results={songs} onTrackSelect={handleTrackSelect}/>
         </Grid>
 

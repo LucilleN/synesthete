@@ -7,10 +7,16 @@ const styles = theme => ({
   row: {
     background: theme.palette.light.pink,
     padding: 4,
-    margin: 1
+    margin: 2,
+    '&:hover': {
+       background: theme.palette.white,
+    },
   },
   text: {
     color: theme.palette.dark.purple,
+    '&:hover': {
+       color: theme.palette.dark.purple
+    },
   }
 })
 

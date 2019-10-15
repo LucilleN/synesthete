@@ -14,7 +14,11 @@ const styles = theme => ({
     margin: '0 auto',
     fontSize: '1.5rem',
     textAlign: 'center',
-    testTransform: 'none'
+    testTransform: 'none',
+    '&:hover': {
+       background: theme.palette.white,
+       color: theme.palette.dark.purple
+    },
   },
   text: {
     testTransform: 'none'
