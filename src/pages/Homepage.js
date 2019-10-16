@@ -16,7 +16,8 @@ const styles = theme => ({
   title: {
     fontSize: '7rem',
     fontWeight: 800,
-    color: theme.palette.white
+    color: theme.palette.white,
+    marginTop: '-10px'
   },
   subTitle: {
     fontSize: '3rem',

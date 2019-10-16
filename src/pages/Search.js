@@ -11,7 +11,7 @@ import { searchSongs } from '../api'
 const styles = theme => ({
   title: {
     color: theme.palette.light.pink,
-    padding: 5,
+    // padding: 5,
     fontSize: '3rem',
     textAlign: 'center'
   },
@@ -20,20 +20,32 @@ const styles = theme => ({
     flexDirection: 'column',
     alignItems: 'center'
   },
+  searchBar: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center',
+    marginTop: '-15px'
+  },
   searchField: {
     width: '50%',
     height: '1.5rem',
-    marginBottom: 10
+    color: theme.palette.light.pink,
+    '&:focus': {
+      outline: 'none',
+      border: `2px solid ${theme.palette.dark.pink}`,
+      color: theme.palette.dark.pink
+    },
   },
   buttonEnabled: {
     color: theme.palette.white,
     fontSize: '1rem',
     background: theme.palette.dark.pink,
-    height: '50px',
+    height: '40px',
     width: '150px',
     borderRadius: '30px',
     border: 'none',
-    margin: 5,
+    margin: 15,
     '&:hover': {
        background: theme.palette.white,
        color: theme.palette.dark.pink
@@ -43,11 +55,11 @@ const styles = theme => ({
     color: theme.palette.white,
     fontSize: '1rem',
     background: theme.palette.dark.pink,
-    height: '50px',
+    height: '40px',
     width: '150px',
     borderRadius: '30px',
     border: 'none',
-    margin: 5,
+    margin: 15,
     opacity: '0.3'
   },
   resultsContainer: {
@@ -57,18 +69,15 @@ const styles = theme => ({
     marginTop: 10,
     padding: '0px 15px 15px',
     background: theme.palette.dark.purple,
-    // This doesn't work
-    '@global': {
-      '*::-webkit-scrollbar': {
-        width: '0.4em'
-      },
-      '*::-webkit-scrollbar-track': {
-        '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.00)'
-      },
-      '*::-webkit-scrollbar-thumb': {
-        backgroundColor: 'rgba(0,0,0,.1)',
-        outline: '1px solid slategrey'
-      }
+    '&::-webkit-scrollbar': {
+      width: '1em',
+    },
+    '&::-webkit-scrollbar-track': {
+      '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.00)',
+      backgroundColor: theme.palette.dark.pink,
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: theme.palette.white,
     }
   }
 })
@@ -83,7 +92,10 @@ const SearchForm = (props) => {
   const [songSelected, setSongSelected] = useState(false)
   const [songID, setSongID] = useState(null)
 
+  const defaultText = 'search tracks'
+
   const handleQueryChange = event => setQuery(event.target.value)
+  // const handleFocus = event =>
 
   const performQuery = async event => {
     event.preventDefault() // why?
@@ -119,13 +131,12 @@ const SearchForm = (props) => {
           search
         </Typography>
 
-        <input name="query" type="text" value={query} onChange={handleQueryChange} className={classes.searchField}/>
-
-        <div className="ButtonBar">
+        <Grid container justify="center" className={classes.searchBar}>
+          <input name="query" type="text" value={query} onChange={handleQueryChange} className={classes.searchField}/>
           <button type="submit" disabled={!query} className={query ? classes.buttonEnabled : classes.buttonDisabled}>
             search tracks
           </button>
-        </div>
+        </Grid>
 
         {error && (
           <div className="error">
