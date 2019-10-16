@@ -9,7 +9,9 @@ import SearchForm from './SearchForm'
 
 import Homepage from './pages/Homepage'
 import Search from './pages/Search'
+import UploadVisualization from './pages/UploadVisualization'
 import Visualization from './pages/Visualization'
+import MenuBar from './components/MenuBar'
 
 import { apiHost } from './api'
 
@@ -50,8 +52,12 @@ const routes = (
   <Router>
     <div>
       <Switch>
+        <Route exact path="*" component={MenuBar}/>
+      </Switch>
+      <Switch>
         <Route exact path="/" component={Homepage} />
         <Route exact path="/search" component={Search} />
+        <Route exact path="/upload" component={UploadVisualization} />
         <Route exact path="/visualization" component={Visualization} />
         <Route exact path="/visualization/:songID" component={Visualization} />
       </Switch>
