@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
   bar: {
     background: theme.palette.dark.pink,
     height: '60px',
     textAlign: 'center',
-    // opacity: '0.8'
+    // opacity: '0.8',
+    zIndex: 10
   },
   button: {
     height: '100%',
@@ -39,17 +41,33 @@ const styles = theme => ({
 })
 
 const MenuBar = props => {
+  const [homeSelected, setHomeSelected] = useState(false)
+
+
+  const handleHomeSelect = event => {
+    console.log("handleHomeSelect called")
+    event.preventDefault()
+    setHomeSelected(true)
+    console.log(`homeSelected is ${homeSelected}`)
+  }
 
   const { classes } = props
 
+  if (homeSelected) {
+    // setHomeSelected(false)
+    return (
+      <Redirect to={'/'} />
+    )
+  }
+
   return (
-    <Grid container xs={12} className={classes.bar}>
-      <Grid item xs={3}>
+    <Grid container className={classes.bar}>
+      <Grid item xs={3} onClick={handleHomeSelect}>
         <Typography className={classes.logo}>
           synesthete
         </Typography>
       </Grid>
-      <Grid item xs={2} className={classes.button}>
+      <Grid item xs={2} className={classes.button} onClick={handleHomeSelect}>
         <Typography className={classes.textNotCurrentPage}>
           home
         </Typography>
