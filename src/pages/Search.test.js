@@ -5,7 +5,7 @@ import ReactTestUtils from 'react-dom/test-utils'
 
 import sinon from 'sinon'
 
-import SearchForm from './SearchForm'
+// import SearchForm from './SearchForm'
 import Search from './Search'
 
 import * as api from '../api'
@@ -29,13 +29,13 @@ import * as api from '../api'
 // https://semaphoreci.com/community/tutorials/snapshot-testing-react-components-with-jest
 //
 it('should start with an empty search field', () => {
-  const component = TestRenderer.create(<SearchForm />)
+  const component = TestRenderer.create(<Search />)
   const tree = component.toJSON()
   expect(tree).toMatchSnapshot()
 })
 
 it('should start with a disabled search button', () => {
-  const component = TestRenderer.create(<SearchForm />)
+  const component = TestRenderer.create(<Search />)
   const tree = component.toJSON()
   expect(tree).toMatchSnapshot()
 })
@@ -45,7 +45,7 @@ describe('search button', () => {
   beforeEach(() => {
     div = document.createElement('div')
     ReactTestUtils.act(() => {
-      ReactDOM.render(<SearchForm />, div)
+      ReactDOM.render(<Search />, div)
     })
   })
 
@@ -78,7 +78,7 @@ describe('search button', () => {
 const setupAndQuerySearchForm = async () => {
   const div = document.createElement('div')
   ReactTestUtils.act(() => {
-    ReactDOM.render(<SearchForm />, div)
+    ReactDOM.render(<Search />, div)
   })
 
   const searchInput = div.querySelector('input')
