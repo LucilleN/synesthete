@@ -1,19 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+import RecommendationButton from '../components/RecommendationButton'
 
-const styles = theme => ({
+export const styles = theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
   },
-  fileInput: {
-    // position: 'fixed',
-    // top: '10px',
-    // left: '10px',
-    zIndex: 3,
-    color: 'white'
+  // fileInput: {
+  //   // position: 'fixed',
+  //   // top: '10px',
+  //   // left: '10px',
+  //   zIndex: 3,
+  //   color: 'white'
+  // },
+  recommendationButton: {
+    zIndex: 10,
+    marginTop: 200
   },
   canvas: {
     position: 'fixed',
@@ -52,7 +57,7 @@ const styles = theme => ({
     left: '0px',
     background: 'linear-gradient(transparent, #00035f, transparent)',
     backgroundSize: '100% 7px',
-    animation: 'bg 1s infinite linear',
+    // animation: 'bg 1s infinite linear',
     zIndex: 1,
     opacity: 0.3
   },
@@ -67,36 +72,53 @@ const styles = theme => ({
   }
 })
 
+let src;
+
 const Visualization = props => {
   const { classes } = props
 
-  const audio = useRef(null)
-  console.log("audio: " + audio)
+  const audioRef = useRef(null)
+  const canvasRef = useRef(null)
+  // const fileRef = useRef(null)
   const [songID, setSongID] = useState(null)
 
   /*-------------------------------------------
                 LOAD MUSIC FILE
   -------------------------------------------*/
   const loadMusicFile = () => {
-    // const audio = document.getElementById("audio")
+  // function loadMusicFile() {
 
-    const file = document.getElementById("file-input")
-    const files = file.files
-    // audio.current.src = URL.createObjectURL(files[0])
-    // audio.current.src = "https://p.scdn.co/mp3-preview/1c0da00b5c95a1a6c9dfc05b14a1a628a6e0ad73?cid=159ac88b1c534ed7ae41602f1e558a49"
-    audio.current.crossOrigin = "anonymous";
-    audio.current.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
+    const audio = audioRef.current
+
+    // const file = fileRef.current
+    // const files = file.files
+    // audio.src = URL.createObjectURL(files[0])
+
+    // audio.crossOrigin = "anonymous";
+    // audio.src = "https://p.scdn.co/mp3-preview/1c0da00b5c95a1a6c9dfc05b14a1a628a6e0ad73?cid=159ac88b1c534ed7ae41602f1e558a49"
+    // audio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
+    audio.src = "http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3"
     console.log("audio.src: " + audio.src)
 
-    const canvas = document.getElementById("canvas")
+
+    const canvas = canvasRef.current;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const ctx = canvas.getContext("2d");
 
+
     const context = new AudioContext(); // (Interface) Audio-processing graph
-    let src = context.createMediaElementSource(audio.current); // Give  audio context an audio sourcE
+    // let src
+    // if (src === undefined) {
+    //   src = context.createMediaElementSource(audio);
+    // }
+    if (!src) {
+      src = context.createMediaElementSource(audio); // Give audio context an audio source
+    }
+    // let src = context.createMediaElementSource(audio); // Give audio context an audio source
     const analyser = context.createAnalyser(); // Create an analyser for the audio context
 
+    /*
     src.connect(analyser); // Connects the audio context source to the analyser
     analyser.connect(context.destination); // End destination of an audio graph in a given context
     analyser.fftSize = 16384;
@@ -196,8 +218,9 @@ const Visualization = props => {
       }
     }
 
-    audio.current.play();
+    audio.play();
     renderFrame();
+    */
   }
 
   useEffect(() => {
@@ -205,6 +228,11 @@ const Visualization = props => {
     setSongID(songID)
     // Use this later for real API stuff
     // loadMusicFile()
+
+    // const audio = audioRef.current
+    // audio.src = "http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3"
+
+    loadMusicFile()
   })
 
   return (
@@ -212,10 +240,11 @@ const Visualization = props => {
       <Typography className={classes.title}>
         Visualization Page, song ID is {songID}
       </Typography>
-      <input type="file" id="file-input" accept="audio/*,video/*,image/*" className={classes.fileInput} onChange={loadMusicFile}/>
-      <canvas id="canvas" width="300" height="300" className={classes.canvas}></canvas>
-      <audio ref={audio} id="audio" controls className={classes.audio}></audio>
-      <div id="background" className={classes.background}></div>
+      {/* <input ref={fileRef} type="file" id="file-input" accept="audio/*,video/*,image/*" className={classes.fileInput} onChange={loadMusicFile}/> */}
+      <canvas ref={canvasRef} id="canvas" width="300" height="300" className={classes.canvas}></canvas>
+      <audio ref={audioRef} id="audio" controls className={classes.audio}></audio>
+      {/* <div id="background" className={classes.background}></div> */}
+      <RecommendationButton className={classes.recommendationButton}/>
     </div>
   )
 }
