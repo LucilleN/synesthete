@@ -8,10 +8,12 @@ const styles = theme => ({
   fab: {
     background: theme.palette.dark.purple,
     color: 'white',
-    height: 50,
-    width: 150,
+    height: 60,
+    width: 240,
     borderRadius: 30,
-    margin: '0 auto',
+    marginLeft: 40,
+    marginRight: 40,
+    marginTop: 20,
     fontSize: '1.5rem',
     textAlign: 'center',
     testTransform: 'none',
@@ -26,11 +28,11 @@ const styles = theme => ({
 })
 
 const StartButton = props => {
-  const { classes } = props
+  const { classes, href, text } = props
   return (
-    <Fab variant="extended" color="primary" aria-label="Start" href="/search" className={classes.fab}> {/*href="/search"*/}
+    <Fab variant="extended" color="primary" aria-label="Start" href={href} className={classes.fab}> {/*href="/search"*/}
       <Typography className={classes.text}>
-        start
+        {text}
       </Typography>
     </Fab>
   )

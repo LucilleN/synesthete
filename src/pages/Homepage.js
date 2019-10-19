@@ -11,6 +11,7 @@ const styles = theme => ({
     textAlign: 'center',
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'space-between',
     alignItems: 'center'
   },
   title: {
@@ -49,6 +50,10 @@ const styles = theme => ({
     textAlign: 'center',
     width: '60%',
     marginBottom: 10
+  },
+  buttonRow: {
+    display: 'flex',
+    flexDirection: 'row'
   }
 })
 
@@ -75,10 +80,13 @@ const Homepage = props => {
           what to do
         </Typography>
         <Typography className={classes.paragraph}>
-          1, 2, 3
+          Either search for a song to watch its visualization for a 30-second sample, or upload your own audio file to see it get visualized!
         </Typography>
       </div>
-      <StartButton />
+      <div className={classes.buttonRow}>
+        <StartButton href="/search" text="search song samples"/>
+        <StartButton href="/upload" text="upload a file"/>
+      </div>
     </div>
   )
 }
