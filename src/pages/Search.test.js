@@ -28,7 +28,7 @@ import * as api from '../api'
 // Handy reference:
 // https://semaphoreci.com/community/tutorials/snapshot-testing-react-components-with-jest
 //
-it('should start with an empty search field', () => {
+it('should start with a search field with default text', () => {
   const component = TestRenderer.create(<Search />)
   const tree = component.toJSON()
   expect(tree).toMatchSnapshot()
@@ -62,7 +62,12 @@ describe('search button', () => {
     expect(searchButton.disabled).toBe(false)
   })
 
-  it('should be disabled when the search field is blank', () => {
+  it('should be disabled when the query is blank', () => {
+    const searchButton = div.querySelector('button')
+    expect(searchButton.disabled).toBe(true)
+  })
+
+  it('should be enabled when the user enters a query', () => {
     const searchInput = div.querySelector('input')
     ReactTestUtils.act(() => {
       searchInput.value = ''
@@ -70,7 +75,7 @@ describe('search button', () => {
     })
 
     const searchButton = div.querySelector('button')
-    expect(searchButton.disabled).toBe(true)
+    expect(searchButton.disabled).toBe(false)
   })
 })
 
@@ -98,22 +103,88 @@ const setupAndQuerySearchForm = async () => {
 describe('API calls', () => {
   let div
   beforeEach(async () => {
-    sinon.stub(api, 'searchGifs')
+    sinon.stub(api, 'searchSongs')
 
     // To manage size, we supply a mock response that contains _only_ what the app will need. This does mean
     // that we need to revise the mock response if our app starts using more (or different) data.
-    api.searchGifs.returns(Promise.resolve({
-      data: [
-        {
-          id: 'FiGiRei2ICzzG',
-          source_tld: 'tumblr.com',
-          images: {
-            fixed_width: {
-              url: 'http://media2.giphy.com/media/FiGiRei2ICzzG/200w.gif'
-            }
-          }
-        }
-      ]
+    api.searchSongs.returns(Promise.resolve({
+      "tracks" : {
+        "href" : "https://api.spotify.com/v1/search?query=the+night+we+met&type=track&offset=0&limit=20",
+        "items" : [ {
+          "album" : {
+            "album_type" : "album",
+            "artists" : [ {
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/artist/6ltzsmQQbmdoHHbLZ4ZN25"
+              },
+              "href" : "https://api.spotify.com/v1/artists/6ltzsmQQbmdoHHbLZ4ZN25",
+              "id" : "6ltzsmQQbmdoHHbLZ4ZN25",
+              "name" : "Lord Huron",
+              "type" : "artist",
+              "uri" : "spotify:artist:6ltzsmQQbmdoHHbLZ4ZN25"
+            } ],
+            "available_markets" : [ "CA", "US" ],
+            "external_urls" : {
+              "spotify" : "https://open.spotify.com/album/3yoNZlqerJnsnMN5EDwwBS"
+            },
+            "href" : "https://api.spotify.com/v1/albums/3yoNZlqerJnsnMN5EDwwBS",
+            "id" : "3yoNZlqerJnsnMN5EDwwBS",
+            "images" : [ {
+              "height" : 640,
+              "url" : "https://i.scdn.co/image/d0a15f9288814a7e3f199ab2d1a6b0c9a9a633b5",
+              "width" : 640
+            }, {
+              "height" : 300,
+              "url" : "https://i.scdn.co/image/9bcea4ada214a061cecce6d565319f839ea83ce1",
+              "width" : 300
+            }, {
+              "height" : 64,
+              "url" : "https://i.scdn.co/image/0a2f11966d40cd6fc87ee70b71d8547578e87fe8",
+              "width" : 64
+            } ],
+            "name" : "Strange Trails",
+            "release_date" : "2015-04-07",
+            "release_date_precision" : "day",
+            "total_tracks" : 14,
+            "type" : "album",
+            "uri" : "spotify:album:3yoNZlqerJnsnMN5EDwwBS"
+          },
+          "artists" : [ {
+            "external_urls" : {
+              "spotify" : "https://open.spotify.com/artist/6ltzsmQQbmdoHHbLZ4ZN25"
+            },
+            "href" : "https://api.spotify.com/v1/artists/6ltzsmQQbmdoHHbLZ4ZN25",
+            "id" : "6ltzsmQQbmdoHHbLZ4ZN25",
+            "name" : "Lord Huron",
+            "type" : "artist",
+            "uri" : "spotify:artist:6ltzsmQQbmdoHHbLZ4ZN25"
+          } ],
+          "available_markets" : [ "CA", "US" ],
+          "disc_number" : 1,
+          "duration_ms" : 208211,
+          "explicit" : false,
+          "external_ids" : {
+            "isrc" : "US53Q1200103"
+          },
+          "external_urls" : {
+            "spotify" : "https://open.spotify.com/track/0QZ5yyl6B6utIWkxeBDxQN"
+          },
+          "href" : "https://api.spotify.com/v1/tracks/0QZ5yyl6B6utIWkxeBDxQN",
+          "id" : "0QZ5yyl6B6utIWkxeBDxQN",
+          "is_local" : false,
+          "name" : "The Night We Met",
+          "popularity" : 76,
+          "preview_url" : "https://p.scdn.co/mp3-preview/1c0da00b5c95a1a6c9dfc05b14a1a628a6e0ad73?cid=159ac88b1c534ed7ae41602f1e558a49",
+          "track_number" : 14,
+          "type" : "track",
+          "uri" : "spotify:track:0QZ5yyl6B6utIWkxeBDxQN"
+        } ],
+        "limit" : 20,
+        "next" : "https://api.spotify.com/v1/search?query=the+night+we+met&type=track&offset=20&limit=20",
+        "offset" : 0,
+        "previous" : null,
+        "total" : 204
+      }
     }))
 
     div = await setupAndQuerySearchForm()
@@ -121,19 +192,21 @@ describe('API calls', () => {
 
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(div)
-    api.searchGifs.restore()
+    api.searchSongs.restore()
   })
 
-  it('should trigger a Giphy search when the search button is clicked', () => {
+  it('should trigger a song search when the search button is clicked', () => {
     // Note how this _isn’t_ a snapshot test because we’re checking whether a function was called with
     // the right arguments.
-    expect(api.searchGifs.firstCall.args[0]).toEqual({
-      rating: 'pg-13',
+    expect(api.searchSongs.firstCall.args[0]).toEqual({
+      // rating: 'pg-13',
       q: 'hello' // Our test search term.
     })
   })
 
-  it('should populate the image container when search results arrive', () => {
+  //// LEFT OFF HERE!!!!!!!!!!!!!!
+
+  it('should populate the song results container when search results arrive', () => {
     // Our mock search results yield one image, so we expect our results container to have one child.
     const searchResults = div.querySelector('div.SearchResults')
     expect(searchResults.children.length).toEqual(1)
@@ -143,15 +216,15 @@ describe('API calls', () => {
 describe('failed API calls', () => {
   let div
   beforeEach(async () => {
-    sinon.stub(api, 'searchGifs')
-    api.searchGifs.returns(Promise.reject('Mock failure'))
+    sinon.stub(api, 'searchSongs')
+    api.searchSongs.returns(Promise.reject('Mock failure'))
 
     div = await setupAndQuerySearchForm()
   })
 
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(div)
-    api.searchGifs.restore()
+    api.searchSongs.restore()
   })
 
   it('should display an alert when the API call fails', () => {
