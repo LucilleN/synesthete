@@ -1565,5 +1565,7 @@ const searchSongs = () => Promise.resolve({
 
 export {
   apiHost,
-  searchSongs
+  searchSongs,
+  getAudioFeatures,
+  getRecommendation
 }
