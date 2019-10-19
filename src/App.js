@@ -51,9 +51,10 @@ const styles = () => ({
 const routes = (
   <Router>
     <div>
-      <Switch>
+      {/* <Switch>
         <Route exact path="*" component={MenuBar}/>
-      </Switch>
+      <Switch> */}
+      <MenuBar />
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route exact path="/search" component={Search} />

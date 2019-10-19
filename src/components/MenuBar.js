@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
@@ -59,6 +59,10 @@ const MenuBar = props => {
       <Redirect to={'/'} />
     )
   }
+
+  // useEffect(() => {
+  //   setHomeSelected(false)
+  // })
 
   return (
     <Grid container className={classes.bar}>
