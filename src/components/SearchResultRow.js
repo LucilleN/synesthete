@@ -6,8 +6,11 @@ import { withStyles } from '@material-ui/core/styles'
 const styles = theme => ({
   row: {
     background: theme.palette.light.pink,
-    padding: 4,
+    padding: '4px 16px',
     margin: 2,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     '&:hover': {
        background: theme.palette.white,
     },
@@ -28,6 +31,9 @@ const SearchResultRow = props => {
     <Grid item xs={12} id={songID} className={classes.row} onClick={onTrackSelect}>
       <Typography id={songID} className={classes.text}>
         "{songName}," Artist: {artistName}
+      </Typography>
+      <Typography>
+        {">>> Visualize This Sample >>>"}
       </Typography>
     </Grid>
   )

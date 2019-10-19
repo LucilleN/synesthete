@@ -31,6 +31,7 @@ const styles = theme => ({
     width: '50%',
     height: '1.5rem',
     color: theme.palette.light.pink,
+    fontSize: '1.125rem',
     '&:focus': {
       outline: 'none',
       border: `2px solid ${theme.palette.dark.pink}`,
@@ -85,17 +86,26 @@ const styles = theme => ({
 const SearchForm = (props) => {
 
   const { classes } = props
+  const defaultText = 'search for a song'
 
   const [error, setError] = useState(null) // so it's const even though error can change?
   const [query, setQuery] = useState('')
   const [songs, setSongs] = useState([])
   const [songSelected, setSongSelected] = useState(false)
   const [songID, setSongID] = useState(null)
-
-  const defaultText = 'search tracks'
+  const [showDefaultText, setShowDefaultText] = useState(true)
+  const [formSubmitted, setFormSubmitted] = useState(false)
 
   const handleQueryChange = event => setQuery(event.target.value)
-  // const handleFocus = event =>
+  const handleFocus = event => {
+    setShowDefaultText(false)
+  }
+  const handleFocusOut = event => {
+    console.log("handleFocusOut")
+    if (query === "") {
+      setShowDefaultText(true)
+    }
+  }
 
   const performQuery = async event => {
     event.preventDefault() // why?
@@ -112,6 +122,10 @@ const SearchForm = (props) => {
     } catch (error) {
       setError('Sorry, but something went wrong.')
     }
+  }
+
+  const handleFormSubmit = event => {
+    setFormSubmitted(true)
   }
 
   const handleTrackSelect = async event => {
@@ -132,9 +146,11 @@ const SearchForm = (props) => {
         </Typography>
 
         <Grid container justify="center" className={classes.searchBar}>
-          <input name="query" type="text" value={query} onChange={handleQueryChange} className={classes.searchField}/>
-          <button type="submit" disabled={!query} className={query ? classes.buttonEnabled : classes.buttonDisabled}>
-            search tracks
+          <input name="query" type="text" value={showDefaultText ? defaultText : query} onChange={handleQueryChange} className={classes.searchField} onFocus={handleFocus} onBlur={handleFocusOut}/>
+          <button type="submit" disabled={!query} className={query ? classes.buttonEnabled : classes.buttonDisabled} onClick={handleFormSubmit}>
+            <Typography>
+              search tracks
+            </Typography>
           </button>
         </Grid>
 
@@ -145,7 +161,7 @@ const SearchForm = (props) => {
         )}
 
         <Grid container xs={10} className={classes.resultsContainer}>
-          <SearchResults results={songs} onTrackSelect={handleTrackSelect}/>
+          <SearchResults results={songs} onTrackSelect={handleTrackSelect} submitted={formSubmitted}/>
         </Grid>
 
       </form>
