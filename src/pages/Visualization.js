@@ -3,19 +3,21 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import RecommendationButton from '../components/RecommendationButton'
 
+import { getAudioFeatures } from '../api'
+
 export const styles = theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
   },
-  // fileInput: {
-  //   // position: 'fixed',
-  //   // top: '10px',
-  //   // left: '10px',
-  //   zIndex: 3,
-  //   color: 'white'
-  // },
+  fileInput: {
+    // position: 'fixed',
+    // top: '10px',
+    // left: '10px',
+    zIndex: 3,
+    color: 'white'
+  },
   recommendationButton: {
     zIndex: 10,
     marginTop: 200
@@ -74,13 +76,70 @@ export const styles = theme => ({
 
 let src;
 
+// TODO This is SUPER DIRTY but at least proves that if we maintain the same context, audioNode, and analyser,
+// then things stay OK.
+let context, audioNode, analyser
+
+
 const Visualization = props => {
   const { classes } = props
 
+  const [url, setUrl] = useState('')
+
   const audioRef = useRef(null)
   const canvasRef = useRef(null)
-  // const fileRef = useRef(null)
+
   const [songID, setSongID] = useState(null)
+  const [error, setError] = useState(null)
+  const [audioFeatures, setAudioFeatures] = useState(null)
+
+  // Equivalent of componentDidMount (ONLY RUNS ONCE)
+  useEffect(() => {
+    performAudioFeaturesQuery()
+  }, [])
+
+  // Equivalent of componentDidMount and componentDidUpdate
+  useEffect(() => {
+    const { songID } = props.match.params
+    setSongID(songID)
+    // Use this later for real API stuff
+    loadMusicFile()
+    loadMusicFile()
+  })
+
+
+
+  /*-------------------------------------------
+                  API STUFF
+  -------------------------------------------*/
+  // const performAudioFeaturesQuery = async event => {
+  const performAudioFeaturesQuery = async () => {
+    console.log("performAudioFeaturesQuery")
+    // event.preventDefault() // why?
+
+    setError(null) // why?
+
+    try {
+      // const result = await getAudioFeatures({
+      //   id: songID,
+      //   headers: {
+      //     'Authorization': 'Bearer '
+      //   }
+      // })
+
+      const result = await getAudioFeatures()
+      console.log("result: ")
+      console.log(result)
+
+      // audioFeatures = result
+      setAudioFeatures(result)
+      console.log("AUDIO FEATURES: ")
+      console.log(audioFeatures)
+
+    } catch (error) {
+      setError('Sorry, but something went wrong.')
+    }
+  }
 
   /*-------------------------------------------
                 LOAD MUSIC FILE
@@ -94,19 +153,25 @@ const Visualization = props => {
     // const files = file.files
     // audio.src = URL.createObjectURL(files[0])
 
+    audio.src = url
+
     // audio.crossOrigin = "anonymous";
     // audio.src = "https://p.scdn.co/mp3-preview/1c0da00b5c95a1a6c9dfc05b14a1a628a6e0ad73?cid=159ac88b1c534ed7ae41602f1e558a49"
     // audio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
-    audio.src = "http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3"
+    // audio.src = "http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3"
     console.log("audio.src: " + audio.src)
 
+    if (context && audioNode && analyser) {
+      audio.play();
+      return
+    }
 
     const canvas = canvasRef.current;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const ctx = canvas.getContext("2d");
 
-
+/*
     const context = new AudioContext(); // (Interface) Audio-processing graph
     // let src
     // if (src === undefined) {
@@ -117,9 +182,14 @@ const Visualization = props => {
     }
     // let src = context.createMediaElementSource(audio); // Give audio context an audio source
     const analyser = context.createAnalyser(); // Create an analyser for the audio context
+*/
+    context = new AudioContext(); // (Interface) Audio-processing graph
+    audioNode = context.createMediaElementSource(audio); // Give audio context an audio source
+    analyser = context.createAnalyser(); // Create an analyser for the audio context
 
-    /*
-    src.connect(analyser); // Connects the audio context source to the analyser
+    // src.connect(analyser); // Connects the audio context source to the analyser
+    audioNode.connect(analyser); // Connects the audio context source to the analyser
+
     analyser.connect(context.destination); // End destination of an audio graph in a given context
     analyser.fftSize = 16384;
 
@@ -175,8 +245,8 @@ const Visualization = props => {
       }
 
       for (let i = 0; i < bars; i++) {
-        barHeight = (dataArray[i] * 2.5);
-        const barHeightMax = 255 * 2.5;
+        barHeight = (dataArray[i] * 2);
+        const barHeightMax = 255 * 2;
         const multiple = 6
         // offset = -10 // Lord Huron, the Night We Met (key: A major)
         let offset = -7 // Kina Grannis, Iris (key: F# Major)
@@ -220,29 +290,22 @@ const Visualization = props => {
 
     audio.play();
     renderFrame();
-    */
+
   }
 
-  useEffect(() => {
-    const { songID } = props.match.params
-    setSongID(songID)
-    // Use this later for real API stuff
-    // loadMusicFile()
-
-    // const audio = audioRef.current
-    // audio.src = "http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3"
-
-    loadMusicFile()
-  })
+  console.log('ABOUT TO RETURN, AUDIO FEATURES: ')
+  console.log(audioFeatures)
 
   return (
     <div className={classes.root}>
       <Typography className={classes.title}>
-        Visualization Page, song ID is {songID}
+        Visualization Page, song ID is: {songID}
+        <input type="text" value={url} onChange={event => setUrl(event.target.value)} />
+        <button onClick={loadMusicFile} disabled={!url}>Load</button>
       </Typography>
       {/* <input ref={fileRef} type="file" id="file-input" accept="audio/*,video/*,image/*" className={classes.fileInput} onChange={loadMusicFile}/> */}
       <canvas ref={canvasRef} id="canvas" width="300" height="300" className={classes.canvas}></canvas>
-      <audio ref={audioRef} id="audio" controls className={classes.audio}></audio>
+      <audio ref={audioRef} id="audio" crossOrigin="anonymous" controls className={classes.audio}></audio>
       {/* <div id="background" className={classes.background}></div> */}
       <RecommendationButton className={classes.recommendationButton}/>
     </div>
