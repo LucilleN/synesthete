@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+import { styles } from './Visualization'
 
+{/*
 const styles = theme => ({
   root: {
     // background: 'black',
@@ -37,8 +39,8 @@ const styles = theme => ({
   },
   background: {
     width: '100%',
-    height: '100%',
-    // height: 'calc(100%-60px)',
+    // height: '100%',
+    height: 'calc(100% - 60px)',
     // width: '90vw',
     // height: '70vh',
     position: 'absolute',
@@ -60,48 +62,44 @@ const styles = theme => ({
     zIndex: 4
   }
 })
+*/}
 
 const UploadVisualization = props => {
   const { classes } = props
 
-  // const audio = useRef(null)
-  const file = useRef(null)
+  const audioRef = useRef(null)
+  const canvasRef = useRef(null)
+  const fileRef = useRef(null)
 
-  //////// LOAD MUSIC FILE ////////
+  /*-------------------------------------------
+                LOAD MUSIC FILE
+  -------------------------------------------*/
   const loadMusicFile = () => {
-    const audio = document.getElementById("audio")
+    const audio = audioRef.current
 
-    const file = document.getElementById("file-input")
+    const file = fileRef.current
     const files = file.files
     audio.src = URL.createObjectURL(files[0])
+    // audio.crossOrigin = "anonymous";
+    // audio.src = "https://p.scdn.co/mp3-preview/1c0da00b5c95a1a6c9dfc05b14a1a628a6e0ad73?cid=159ac88b1c534ed7ae41602f1e558a49"
+    // audio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
+    console.log("audio.src: " + audio.src)
 
-    const name = files[0].name
-
-    const canvas = document.getElementById("canvas")
+    const canvas = canvasRef.current;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const ctx = canvas.getContext("2d");
 
     const context = new AudioContext(); // (Interface) Audio-processing graph
-    let src = context.createMediaElementSource(audio); // Give the audio context an audio source,
-    // to which can then be played and manipulated
+    let src = context.createMediaElementSource(audio); // Give audio context an audio source
     const analyser = context.createAnalyser(); // Create an analyser for the audio context
 
     src.connect(analyser); // Connects the audio context source to the analyser
     analyser.connect(context.destination); // End destination of an audio graph in a given context
-    // Sends sound to the speakers or headphones
-
     analyser.fftSize = 16384;
-    // FFTSize represents the window size in samples that is used when performing a FFT
-    // Lower the size, the less bars (but wider in size)
 
-    const bufferLength = analyser.frequencyBinCount; // (read-only property)
-    // Equates to number of data values you have to play with for the visualization
-    // The FFT size defines the number of bins used for dividing the window into equal strips, or bins.
-    // Hence, a bin is a spectrum sample, and defines the frequency resolution of the window.
-
-    const dataArray = new Uint8Array(bufferLength); // Converts to 8-bit unsigned integer array
-    // At this point dataArray is an array with length of bufferLength but no values
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
 
     const WIDTH = canvas.width;
     const HEIGHT = canvas.height;
@@ -116,9 +114,7 @@ const UploadVisualization = props => {
 
       x = 0;
 
-      analyser.getByteFrequencyData(dataArray); // Copies the frequency data into dataArray
-      // Results in a normalized array of values between 0 and 255
-      // Before this step, dataArray's values are all zeros (but with length of 8192)
+      analyser.getByteFrequencyData(dataArray);
 
       ctx.fillStyle = "rgba(0,0,0,0.1)"; // Clears canvas before rendering bars (black with opacity 0.2)
       ctx.fillRect(0, 0, WIDTH, HEIGHT); // Fade effect, set opacity to 1 for sharper rendering of bars
@@ -192,7 +188,6 @@ const UploadVisualization = props => {
 
         ctx.fillStyle = `rgba(${r},${g},${b},${a})`;
         ctx.fillRect(x, (HEIGHT - barHeight), barWidth, barHeight);
-        // (x, y, i, j) where (x, y) is the start point and (i, j) is the end point
 
         x += barWidth + 10 // Gives 10px space between each bar
       }
@@ -205,13 +200,12 @@ const UploadVisualization = props => {
   return (
     <div className={classes.root}>
       <Typography className={classes.title}>
-        Visualization Upload Page
+        Upload A Song to Visualize
       </Typography>
-      <input /*ref={file}*/ type="file" id="file-input" accept="audio/*,video/*,image/*" className={classes.fileInput} onChange={loadMusicFile}/>
-      <canvas id="canvas" width="300" height="300" className={classes.canvas}></canvas>
-      <audio /*ref={audio}*/ id="audio" controls className={classes.audio}></audio>
-      <div id="background" className={classes.background}></div>
-      {/* <script src="../../test_visualization/script.js"></script> */}
+      <input ref={fileRef} type="file" id="file-input" accept="audio/*,video/*,image/*" className={classes.fileInput} onChange={loadMusicFile}/>
+      <canvas ref={canvasRef} id="canvas" width="300" height="300" className={classes.canvas}></canvas>
+      <audio ref={audioRef} id="audio" controls className={classes.audio}></audio>
+      {/* <div id="background" className={classes.background}></div> */}
     </div>
   )
 }
