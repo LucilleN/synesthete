@@ -12,10 +12,13 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    overflow: 'auto',
+    maxHeight: 'calc(100% - 60px)',
+    minHeight: 'calc(100% - 60px)'
   },
   title: {
-    fontSize: '7rem',
+    fontSize: '6rem',
     fontWeight: 800,
     color: theme.palette.white,
     marginTop: '-10px'
