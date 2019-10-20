@@ -16,7 +16,7 @@ import MenuBar from './components/MenuBar'
 
 import { apiHost } from './api'
 
-const theme = createMuiTheme({
+export const theme = createMuiTheme({
   palette: {
     primary: {
       light: '#c23063', // magenta

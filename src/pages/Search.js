@@ -67,7 +67,9 @@ const styles = theme => ({
     maxHeight: '65vh',
     minHeight: '65vh',
     overflow: 'auto',
+    width: '80vw',
     marginTop: 10,
+    marginBottom: 20,
     padding: '0px 15px 15px',
     background: theme.palette.dark.purple,
     '&::-webkit-scrollbar': {
@@ -93,6 +95,7 @@ const SearchForm = (props) => {
   const [songs, setSongs] = useState([])
   const [songSelected, setSongSelected] = useState(false)
   const [songID, setSongID] = useState(null)
+  // const [songIndex, setSongIndex] = useState(null)
   const [showDefaultText, setShowDefaultText] = useState(true)
   const [formSubmitted, setFormSubmitted] = useState(false)
 
@@ -134,6 +137,10 @@ const SearchForm = (props) => {
     setSongSelected(true)
     setSongID(event.target.id)
 
+    // const index = songs.findIndex((song) => (song.id === songID))
+    // console.log(index)
+    // setSongID(index)
+
     // put a try catch here
   }
 
@@ -160,7 +167,7 @@ const SearchForm = (props) => {
           </div>
         )}
 
-        <Grid container xs={10} className={classes.resultsContainer}>
+        <Grid container className={classes.resultsContainer}>
           <SearchResults results={songs} onTrackSelect={handleTrackSelect} submitted={formSubmitted}/>
         </Grid>
 
@@ -169,9 +176,13 @@ const SearchForm = (props) => {
   }
   else {
     return (
-      <Redirect to={`/visualization/${songID}`} />
+      <Redirect to={{
+          pathname: `/visualization/${songID}`,
+          state: { track: null }
+        }}
+      />
     )
   }
 }
 
-export default withStyles(styles)(SearchForm)
+export default withStyles(styles, { withTheme: true })(SearchForm)

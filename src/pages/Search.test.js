@@ -2,40 +2,33 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import TestRenderer from 'react-test-renderer'
 import ReactTestUtils from 'react-dom/test-utils'
+import MuiThemeProvider from '@material-ui/core/styles'
+// import { unwrap } from "@material-ui/core/test-utils";
 
 import sinon from 'sinon'
 
-// import SearchForm from './SearchForm'
 import Search from './Search'
-
 import * as api from '../api'
 
-// This test suite uses a distinct testing technique called _snapshot testing_. Go take
-// a peek at the code then come back here for more commentary.
-//
-// Note how, with snapshot testing, you are truly dependent on that descriptive text.
-// The enforcement is in the snapshot match, not a condition that is in the test code.
-// This is where snapshot testing differs from traditional test-driven development:
-// _It assumes that the code works initially._ This actually does line up fairly well
-// with user interface development, because it tends to be easier to just “eyeball” a
-// user interface first rather than write tests against it.
-//
-// It takes some adjustment to start “trusting” a snapshot test, just as it takes some
-// adjustment to trust version control. If you want to manually check whether a snapshot
-// is truly in the state that you want it to be, you can always look at the .snap file
-// within the __snapshots__ folder.
-//
-// Handy reference:
-// https://semaphoreci.com/community/tutorials/snapshot-testing-react-components-with-jest
-//
-it('should start with a search field with default text', () => {
-  const component = TestRenderer.create(<Search />)
+let unstyledSearch
+const div = document.createElement('div')
+ReactDOM.render(
+  <Search innerRef={(node) => {unstyledSearch = node}} />
+, div)
+
+// const UnstyledSearch = unwrap(Search)
+
+it.only('should start with a search field with default text', () => {
+  let unstyledSearch
+  const component = TestRenderer.create(
+    <Search theme={theme} innerRef={(node) => {unstyledSearch = node}} />
+  )
   const tree = component.toJSON()
   expect(tree).toMatchSnapshot()
 })
 
 it('should start with a disabled search button', () => {
-  const component = TestRenderer.create(<Search />)
+  const component = TestRenderer.create(unstyledSearch)
   const tree = component.toJSON()
   expect(tree).toMatchSnapshot()
 })
@@ -45,7 +38,7 @@ describe('search button', () => {
   beforeEach(() => {
     div = document.createElement('div')
     ReactTestUtils.act(() => {
-      ReactDOM.render(<Search />, div)
+      ReactDOM.render(unstyledSearch, div)
     })
   })
 
@@ -83,7 +76,7 @@ describe('search button', () => {
 const setupAndQuerySearchForm = async () => {
   const div = document.createElement('div')
   ReactTestUtils.act(() => {
-    ReactDOM.render(<Search />, div)
+    ReactDOM.render(unstyledSearch, div)
   })
 
   const searchInput = div.querySelector('input')
@@ -199,6 +192,7 @@ describe('API calls', () => {
     // Note how this _isn’t_ a snapshot test because we’re checking whether a function was called with
     // the right arguments.
     expect(api.searchSongs.firstCall.args[0]).toEqual({
+    // expect(api.searchSongs.getCall(0)).toEqual({
       // rating: 'pg-13',
       q: 'hello' // Our test search term.
     })
