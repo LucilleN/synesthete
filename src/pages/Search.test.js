@@ -2,26 +2,19 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import TestRenderer from 'react-test-renderer'
 import ReactTestUtils from 'react-dom/test-utils'
-import MuiThemeProvider from '@material-ui/core/styles'
-// import { unwrap } from "@material-ui/core/test-utils";
+import { MuiThemeProvider } from '@material-ui/core/styles'
 
 import sinon from 'sinon'
 
+import { theme } from '../App'
 import Search from './Search'
 import * as api from '../api'
 
-let unstyledSearch
-const div = document.createElement('div')
-ReactDOM.render(
-  <Search innerRef={(node) => {unstyledSearch = node}} />
-, div)
-
-// const UnstyledSearch = unwrap(Search)
-
 it.only('should start with a search field with default text', () => {
-  let unstyledSearch
   const component = TestRenderer.create(
-    <Search theme={theme} innerRef={(node) => {unstyledSearch = node}} />
+    <MuiThemeProvider theme={theme}>
+      <Search />
+    </MuiThemeProvider>
   )
   const tree = component.toJSON()
   expect(tree).toMatchSnapshot()
