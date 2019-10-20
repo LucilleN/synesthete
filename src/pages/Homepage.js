@@ -13,9 +13,10 @@ const styles = theme => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    overflow: 'auto',
-    maxHeight: 'calc(100% - 60px)',
-    minHeight: 'calc(100% - 60px)'
+    height: '100%'
+    // overflow: 'auto',
+    // maxHeight: 'calc(100% - 60px)',
+    // minHeight: 'calc(100% - 60px)'
   },
   title: {
     fontSize: '6rem',
@@ -75,7 +76,7 @@ const Homepage = props => {
           what is synesthesia?
         </Typography>
         <Typography className={classes.paragraph}>
-          Synesthesia is a neurological phenomenon that allows the senses to overlap. Roughly 4% of people have some form of synesthesia, and others have experienced it under the influence of psychedelic drugs. Chromesthetes in particular have sound-color synesthesia, which means that they hear music as colors. This makes listening to music an especially vibrant experience.
+          Synesthesia is a neurological phenomenon that allows the senses to overlap. Chromesthetes have sound-color synesthesia, which means that they hear music as colors. This makes listening to music an especially vibrant experience.
         </Typography>
       </div>
       <div className={classes.section}>

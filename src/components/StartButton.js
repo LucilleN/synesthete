@@ -14,6 +14,7 @@ const styles = theme => ({
     marginLeft: 40,
     marginRight: 40,
     marginTop: 20,
+    marginBottom: 20,
     fontSize: '1.5rem',
     textAlign: 'center',
     testTransform: 'none',
