@@ -8,6 +8,7 @@ import AppHeader from './AppHeader'
 import SearchForm from './SearchForm'
 
 import Homepage from './pages/Homepage'
+import About from './pages/About'
 import Search from './pages/Search'
 import UploadVisualization from './pages/UploadVisualization'
 import Visualization from './pages/Visualization'
@@ -43,7 +44,9 @@ const theme = createMuiTheme({
 const styles = () => ({
   root: {
     width: '100vw',
-    height: '100vh',
+    // height: '100vh',
+    height: '100%',
+    minHeight: '100vh',
     background: `linear-gradient(0deg, ${theme.palette.dark.pink} -25%, ${theme.palette.dark.purple} 80%)`
   }
 })
@@ -57,6 +60,7 @@ const routes = (
       <MenuBar />
       <Switch>
         <Route exact path="/" component={Homepage} />
+        <Route exact path="/about" component={About} />
         <Route exact path="/search" component={Search} />
         <Route exact path="/upload" component={UploadVisualization} />
         <Route exact path="/visualization" component={Visualization} />
