@@ -45,7 +45,7 @@ const SearchResults = props => {
 
   else if (submitted && results.length === 0) {
     return (
-      <div className={classes.noResults}>
+      <div className={classes.noResults} id="noResults">
         <Typography className={classes.message}>
           Sorry, there are no songs that match your query
         </Typography>
@@ -55,8 +55,8 @@ const SearchResults = props => {
 
   else {
     return (
-      <div className={classes.searchResults}>
-        <Grid container>
+      <div className={classes.searchResults} id="searchResults">
+        <Grid container id="resultsContainer">
           {results.map(song => (
             <SearchResultRow
               key={song.id}

@@ -45,14 +45,24 @@ describe('initial state', () => {
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
+
+  it('should start with default text in the results box', () => {
+    const tree = component.toJSON()
+    expect(tree).toMatchSnapshot()
+  })
+
 })
 
-xdescribe('search button', () => {
+describe('search button', () => {
   let div
   beforeEach(() => {
     div = document.createElement('div')
     ReactTestUtils.act(() => {
-      ReactDOM.render(TestComponent, div)
+      ReactDOM.render(
+        <MuiThemeProvider theme={theme}>
+          <Search />
+        </MuiThemeProvider>
+      , div)
     })
   })
 
@@ -77,7 +87,7 @@ xdescribe('search button', () => {
   it('should be enabled when the user enters a query', () => {
     const searchInput = div.querySelector('input')
     ReactTestUtils.act(() => {
-      searchInput.value = ''
+      searchInput.value = 'hello there this is a song search'
       ReactTestUtils.Simulate.change(searchInput)
     })
 
@@ -90,7 +100,11 @@ xdescribe('search button', () => {
 const setupAndQuerySearchForm = async () => {
   const div = document.createElement('div')
   ReactTestUtils.act(() => {
-    ReactDOM.render(unstyledSearch, div)
+    ReactDOM.render(
+      <MuiThemeProvider theme={theme}>
+        <Search />
+      </MuiThemeProvider>
+    , div)
   })
 
   const searchInput = div.querySelector('input')
@@ -107,7 +121,7 @@ const setupAndQuerySearchForm = async () => {
   return div
 }
 
-describe('API calls', () => {
+describe('normal API calls', () => {
   let div
   beforeEach(async () => {
     sinon.stub(api, 'searchSongs')
@@ -205,6 +219,9 @@ describe('API calls', () => {
   it('should trigger a song search when the search button is clicked', () => {
     // Note how this _isn’t_ a snapshot test because we’re checking whether a function was called with
     // the right arguments.
+
+    // TODO: Why does it only work with the first and not the second way?
+
     expect(api.searchSongs.firstCall.args[0]).toEqual({
     // expect(api.searchSongs.getCall(0)).toEqual({
       // rating: 'pg-13',
@@ -212,14 +229,52 @@ describe('API calls', () => {
     })
   })
 
-  //// LEFT OFF HERE!!!!!!!!!!!!!!
-
   it('should populate the song results container when search results arrive', () => {
     // Our mock search results yield one image, so we expect our results container to have one child.
-    const searchResults = div.querySelector('div.SearchResults')
+    const searchResults = div.querySelector('div.searchResults')
     expect(searchResults.children.length).toEqual(1)
   })
 })
+
+
+describe('API calls that return no search results', () => {
+  let div
+  beforeEach(async () => {
+    sinon.stub(api, 'searchSongs')
+
+    api.searchSongs.returns(Promise.resolve({
+      "tracks" : {
+        "href" : "https://api.spotify.com/v1/search?query=the+night+we+met&type=track&offset=0&limit=20",
+        "items" : [], // no results returned
+        "limit" : 20,
+        "next" : "https://api.spotify.com/v1/search?query=the+night+we+met&type=track&offset=20&limit=20",
+        "offset" : 0,
+        "previous" : null,
+        "total" : 0
+      }
+    }))
+
+    div = await setupAndQuerySearchForm()
+  })
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(div)
+    api.searchSongs.restore()
+  })
+
+  it('should trigger a song search when the search button is clicked', () => {
+    expect(api.searchSongs.firstCall.args[0]).toEqual({
+      q: 'hello'
+    })
+  })
+
+  it('should render the noResults div', () => {
+    // Our mock search results yield one image, so we expect our results container to have one child.
+    const searchResults = div.querySelector('div#noResults')
+    expect(searchResults).not.toBeNull()
+  })
+})
+
 
 describe('failed API calls', () => {
   let div
