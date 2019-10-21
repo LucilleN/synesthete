@@ -10,28 +10,49 @@ import { theme } from '../App'
 import Search from './Search'
 import * as api from '../api'
 
-it.only('should start with a search field with default text', () => {
-  const component = TestRenderer.create(
+let component;
+beforeEach(() => {
+  component = TestRenderer.create(
     <MuiThemeProvider theme={theme}>
       <Search />
     </MuiThemeProvider>
   )
-  const tree = component.toJSON()
-  expect(tree).toMatchSnapshot()
 })
 
-it('should start with a disabled search button', () => {
-  const component = TestRenderer.create(unstyledSearch)
-  const tree = component.toJSON()
-  expect(tree).toMatchSnapshot()
+class TestComponent extends React.Component {
+  render() {
+    return (
+      <MuiThemeProvider theme={theme}>
+        <Search />
+      </MuiThemeProvider>
+    )
+  }
+}
+
+describe('initial state', () => {
+  it('should start with a search field with default text', () => {
+    // const component = TestRenderer.create(
+    //   <MuiThemeProvider theme={theme}>
+    //     <Search />
+    //   </MuiThemeProvider>
+    // )
+    const tree = component.toJSON()
+    expect(tree).toMatchSnapshot()
+  })
+
+  it('should start with a disabled search button', () => {
+    // const component = TestRenderer.create(unstyledSearch)
+    const tree = component.toJSON()
+    expect(tree).toMatchSnapshot()
+  })
 })
 
-describe('search button', () => {
+xdescribe('search button', () => {
   let div
   beforeEach(() => {
     div = document.createElement('div')
     ReactTestUtils.act(() => {
-      ReactDOM.render(unstyledSearch, div)
+      ReactDOM.render(TestComponent, div)
     })
   })
 
