@@ -23,7 +23,7 @@ const styles = theme => ({
     textAlign: 'center',
     fontSize: '2rem',
     color: theme.palette.dark.pink,
-    opacity: 0.4,
+    opacity: 0.6,
     width: '30%'
   }
 })

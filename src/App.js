@@ -21,8 +21,10 @@ export const theme = createMuiTheme({
     },
     type: 'dark',
     dark: {
-      pink: '#c23063',
-      purple: '#10002e',
+      // pink: '#c23063',
+      pink: '#bf265c',
+      // purple: '#10002e',
+      purple: '#1c004f',
     },
     medium: {
       purple: '#5a0b66',
@@ -44,7 +46,8 @@ const styles = () => ({
     // height: '100vh',
     height: '100%',
     minHeight: '100vh',
-    background: `linear-gradient(0deg, ${theme.palette.dark.pink} -25%, ${theme.palette.dark.purple} 80%)`
+    // background: `linear-gradient(0deg, ${theme.palette.dark.pink} -25%, ${theme.palette.dark.purple} 80%)`
+    background: `linear-gradient(0deg, ${theme.palette.dark.pink} 0%, ${theme.palette.dark.purple} 80%)`
   }
 })
 
@@ -83,10 +86,6 @@ const App = (props) => {
     <div className={classes.root}>
       <style>@import url('https://fonts.googleapis.com/css?family=Dosis&display=swap');</style>
       <MuiThemeProvider theme={theme}>
-        {/*
-        <AppHeader />
-        <SearchForm />
-        */}
         {routes}
       </MuiThemeProvider>
     </div>

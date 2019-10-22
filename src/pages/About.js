@@ -22,7 +22,8 @@ const styles = theme => ({
     color: theme.palette.light.pink,
     // padding: 5,
     fontSize: '3rem',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: 5
   },
   section: {
     textAlign: 'center',
@@ -36,14 +37,14 @@ const styles = theme => ({
     fontSize: '2rem',
     fontWeight: 600,
     color: theme.palette.white,
-    opacity: '0.6',
+    opacity: '0.7',
     marginBottom: 5
   },
   paragraph: {
     fontSize: '1rem',
     lineHeight: '1 rem',
     color: theme.palette.white,
-    opacity: '0.4',
+    opacity: '0.6',
     textAlign: 'center',
     width: '60%',
     marginBottom: 10

@@ -20,8 +20,9 @@ const styles = theme => ({
   },
   textNotCurrentPage: {
     color: theme.palette.light.pink,
-    fontSize: '1.5rem',
+    fontSize: '1.625rem',
     padding: 10,
+    fontWeight: 'bold',
     '&:hover': {
        color: theme.palette.dark.purple
     },
