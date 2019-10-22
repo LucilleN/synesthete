@@ -4,8 +4,6 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { withStyles } from '@material-ui/core/styles'
 
-import AppHeader from './AppHeader'
-
 import Homepage from './pages/Homepage'
 import About from './pages/About'
 import Search from './pages/Search'
