@@ -5,7 +5,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { withStyles } from '@material-ui/core/styles'
 
 import AppHeader from './AppHeader'
-import SearchForm from './SearchForm'
 
 import Homepage from './pages/Homepage'
 import About from './pages/About'
