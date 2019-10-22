@@ -122,6 +122,7 @@ const SearchForm = (props) => {
       })
 
       setSongs(result.tracks.items)
+      setFormSubmitted(true)
     } catch (error) {
       setError('Sorry, but something went wrong.')
     }
@@ -154,7 +155,7 @@ const SearchForm = (props) => {
 
         <Grid container justify="center" className={classes.searchBar}>
           <input name="query" type="text" value={showDefaultText ? defaultText : query} onChange={handleQueryChange} className={classes.searchField} onFocus={handleFocus} onBlur={handleFocusOut}/>
-          <button type="submit" disabled={!query} className={query ? classes.buttonEnabled : classes.buttonDisabled} onClick={handleFormSubmit}>
+          <button type="submit" disabled={!query} className={query ? classes.buttonEnabled : classes.buttonDisabled}>
             <Typography>
               search tracks
             </Typography>

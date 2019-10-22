@@ -232,7 +232,7 @@ describe('normal API calls', () => {
 
   it('should populate the song results container when search results arrive', () => {
     // Our mock search results yield one image, so we expect our results container to have one child.
-    const searchResults = div.querySelector('div.searchResults') // use .find
+    const searchResults = div.querySelector('div#searchResults') // use .find
     console.log("searchResults: " + searchResults)
     console.log(div)
     expect(searchResults.children.length).toEqual(1)
