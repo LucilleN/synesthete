@@ -166,11 +166,34 @@ const Visualization = props => {
     event.preventDefault()
     setError(null)
 
+    let currentRecommendation = trackObject
+
     try {
       const result = await getRecommendation({
         limit: 1,
-        // do more stuff here with currentSong
+        seed_tracks: `${currentRecommendation.id}`,
+        seed_artists: `${currentRecommendation.artists[0].id}`,
+        target_energy: `${audioFeatures.energy}`,
+        target_valence: `${audioFeatures.valence}`,
+        target_acousticness: `${audioFeatures.acousticness}`,
+        target_key: `${audioFeatures.key}`
       })
+      currentRecommendation = result.tracks[0]
+
+      // the recommendation might be a song with a null preview url, which means we can't play it
+      while (!currentRecommendation.preview_url) {
+        const result = await getRecommendation({
+          limit: 1,
+          seed_tracks: `${currentRecommendation.id}`,
+          seed_artists: `${currentRecommendation.artists[0].id}`
+        })
+        currentRecommendation = result.tracks[0]
+      }
+
+      // let recommendation = result.tracks[0]
+      // if (!recommendation.preview_url) {
+      //
+      // }
       setRecommendedSong(result.tracks[0])
 
     } catch (error) {
@@ -182,15 +205,11 @@ const Visualization = props => {
                 LOAD MUSIC FILE
   -------------------------------------------*/
   const loadMusicFile = () => {
-  // function loadMusicFile() {
 
     const audio = audioRef.current
 
-    // const file = fileRef.current
-    // const files = file.files
-    // audio.src = URL.createObjectURL(files[0])
-
-    audio.src = url
+    // audio.src = url
+    audio.src = trackObject.preview_url
 
     // audio.crossOrigin = "anonymous";
     // audio.src = "https://p.scdn.co/mp3-preview/1c0da00b5c95a1a6c9dfc05b14a1a628a6e0ad73?cid=159ac88b1c534ed7ae41602f1e558a49"
