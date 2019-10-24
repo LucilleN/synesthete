@@ -61,7 +61,7 @@ const SearchResults = props => {
     return (
       <div className={classes.searchResults} id="searchResults">
         <Grid container id="resultsContainer">
-          {results.map(song => (
+          {results.filter(song => song.preview_url !== null).map(song => (
             <SearchResultRow
               key={song.id}
               songName={song.name}

@@ -166,13 +166,13 @@ const Visualization = props => {
     event.preventDefault()
     setError(null)
 
-    let currentRecommendation = trackObject
+    let currentRecommendation;
 
     try {
       const result = await getRecommendation({
         limit: 1,
-        seed_tracks: `${currentRecommendation.id}`,
-        seed_artists: `${currentRecommendation.artists[0].id}`,
+        seed_tracks: `${trackObject.id}`,
+        seed_artists: `${trackObject.artists[0].id}`,
         target_energy: `${audioFeatures.energy}`,
         target_valence: `${audioFeatures.valence}`,
         target_acousticness: `${audioFeatures.acousticness}`,
@@ -190,10 +190,6 @@ const Visualization = props => {
         currentRecommendation = result.tracks[0]
       }
 
-      // let recommendation = result.tracks[0]
-      // if (!recommendation.preview_url) {
-      //
-      // }
       setRecommendedSong(result.tracks[0])
 
     } catch (error) {
