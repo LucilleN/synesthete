@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 // import { Redirect } from 'react-router-dom';
 
 import SearchResults from '../components/SearchResults'
+import ErrorDialog from '../components/ErrorDialog'
 
 import { searchSongs } from '../api'
 
@@ -187,7 +188,18 @@ const SearchForm = (props) => {
           <div className="error">
             {error}
           </div>
+
         )}
+
+        {/*
+
+        {error && (
+          <div id="error">
+            <ErrorDialog error={error} errorSubtitle={"Try refreshing the page and starting a new search."}/>
+          </div>
+        )}
+
+        */}
 
         <Grid container className={classes.resultsContainer}>
           <SearchResults results={songs} submitted={formSubmitted}/>

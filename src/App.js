@@ -16,8 +16,8 @@ import { apiHost } from './api'
 export const theme = createMuiTheme({
   palette: {
     primary: {
-      light: '#c23063', // magenta
-      main: '#180142' // dark purple
+      main: '#c23063', // magenta
+      dark: '#180142' // dark purple
     },
     type: 'dark',
     dark: {

@@ -295,6 +295,10 @@ describe('failed API calls', () => {
 
   it('should display an alert when the API call fails', () => {
     // The document should contain the error div.
+    
+    // const searchErrorText = div.querySelector('div#error')
+    // expect(searchErrorText.textContent).toEqual('Sorry, but something went wrong.')
+
     const searchError = div.querySelector('div.error')
     expect(searchError.textContent).toEqual('Sorry, but something went wrong.')
   })
