@@ -25,73 +25,35 @@ const getAudioFeatures = () => {
 
 const getRecommendation = () => Promise.resolve({
   "tracks" : [ {
-    "album" : {
-      "album_type" : "ALBUM",
-      "artists" : [ {
-        "external_urls" : {
-          "spotify" : "https://open.spotify.com/artist/0XHM5ZNJDU8e4CfbWMeSzC"
-        },
-        "href" : "https://api.spotify.com/v1/artists/0XHM5ZNJDU8e4CfbWMeSzC",
-        "id" : "0XHM5ZNJDU8e4CfbWMeSzC",
-        "name" : "Roo Panes",
-        "type" : "artist",
-        "uri" : "spotify:artist:0XHM5ZNJDU8e4CfbWMeSzC"
-      } ],
-      "available_markets" : [ "AD", "AE", "AR", "AT", "AU", "BE", "BG", "BH", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "DZ", "EC", "EE", "EG", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "ID", "IE", "IL", "IN", "IS", "IT", "JO", "JP", "KW", "LB", "LI", "LT", "LU", "LV", "MA", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "OM", "PA", "PE", "PH", "PL", "PS", "PT", "PY", "QA", "RO", "SA", "SE", "SG", "SK", "SV", "TH", "TN", "TR", "TW", "US", "UY", "VN", "ZA" ],
-      "external_urls" : {
-        "spotify" : "https://open.spotify.com/album/3ZTS2uxdWAkBnIXzsCY8PZ"
-      },
-      "href" : "https://api.spotify.com/v1/albums/3ZTS2uxdWAkBnIXzsCY8PZ",
-      "id" : "3ZTS2uxdWAkBnIXzsCY8PZ",
-      "images" : [ {
-        "height" : 640,
-        "url" : "https://i.scdn.co/image/ab67616d0000b2731763012ab9a170a56bf0542a",
-        "width" : 640
-      }, {
-        "height" : 300,
-        "url" : "https://i.scdn.co/image/ab67616d00001e021763012ab9a170a56bf0542a",
-        "width" : 300
-      }, {
-        "height" : 64,
-        "url" : "https://i.scdn.co/image/ab67616d000048511763012ab9a170a56bf0542a",
-        "width" : 64
-      } ],
-      "name" : "Little Giant",
-      "release_date" : "2014-10-06",
-      "release_date_precision" : "day",
-      "total_tracks" : 0,
-      "type" : "album",
-      "uri" : "spotify:album:3ZTS2uxdWAkBnIXzsCY8PZ"
-    },
     "artists" : [ {
       "external_urls" : {
-        "spotify" : "https://open.spotify.com/artist/0XHM5ZNJDU8e4CfbWMeSzC"
+        "spotify" : "https://open.spotify.com/artist/02YLJJnWC7YQVixkjEBRn7"
       },
-      "href" : "https://api.spotify.com/v1/artists/0XHM5ZNJDU8e4CfbWMeSzC",
-      "id" : "0XHM5ZNJDU8e4CfbWMeSzC",
-      "name" : "Roo Panes",
+      "href" : "https://api.spotify.com/v1/artists/02YLJJnWC7YQVixkjEBRn7",
+      "id" : "02YLJJnWC7YQVixkjEBRn7",
+      "name" : "Billie Marten",
       "type" : "artist",
-      "uri" : "spotify:artist:0XHM5ZNJDU8e4CfbWMeSzC"
+      "uri" : "spotify:artist:02YLJJnWC7YQVixkjEBRn7"
     } ],
     "available_markets" : [ "AD", "AE", "AR", "AT", "AU", "BE", "BG", "BH", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "DZ", "EC", "EE", "EG", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "ID", "IE", "IL", "IN", "IS", "IT", "JO", "JP", "KW", "LB", "LI", "LT", "LU", "LV", "MA", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "OM", "PA", "PE", "PH", "PL", "PS", "PT", "PY", "QA", "RO", "SA", "SE", "SG", "SK", "SV", "TH", "TN", "TR", "TW", "US", "UY", "VN", "ZA" ],
     "disc_number" : 1,
-    "duration_ms" : 241720,
+    "duration_ms" : 187266,
     "explicit" : false,
     "external_ids" : {
-      "isrc" : "GB5UQ1400018"
+      "isrc" : "GBARL1600328"
     },
     "external_urls" : {
-      "spotify" : "https://open.spotify.com/track/4C2aiAVTTVyZbCQZst5Xu1"
+      "spotify" : "https://open.spotify.com/track/0DwaOWI1kC2s98qLj0LTDd"
     },
-    "href" : "https://api.spotify.com/v1/tracks/4C2aiAVTTVyZbCQZst5Xu1",
-    "id" : "4C2aiAVTTVyZbCQZst5Xu1",
+    "href" : "https://api.spotify.com/v1/tracks/0DwaOWI1kC2s98qLj0LTDd",
+    "id" : "0DwaOWI1kC2s98qLj0LTDd",
     "is_local" : false,
-    "name" : "Tiger Striped Sky",
-    "popularity" : 68,
-    "preview_url" : null,
-    "track_number" : 6,
+    "name" : "La Lune",
+    "popularity" : 60,
+    "preview_url" : "https://p.scdn.co/mp3-preview/14399ace213706a367f6bd9f34357dd5f532a588?cid=159ac88b1c534ed7ae41602f1e558a49",
+    "track_number" : 1,
     "type" : "track",
-    "uri" : "spotify:track:4C2aiAVTTVyZbCQZst5Xu1"
+    "uri" : "spotify:track:0DwaOWI1kC2s98qLj0LTDd"
   } ],
   "seeds" : [ {
     "initialPoolSize" : 250,
