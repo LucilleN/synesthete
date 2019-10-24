@@ -101,7 +101,7 @@ export const styles = theme => ({
   }
 })
 
-let src;
+const defaultErrorText = 'Sorry, but something went wrong.'
 
 // TODO This is SUPER DIRTY but at least proves that if we maintain the same context, audioNode, and analyser,
 // then things stay OK.
@@ -112,8 +112,6 @@ const Visualization = props => {
   const { classes } = props
   const { trackObject } = props.location.state
   console.log("VISUALIZATION, at the beginning, trackObject is", trackObject)
-
-  const [url, setUrl] = useState('')
 
   const audioRef = useRef(null)
   const canvasRef = useRef(null)
@@ -146,12 +144,10 @@ const Visualization = props => {
   /*-------------------------------------------
                   API STUFF
   -------------------------------------------*/
-  // const performAudioFeaturesQuery = async event => {
   const performAudioFeaturesQuery = async () => {
     console.log("performAudioFeaturesQuery")
-    // event.preventDefault() // why?
 
-    setError(null) // why?
+    setError(null)
 
     try {
       const result = await getAudioFeatures({
@@ -161,17 +157,10 @@ const Visualization = props => {
         }
       })
 
-      // const result = await getAudioFeatures()
-      // console.log("result: ")
-      // console.log(result)
-
-      // audioFeatures = result
       setAudioFeatures(result)
-      // console.log("AUDIO FEATURES: ")
-      // console.log(audioFeatures)
 
     } catch (error) {
-      setError('Sorry, but something went wrong.')
+      setError(defaultErrorText)
     }
   }
 
@@ -194,7 +183,7 @@ const Visualization = props => {
       })
       currentRecommendation = result.tracks[0]
 
-      // the recommendation might be a song with a null preview url, which means we can't play it
+      // recommendation might be a song with a null preview url; if so, recommend another one
       while (!currentRecommendation.preview_url) {
         const result = await getRecommendation({
           limit: 1,
@@ -207,7 +196,7 @@ const Visualization = props => {
       setRecommendedSong(result.tracks[0])
 
     } catch (error) {
-      setError('Sorry, but something went wrong.')
+      setError(defaultErrorText)
     }
   }
 
