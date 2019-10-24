@@ -26,9 +26,10 @@ const styles = theme => ({
 })
 
 const RecommendationButton = props => {
-  const { classes } = props
+  const { classes, handleClick } = props //TODO: change to currentSong rather than just ID, we want whole object
+
   return (
-    <Fab variant="extended" color="primary" aria-label="Get Recommendation" href="/visualization" className={classes.fab}> {/*href="/search"*/}
+    <Fab variant="extended" color="primary" aria-label="Get Recommendation" href="/visualization" className={classes.fab} onClick={handleClick}> {/*href="/search"*/}
       <Typography className={classes.text}>
         get a visually similar song
       </Typography>

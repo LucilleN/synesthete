@@ -3,7 +3,9 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import RecommendationButton from '../components/RecommendationButton'
 
-import { getAudioFeatures } from '../api'
+import { Redirect } from 'react-router-dom';
+
+import { getAudioFeatures, getRecommendation } from '../api'
 
 export const styles = theme => ({
   root: {
@@ -70,7 +72,9 @@ export const styles = theme => ({
   title: {
     color: theme.palette.white,
     fontSize: '2rem',
-    zIndex: 4
+    zIndex: 4,
+    marginBottom: 8,
+    textAlign: 'center'
   }
 })
 
@@ -83,6 +87,7 @@ let context, audioNode, analyser
 
 const Visualization = props => {
   const { classes } = props
+  const { trackObject } = props.location.state
 
   const [url, setUrl] = useState('')
 
@@ -93,8 +98,11 @@ const Visualization = props => {
   const [error, setError] = useState(null)
   const [audioFeatures, setAudioFeatures] = useState(null)
 
+  const [recommendedSong, setRecommendedSong] = useState(null)
+
   // Equivalent of componentDidMount (ONLY RUNS ONCE)
   useEffect(() => {
+    setAudioFeatures(null)
     performAudioFeaturesQuery()
   }, [])
 
@@ -105,6 +113,10 @@ const Visualization = props => {
     // Use this later for real API stuff
     loadMusicFile()
     loadMusicFile()
+
+    if (!audioFeatures) {
+      performAudioFeaturesQuery()
+    }
   })
 
 
@@ -135,6 +147,23 @@ const Visualization = props => {
       setAudioFeatures(result)
       console.log("AUDIO FEATURES: ")
       console.log(audioFeatures)
+
+    } catch (error) {
+      setError('Sorry, but something went wrong.')
+    }
+  }
+
+
+  const performRecommendationQuery = async event => {
+    event.preventDefault()
+    setError(null)
+
+    try {
+      const result = await getRecommendation({
+        limit: 1,
+        // do more stuff here with currentSong
+      })
+      setRecommendedSong(result.tracks[0])
 
     } catch (error) {
       setError('Sorry, but something went wrong.')
@@ -295,11 +324,18 @@ const Visualization = props => {
 
   console.log('ABOUT TO RETURN, AUDIO FEATURES: ')
   console.log(audioFeatures)
+  console.log("trackObject", trackObject)
 
   return (
     <div className={classes.root}>
       <Typography className={classes.title}>
-        Visualization Page, song ID is: {songID}
+        Visualization Page<br></br>
+        Song ID: {songID}
+        {audioFeatures &&
+          <Typography className={classes.title}>
+            Acousticness: {audioFeatures.acousticness}
+          </Typography>
+        }
         <input type="text" value={url} onChange={event => setUrl(event.target.value)} />
         <button onClick={loadMusicFile} disabled={!url}>Load</button>
       </Typography>
@@ -307,7 +343,14 @@ const Visualization = props => {
       <canvas ref={canvasRef} id="canvas" width="300" height="300" className={classes.canvas}></canvas>
       <audio ref={audioRef} id="audio" crossOrigin="anonymous" controls className={classes.audio}></audio>
       {/* <div id="background" className={classes.background}></div> */}
-      <RecommendationButton className={classes.recommendationButton}/>
+      <RecommendationButton className={classes.recommendationButton} handleClick={performRecommendationQuery}/>
+      {recommendedSong &&
+        <Redirect to={{
+            pathname: `/visualization/${recommendedSong.id}`,
+            state: { trackObject: recommendedSong }
+          }}
+        />
+      }
     </div>
   )
 }
