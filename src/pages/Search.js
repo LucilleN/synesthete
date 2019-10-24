@@ -96,6 +96,8 @@ const SearchForm = (props) => {
   const [songSelected, setSongSelected] = useState(false)
   const [songID, setSongID] = useState(null)
   // const [songIndex, setSongIndex] = useState(null)
+  const [song, setSong] = useState(null)
+
   const [showDefaultText, setShowDefaultText] = useState(true)
   const [formSubmitted, setFormSubmitted] = useState(false)
 
@@ -127,16 +129,24 @@ const SearchForm = (props) => {
       setError('Sorry, but something went wrong.')
     }
   }
+  //
+  // const handleFormSubmit = event => {
+  //   setFormSubmitted(true)
+  // }
 
-  const handleFormSubmit = event => {
-    setFormSubmitted(true)
-  }
-
-  const handleTrackSelect = async event => {
+  const handleTrackSelect = async (event, song) => {
     // do api stuff
     console.log(`CALLED HANDLE TRACK SELECT: selected track id ${event.target.id}`)
-    setSongSelected(true)
-    setSongID(event.target.id)
+    console.log(`still in handleTrackSelect, song is:`)
+    console.log(song)
+
+    try {
+      setSongSelected(true)
+      setSong(song)
+      setSongID(event.target.id)
+    } catch (error) {
+      setError('Sorry, but something went wrong.')
+    }
 
     // const index = songs.findIndex((song) => (song.id === songID))
     // console.log(index)
@@ -145,7 +155,19 @@ const SearchForm = (props) => {
     // put a try catch here
   }
 
-  if (!songSelected) {
+  // if (songSelected) {
+  //   console.log("SONG: ", song)
+  //   return (
+  //     <Redirect to={{
+  //         pathname: `/visualization/${songID}`,
+  //         state: { trackObject: song }
+  //       }}
+  //     />
+  //   )
+  // }
+
+  // if (!songSelected) {
+  // else {
     // put whole thing in a Grid with justify="flex-end"
     return (
       <form className={classes.searchForm} onSubmit={performQuery}>
@@ -174,16 +196,17 @@ const SearchForm = (props) => {
 
       </form>
     )
-  }
-  else {
-    return (
-      <Redirect to={{
-          pathname: `/visualization/${songID}`,
-          state: { track: null }
-        }}
-      />
-    )
-  }
+  // }
+  // else {
+  //   console.log("SONG: ", song)
+  //   return (
+  //     <Redirect to={{
+  //         pathname: `/visualization/${songID}`,
+  //         state: { trackObject: song }
+  //       }}
+  //     />
+  //   )
+  // }
 }
 
 export default withStyles(styles, { withTheme: true })(SearchForm)

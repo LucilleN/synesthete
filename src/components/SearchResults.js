@@ -32,6 +32,10 @@ const SearchResults = props => {
 
   const { classes, results, submitted, onTrackSelect } = props
 
+  // const handleTrackSelect = (song) => {
+  //   onTrackSelect(song)
+  // }
+
   if (!submitted) {
     return (
       <div className={classes.noResults}>
@@ -61,6 +65,7 @@ const SearchResults = props => {
             <SearchResultRow
               key={song.id}
               songName={song.name}
+              song={song}
               songID={song.id}
               artistName={song.artists[0].name}
               onTrackSelect={onTrackSelect}

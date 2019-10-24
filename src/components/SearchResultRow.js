@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+
+import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
   row: {
@@ -25,18 +27,46 @@ const styles = theme => ({
 
 const SearchResultRow = props => {
 
-  const { classes, songName, songID, artistName, onTrackSelect } = props
+  const { classes, songName, song, songID, artistName, onTrackSelect } = props
 
-  return (
-    <Grid item xs={12} id={songID} className={classes.row} onClick={onTrackSelect}>
-      <Typography id={songID} className={classes.text}>
-        "{songName}," Artist: {artistName}
-      </Typography>
-      <Typography>
-        {">>> Visualize This Sample >>>"}
-      </Typography>
-    </Grid>
-  )
+  const [clicked, setClicked] = useState(false)
+
+  const handleClick = () => {
+    console.log("handleClick called")
+    setClicked(true)
+  }
+
+  // if (clicked) {
+  //   return (
+  //     <Redirect to={{
+  //         pathname: `/visualization/${songID}`,
+  //         state: { trackObject: song }
+  //       }}
+  //     />
+  //   )
+  // }
+  if (!clicked) {
+    return (
+      <Grid item xs={12} id={songID} className={classes.row} onClick={handleClick}> 
+        <Typography id={songID} className={classes.text}>
+          "{songName}," Artist: {artistName}
+        </Typography>
+        <Typography>
+          {">>> Visualize This Sample >>>"}
+        </Typography>
+      </Grid>
+    )
+  }
+  else {
+    return (
+      <Redirect to={{
+          pathname: `/visualization/${songID}`,
+          state: { trackObject: song }
+        }}
+      />
+    )
+  }
+
 }
 
 export default withStyles(styles)(SearchResultRow)
