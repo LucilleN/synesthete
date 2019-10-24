@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import { styles } from './Visualization'
@@ -64,8 +64,14 @@ const styles = theme => ({
 })
 */
 
+// TODO This is SUPER DIRTY but at least proves that if we maintain the same context, audioNode, and analyser,
+// then things stay OK.
+let context, audioNode, analyser
+
 const UploadVisualization = props => {
   const { classes } = props
+
+  const [url, setUrl] = useState('')
 
   const audioRef = useRef(null)
   const canvasRef = useRef(null)
@@ -79,22 +85,35 @@ const UploadVisualization = props => {
 
     const file = fileRef.current
     const files = file.files
-    audio.src = URL.createObjectURL(files[0])
+    if (files.length > 0) {
+      audio.src = URL.createObjectURL(files[0])
+    }
+    else {
+      audio.src = url
+    }
+    // audio.src = URL.createObjectURL(files[0])
+    // audio.src = url
     // audio.crossOrigin = "anonymous";
     // audio.src = "https://p.scdn.co/mp3-preview/1c0da00b5c95a1a6c9dfc05b14a1a628a6e0ad73?cid=159ac88b1c534ed7ae41602f1e558a49"
     // audio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
     console.log("audio.src: " + audio.src)
+
+    // The hookup only needs to be done once.
+    if (context && audioNode && analyser) {
+      audio.play();
+      return
+    }
 
     const canvas = canvasRef.current;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const ctx = canvas.getContext("2d");
 
-    const context = new AudioContext(); // (Interface) Audio-processing graph
-    let src = context.createMediaElementSource(audio); // Give audio context an audio source
-    const analyser = context.createAnalyser(); // Create an analyser for the audio context
+    context = new AudioContext(); // (Interface) Audio-processing graph
+    audioNode = context.createMediaElementSource(audio); // Give audio context an audio source
+    analyser = context.createAnalyser(); // Create an analyser for the audio context
 
-    src.connect(analyser); // Connects the audio context source to the analyser
+    audioNode.connect(analyser); // Connects the audio context source to the analyser
     analyser.connect(context.destination); // End destination of an audio graph in a given context
     analyser.fftSize = 16384;
 
@@ -204,7 +223,9 @@ const UploadVisualization = props => {
       </Typography>
       <input ref={fileRef} type="file" id="file-input" accept="audio/*,video/*,image/*" className={classes.fileInput} onChange={loadMusicFile}/>
       <canvas ref={canvasRef} id="canvas" width="300" height="300" className={classes.canvas}></canvas>
-      <audio ref={audioRef} id="audio" controls className={classes.audio}></audio>
+      <audio ref={audioRef} id="audio" controls className={classes.audio} crossOrigin="anonymous"></audio>
+      <input type="text" value={url} onChange={event => setUrl(event.target.value)} className={classes.urlInput} />
+      <button onClick={loadMusicFile} disabled={!url} className={classes.urlButton}>Load</button>
       {/* <div id="background" className={classes.background}></div> */}
     </div>
   )

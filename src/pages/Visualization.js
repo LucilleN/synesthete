@@ -20,6 +20,13 @@ export const styles = theme => ({
     zIndex: 3,
     color: 'white'
   },
+  urlInput: {
+    zIndex: 3,
+    color: theme.palette.dark.pink
+  },
+  urlButton: {
+    zIndex: 3
+  },
   recommendationButton: {
     zIndex: 10,
     marginTop: 200
