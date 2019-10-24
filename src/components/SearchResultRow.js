@@ -27,27 +27,18 @@ const styles = theme => ({
 
 const SearchResultRow = props => {
 
-  const { classes, songName, song, songID, artistName, onTrackSelect } = props
+  const { classes, songName, song, songID, artistName } = props
 
   const [clicked, setClicked] = useState(false)
 
   const handleClick = () => {
-    console.log("handleClick called")
+    console.log("SEARCH RESULT ROW", "handleClick called")
     setClicked(true)
   }
 
-  // if (clicked) {
-  //   return (
-  //     <Redirect to={{
-  //         pathname: `/visualization/${songID}`,
-  //         state: { trackObject: song }
-  //       }}
-  //     />
-  //   )
-  // }
   if (!clicked) {
     return (
-      <Grid item xs={12} id={songID} className={classes.row} onClick={handleClick}> 
+      <Grid item xs={12} id={songID} className={classes.row} onClick={handleClick}>
         <Typography id={songID} className={classes.text}>
           "{songName}," Artist: {artistName}
         </Typography>

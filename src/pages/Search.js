@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 import SearchResults from '../components/SearchResults'
 
@@ -93,10 +93,9 @@ const SearchForm = (props) => {
   const [error, setError] = useState(null) // so it's const even though error can change?
   const [query, setQuery] = useState('')
   const [songs, setSongs] = useState([])
-  const [songSelected, setSongSelected] = useState(false)
-  const [songID, setSongID] = useState(null)
-  // const [songIndex, setSongIndex] = useState(null)
-  const [song, setSong] = useState(null)
+  // const [songSelected, setSongSelected] = useState(false)
+  // const [songID, setSongID] = useState(null)
+  // const [song, setSong] = useState(null)
 
   const [showDefaultText, setShowDefaultText] = useState(true)
   const [formSubmitted, setFormSubmitted] = useState(false)
@@ -133,27 +132,27 @@ const SearchForm = (props) => {
   // const handleFormSubmit = event => {
   //   setFormSubmitted(true)
   // }
-
-  const handleTrackSelect = async (event, song) => {
-    // do api stuff
-    console.log(`CALLED HANDLE TRACK SELECT: selected track id ${event.target.id}`)
-    console.log(`still in handleTrackSelect, song is:`)
-    console.log(song)
-
-    try {
-      setSongSelected(true)
-      setSong(song)
-      setSongID(event.target.id)
-    } catch (error) {
-      setError('Sorry, but something went wrong.')
-    }
-
-    // const index = songs.findIndex((song) => (song.id === songID))
-    // console.log(index)
-    // setSongID(index)
-
-    // put a try catch here
-  }
+  //
+  // const handleTrackSelect = async (event, song) => {
+  //   // do api stuff
+  //   console.log(`CALLED HANDLE TRACK SELECT: selected track id ${event.target.id}`)
+  //   console.log(`still in handleTrackSelect, song is:`)
+  //   console.log(song)
+  //
+  //   try {
+  //     setSongSelected(true)
+  //     setSong(song)
+  //     setSongID(event.target.id)
+  //   } catch (error) {
+  //     setError('Sorry, but something went wrong.')
+  //   }
+  //
+  //   // const index = songs.findIndex((song) => (song.id === songID))
+  //   // console.log(index)
+  //   // setSongID(index)
+  //
+  //   // put a try catch here
+  // }
 
   // if (songSelected) {
   //   console.log("SONG: ", song)
@@ -191,7 +190,7 @@ const SearchForm = (props) => {
         )}
 
         <Grid container className={classes.resultsContainer}>
-          <SearchResults results={songs} onTrackSelect={handleTrackSelect} submitted={formSubmitted}/>
+          <SearchResults results={songs} submitted={formSubmitted}/>
         </Grid>
 
       </form>

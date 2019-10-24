@@ -30,7 +30,7 @@ const styles = theme => ({
 
 const SearchResults = props => {
 
-  const { classes, results, submitted, onTrackSelect } = props
+  const { classes, results, submitted } = props
 
   // const handleTrackSelect = (song) => {
   //   onTrackSelect(song)
@@ -68,7 +68,6 @@ const SearchResults = props => {
               song={song}
               songID={song.id}
               artistName={song.artists[0].name}
-              onTrackSelect={onTrackSelect}
             />
           ))}
         </Grid>

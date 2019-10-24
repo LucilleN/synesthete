@@ -322,9 +322,11 @@ const Visualization = props => {
 
   }
 
-  console.log('ABOUT TO RETURN, AUDIO FEATURES: ')
-  console.log(audioFeatures)
-  console.log("trackObject", trackObject)
+  console.log("--------------------------")
+  console.log('VISUALIZATION: ABOUT TO RETURN:')
+  console.log("audioFeatures: ", audioFeatures)
+  console.log("trackObject: ", trackObject)
+  console.log("--------------------------")
 
   return (
     <div className={classes.root}>

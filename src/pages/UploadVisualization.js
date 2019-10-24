@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import { styles } from './Visualization'
 
-{/*
+/*
 const styles = theme => ({
   root: {
     // background: 'black',
@@ -62,7 +62,7 @@ const styles = theme => ({
     zIndex: 4
   }
 })
-*/}
+*/
 
 const UploadVisualization = props => {
   const { classes } = props
