@@ -88,6 +88,7 @@ let context, audioNode, analyser
 const Visualization = props => {
   const { classes } = props
   const { trackObject } = props.location.state
+  console.log("VISUALIZATION, at the beginning, trackObject is", trackObject)
 
   const [url, setUrl] = useState('')
 
@@ -132,21 +133,21 @@ const Visualization = props => {
     setError(null) // why?
 
     try {
-      // const result = await getAudioFeatures({
-      //   id: songID,
-      //   headers: {
-      //     'Authorization': 'Bearer '
-      //   }
-      // })
+      const result = await getAudioFeatures({
+        id: songID,
+        headers: {
+          'Authorization': 'Bearer '
+        }
+      })
 
-      const result = await getAudioFeatures()
-      console.log("result: ")
-      console.log(result)
+      // const result = await getAudioFeatures()
+      // console.log("result: ")
+      // console.log(result)
 
       // audioFeatures = result
       setAudioFeatures(result)
-      console.log("AUDIO FEATURES: ")
-      console.log(audioFeatures)
+      // console.log("AUDIO FEATURES: ")
+      // console.log(audioFeatures)
 
     } catch (error) {
       setError('Sorry, but something went wrong.')
@@ -332,7 +333,9 @@ const Visualization = props => {
     <div className={classes.root}>
       <Typography className={classes.title}>
         Visualization Page<br></br>
-        Song ID: {songID}
+        Song ID: {songID}<br></br>
+        trackObject songID: {trackObject.id}<br></br>
+        trackObject preview_url: {trackObject.preview_url}
         {audioFeatures &&
           <Typography className={classes.title}>
             Acousticness: {audioFeatures.acousticness}
