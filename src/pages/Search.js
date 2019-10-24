@@ -91,12 +91,13 @@ const SearchForm = (props) => {
   const { classes } = props
   const defaultText = 'search for a song'
 
-  const [error, setError] = useState(null) // so it's const even though error can change?
+  const defaultErrorText = 'Sorry, but something went wrong.'
+
+  const [error, setError] = useState(null)
+  // ONLY FOR SEEING IN LOCALHOST
+  // const [error, setError] = useState(defaultErrorText)
   const [query, setQuery] = useState('')
   const [songs, setSongs] = useState([])
-  // const [songSelected, setSongSelected] = useState(false)
-  // const [songID, setSongID] = useState(null)
-  // const [song, setSong] = useState(null)
 
   const [showDefaultText, setShowDefaultText] = useState(true)
   const [formSubmitted, setFormSubmitted] = useState(false)
@@ -115,11 +116,10 @@ const SearchForm = (props) => {
   const performQuery = async event => {
     event.preventDefault() // why?
 
-    setError(null) // why?
+    setError(null)
 
     try {
       const result = await searchSongs({
-        // rating: 'pg-13',
         q: query
       })
 
@@ -129,95 +129,44 @@ const SearchForm = (props) => {
       setError('Sorry, but something went wrong.')
     }
   }
-  //
-  // const handleFormSubmit = event => {
-  //   setFormSubmitted(true)
-  // }
-  //
-  // const handleTrackSelect = async (event, song) => {
-  //   // do api stuff
-  //   console.log(`CALLED HANDLE TRACK SELECT: selected track id ${event.target.id}`)
-  //   console.log(`still in handleTrackSelect, song is:`)
-  //   console.log(song)
-  //
-  //   try {
-  //     setSongSelected(true)
-  //     setSong(song)
-  //     setSongID(event.target.id)
-  //   } catch (error) {
-  //     setError('Sorry, but something went wrong.')
-  //   }
-  //
-  //   // const index = songs.findIndex((song) => (song.id === songID))
-  //   // console.log(index)
-  //   // setSongID(index)
-  //
-  //   // put a try catch here
-  // }
 
-  // if (songSelected) {
-  //   console.log("SONG: ", song)
-  //   return (
-  //     <Redirect to={{
-  //         pathname: `/visualization/${songID}`,
-  //         state: { trackObject: song }
-  //       }}
-  //     />
-  //   )
-  // }
+  return (
+    <form className={classes.searchForm} onSubmit={performQuery}>
+      <Typography className={classes.title}>
+        search
+      </Typography>
 
-  // if (!songSelected) {
-  // else {
-    // put whole thing in a Grid with justify="flex-end"
-    return (
-      <form className={classes.searchForm} onSubmit={performQuery}>
-        <Typography className={classes.title}>
-          search
-        </Typography>
+      <Grid container justify="center" className={classes.searchBar}>
+        <input name="query" type="text" value={showDefaultText ? defaultText : query} onChange={handleQueryChange} className={classes.searchField} onFocus={handleFocus} onBlur={handleFocusOut}/>
+        <button type="submit" disabled={!query} className={query ? classes.buttonEnabled : classes.buttonDisabled}>
+          <Typography>
+            search tracks
+          </Typography>
+        </button>
+      </Grid>
 
-        <Grid container justify="center" className={classes.searchBar}>
-          <input name="query" type="text" value={showDefaultText ? defaultText : query} onChange={handleQueryChange} className={classes.searchField} onFocus={handleFocus} onBlur={handleFocusOut}/>
-          <button type="submit" disabled={!query} className={query ? classes.buttonEnabled : classes.buttonDisabled}>
-            <Typography>
-              search tracks
-            </Typography>
-          </button>
-        </Grid>
+{/*
+      {error && (
+        <div className="error">
+          {error}
+        </div>
 
-        {error && (
-          <div className="error">
-            {error}
-          </div>
+      )}
+*/}
 
-        )}
+      {error && (
+        <div id="error">
+          <ErrorDialog error={error} errorSubtitle={"Try refreshing the page and starting a new search."}/>
+        </div>
+      )}
 
-        {/*
 
-        {error && (
-          <div id="error">
-            <ErrorDialog error={error} errorSubtitle={"Try refreshing the page and starting a new search."}/>
-          </div>
-        )}
+      <Grid container className={classes.resultsContainer}>
+        <SearchResults results={songs} submitted={formSubmitted}/>
+      </Grid>
 
-        */}
-
-        <Grid container className={classes.resultsContainer}>
-          <SearchResults results={songs} submitted={formSubmitted}/>
-        </Grid>
-
-      </form>
-    )
-  // }
-  // else {
-  //   console.log("SONG: ", song)
-  //   return (
-  //     <Redirect to={{
-  //         pathname: `/visualization/${songID}`,
-  //         state: { trackObject: song }
-  //       }}
-  //     />
-  //   )
-  // }
+    </form>
+  )
 }
 
 export default withStyles(styles, { withTheme: true })(SearchForm)

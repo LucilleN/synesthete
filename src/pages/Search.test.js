@@ -19,15 +19,11 @@ beforeEach(() => {
   )
 })
 
-class TestComponent extends React.Component {
-  render() {
-    return (
-      <MuiThemeProvider theme={theme}>
-        <Search />
-      </MuiThemeProvider>
-    )
-  }
-}
+beforeAll(() => {
+    ReactDOM.createPortal = jest.fn((component, node) => {
+        return component
+    })
+});
 
 describe('initial state', () => {
   it('should start with a search field with default text', () => {
@@ -286,6 +282,8 @@ describe('failed API calls', () => {
     api.searchSongs.returns(Promise.reject('Mock failure'))
 
     div = await setupAndQuerySearchForm()
+    console.log("div in beforeEach", div)
+
   })
 
   afterEach(() => {
@@ -295,11 +293,18 @@ describe('failed API calls', () => {
 
   it('should display an alert when the API call fails', () => {
     // The document should contain the error div.
-    
+
     // const searchErrorText = div.querySelector('div#error')
     // expect(searchErrorText.textContent).toEqual('Sorry, but something went wrong.')
 
-    const searchError = div.querySelector('div.error')
-    expect(searchError.textContent).toEqual('Sorry, but something went wrong.')
+    const searchErrorDiv = div.querySelector('div#error')
+    expect(searchErrorDiv !== null).toBe(true)
+    expect(searchErrorDiv.children.length).toBeGreaterThan(0)
+
+    // console.log("div", div)
+
+    // OLD ERROR STUFF
+    // const searchError = div.querySelector('div#error-title')
+    // expect(searchError.textContent).toEqual('Sorry, but something went wrong.')
   })
 })

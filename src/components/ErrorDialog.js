@@ -40,7 +40,6 @@ const ErrorDialog = (props) => {
         onClose={handleClose}
         aria-labelledby="error-title"
         aria-describedby="error-subtitle"
-        bodyStyle={{ backgroundColor: '#180142' }}
       >
         <DialogTitle id="error-title" className={classes.title}>{error}</DialogTitle>
         <DialogContent>
