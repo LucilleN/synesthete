@@ -62,26 +62,6 @@ export const styles = theme => ({
        opacity: 0.8,
     },
   },
-  // background: {
-  //   width: '100%',
-  //   // height: '80vh',
-  //   height: 'calc(100% - 60px)',
-  //   // width: '90vw',
-  //   // height: '70vh',
-  //   position: 'absolute',
-  //   // top: '0px',
-  //   bottom: '0px',
-  //   left: '0px',
-  //   background: 'linear-gradient(transparent, #00035f, transparent)',
-  //   backgroundSize: '100% 7px',
-  //   // animation: 'bg 1s infinite linear',
-  //   zIndex: 1,
-  //   opacity: 0.3
-  // },
-  // '@keyframes bg': {
-  //   from: { backgroundPosition: '0 0' },
-  //   to: { backgroundPosition: '8px 8px' }
-  // },
   titleBar: {
     width: '100%',
     display: 'flex',
@@ -124,7 +104,7 @@ export const styles = theme => ({
     width: '250px',
     borderRadius: '30px',
     border: 'none',
-    margin: '15px 100px',
+    margin: '10px 20px',
     '&:hover': {
        background: theme.palette.white,
        color: theme.palette.dark.pink
@@ -134,8 +114,23 @@ export const styles = theme => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-evenly'
   },
+  button: {
+    zIndex: 4,
+    color: theme.palette.white,
+    fontSize: '1rem',
+    background: theme.palette.dark.purple,
+    height: '60px',
+    width: '250px',
+    borderRadius: '30px',
+    border: 'none',
+    margin: '10px 20px',
+    '&:hover': {
+       background: theme.palette.white,
+       color: theme.palette.dark.purple
+    },
+  }
 
 })
 

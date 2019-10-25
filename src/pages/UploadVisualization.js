@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import Typography from '@material-ui/core/Typography'
+import Fab from '@material-ui/core/Fab'
 import { withStyles } from '@material-ui/core/styles'
 import { styles } from './Visualization'
 
@@ -17,6 +18,16 @@ const UploadVisualization = props => {
   const audioRef = useRef(null)
   const canvasRef = useRef(null)
   const fileRef = useRef(null)
+
+  const handleReload = () => {
+    // setUrl('')
+    // setUploadFileSelected(false)
+    // setLoadUrlSelected(false)
+    // context = null
+    // audioNode = null
+    // analyser = null
+    window.location.reload(false);
+  }
 
   /*-------------------------------------------
                 LOAD MUSIC FILE
@@ -156,9 +167,22 @@ const UploadVisualization = props => {
 
   return (
     <div className={classes.root}>
-      <Typography className={classes.title}>
-        Upload A Song to Visualize
-      </Typography>
+      <div className={classes.titleBar}>
+        <Fab href="/" className={classes.button}>
+          <Typography>
+            {"< back to home"}
+          </Typography>
+        </Fab>
+        <Typography className={classes.title}>
+          Load a Song to Visualize
+        </Typography>
+        <button onClick={handleReload} className={classes.button}>
+          <Typography>
+            Reset
+          </Typography>
+        </button>
+      </div>
+
       <canvas ref={canvasRef} id="canvas" width="300" height="300" className={classes.canvas}></canvas>
       <audio ref={audioRef} id="audio" controls className={classes.audio} crossOrigin="anonymous"></audio>
       {!uploadFileSelected && !loadUrlSelected &&
