@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import RecommendationButton from '../components/RecommendationButton'
 import StartButton from '../components/StartButton'
+import ErrorDialog from '../components/ErrorDialog'
 
 import { Redirect } from 'react-router-dom';
 
@@ -15,9 +16,6 @@ export const styles = theme => ({
     alignItems: 'center'
   },
   fileInput: {
-    // position: 'fixed',
-    // top: '10px',
-    // left: '10px',
     zIndex: 3,
     color: 'white'
   },
@@ -32,35 +30,27 @@ export const styles = theme => ({
   },
   recommendationButton: {
     zIndex: 10,
-    marginTop: 200,
-    // position: 'fixed',
-    // top: '70px',
-    // right: '10px',
+    marginTop: 200
   },
   canvas: {
     position: 'fixed',
     top: '60px',
     left: '0px',
     width: '100%',
-    // height: '70vw',
     height: 'calc(100%-60px)',
-    // background: theme.palette.dark.purple,
     background: 'black',
     zIndex: 0
   },
   audio:{
     position: 'fixed',
-    // left: '10px',
     bottom: '20px',
-    // width: 'calc(100%-25px)',
     width: '90vw',
     height: '35px',
     zIndex: 3,
-    // marginTop: -100
     opacity: 0.1,
     '&:hover': {
        opacity: 0.8,
-    },
+    }
   },
   titleBar: {
     width: '100%',
@@ -108,7 +98,7 @@ export const styles = theme => ({
     '&:hover': {
        background: theme.palette.white,
        color: theme.palette.dark.pink
-    },
+    }
   },
   buttonBar: {
     width: '100%',
@@ -129,12 +119,10 @@ export const styles = theme => ({
     '&:hover': {
        background: theme.palette.white,
        color: theme.palette.dark.purple
-    },
+    }
   }
-
 })
 
-const defaultErrorText = 'Sorry, but something went wrong.'
 
 // TODO This is SUPER DIRTY but at least proves that if we maintain the same context, audioNode, and analyser,
 // then things stay OK.
@@ -144,16 +132,20 @@ let context, audioNode, analyser
 const Visualization = props => {
   const { classes } = props
   const { trackObject } = props.location.state
-  console.log("VISUALIZATION, at the beginning, trackObject is", trackObject)
+  // console.log("VISUALIZATION, at the beginning, trackObject is", trackObject)
 
   const audioRef = useRef(null)
   const canvasRef = useRef(null)
 
   const [songID, setSongID] = useState(null)
   const [error, setError] = useState(null)
+  // ONLY FOR SEEING IN LOCALHOST
+  // const [error, setError] = useState('something')
   const [audioFeatures, setAudioFeatures] = useState(null)
 
   const [recommendedSong, setRecommendedSong] = useState(null)
+
+  const defaultErrorText = 'Sorry, but something went wrong.'
 
   // Equivalent of componentDidMount (ONLY RUNS ONCE)
   useEffect(() => {
@@ -239,14 +231,29 @@ const Visualization = props => {
   const loadMusicFile = () => {
 
     const audio = audioRef.current
+    console.log("audio:", audio)
+    // console.log("audio.src: " + audio.src)
 
-    // audio.src = url
-    audio.src = trackObject.preview_url
-    console.log("audio.src: " + audio.src)
 
     if (context && audioNode && analyser) {
-      audio.play();
+      audio.src = trackObject.preview_url
+
+      // audio.play();
+      let playPromise = audio.play()
+      if (playPromise !== undefined) {
+        playPromise
+          .then(_ => {
+            // Automatic playback started
+            console.log("audio played auto");
+          })
+          .catch(error => {
+            // Auto-play was prevented
+            console.log("playback prevented");
+            setError(defaultErrorText)
+        });
+      }
       return
+
     }
 
     const canvas = canvasRef.current;
@@ -401,6 +408,11 @@ const Visualization = props => {
         }
       </div>
       */}
+      {error && (
+        <div id="error">
+          <ErrorDialog error={error} errorSubtitle={"Try refreshing the page or starting a new search."}/>
+        </div>
+      )}
       {recommendedSong &&
         <Redirect to={{
             pathname: `/visualization/${recommendedSong.id}`,
