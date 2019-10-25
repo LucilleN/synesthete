@@ -124,11 +124,6 @@ export const styles = theme => ({
 })
 
 
-// TODO This is SUPER DIRTY but at least proves that if we maintain the same context, audioNode, and analyser,
-// then things stay OK.
-let context, audioNode, analyser
-
-
 const Visualization = props => {
   const { classes } = props
   const { trackObject } = props.location.state
@@ -142,22 +137,30 @@ const Visualization = props => {
   // ONLY FOR SEEING IN LOCALHOST
   // const [error, setError] = useState('something')
   const [audioFeatures, setAudioFeatures] = useState(null)
-
   const [recommendedSong, setRecommendedSong] = useState(null)
 
+  // const [audio, setAudio] = useState(null)
+  // const [existingContext, setContext] = useState(null)
+  // const [existingAudioNode, setAudioNode] = useState(null)
+  // const [existingAnalyser, setAnalyser] = useState(null)
+
   const defaultErrorText = 'Sorry, but something went wrong.'
+  // let context, audioNode, analyser
+
 
   // Equivalent of componentDidMount (ONLY RUNS ONCE)
   useEffect(() => {
     setAudioFeatures(null)
     performAudioFeaturesQuery()
+    loadMusicFile()
+
   }, [])
 
   // Equivalent of componentDidMount and componentDidUpdate
   useEffect(() => {
     const { songID } = props.match.params
     setSongID(songID)
-    loadMusicFile()
+    // loadMusicFile()
 
     if (!audioFeatures) {
       performAudioFeaturesQuery()
@@ -229,16 +232,28 @@ const Visualization = props => {
                 LOAD MUSIC FILE
   -------------------------------------------*/
   const loadMusicFile = () => {
+    console.log("CALLING loadMusicFile!!")
 
     const audio = audioRef.current
+
     console.log("audio:", audio)
     // console.log("audio.src: " + audio.src)
 
+    // const foundAudioRef = document.querySelector("#audio")
+    // console.log("foundAudioRef", foundAudioRef)
 
-    if (context && audioNode && analyser) {
-      audio.src = trackObject.preview_url
+    // if (context && audioNode && analyser) {
 
-      // audio.play();
+    // if (existingContext && existingAudioNode && existingAnalyser) {
+    //   audio.src = trackObject.preview_url
+    //
+    //   audio.play();
+
+    audio.src = trackObject.preview_url
+
+    audio.play();
+
+  /*
       let playPromise = audio.play()
       if (playPromise !== undefined) {
         playPromise
@@ -252,18 +267,26 @@ const Visualization = props => {
             setError(defaultErrorText)
         });
       }
-      return
-
-    }
+*/
+    //   return
+    // }
 
     const canvas = canvasRef.current;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const ctx = canvas.getContext("2d");
 
-    context = new AudioContext(); // (Interface) Audio-processing graph
-    audioNode = context.createMediaElementSource(audio); // Give audio context an audio source
-    analyser = context.createAnalyser(); // Create an analyser for the audio context
+    // context = new AudioContext(); // (Interface) Audio-processing graph
+    // audioNode = context.createMediaElementSource(audio); // Give audio context an audio source
+    // analyser = context.createAnalyser(); // Create an analyser for the audio context
+
+    const context = new AudioContext(); // (Interface) Audio-processing graph
+    const audioNode = context.createMediaElementSource(audio); // Give audio context an audio source
+    const analyser = context.createAnalyser(); // Create an analyser for the audio context
+
+    // const context = existingContext; // (Interface) Audio-processing graph
+    // const audioNode = existingAudioNode; // Give audio context an audio source
+    // const analyser = existingAnalyser; // Create an analyser for the audio context
 
     audioNode.connect(analyser); // Connects the audio context source to the analyser
 
@@ -282,6 +305,7 @@ const Visualization = props => {
     let x = 0;
 
     function renderFrame() {
+      console.log("RENDERFRAME CALLED")
       requestAnimationFrame(renderFrame); // Takes callback function to invoke before rendering
 
       x = 0;
@@ -364,6 +388,16 @@ const Visualization = props => {
         x += barWidth + 10 // Gives 10px space between each bar
       }
     }
+
+    // if (!existingContext) {
+    //   setContext(context)
+    // }
+    // if (!existingAudioNode) {
+    //   setContext(audioNode)
+    // }
+    // if (!existingAnalyser) {
+    //   setContext(analyser)
+    // }
 
     audio.play();
     renderFrame();
