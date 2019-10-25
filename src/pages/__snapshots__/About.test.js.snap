@@ -1,0 +1,166 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should have a sectionHeading for each section 1`] = `
+<div
+  className="About-root-1"
+>
+  <p
+    className="MuiTypography-root About-title-2 MuiTypography-body1"
+  >
+    about
+  </p>
+  <div
+    className="About-section-3"
+  >
+    <p
+      className="MuiTypography-root About-sectionHeading-4 MuiTypography-body1"
+    >
+      synesthesia, chromesthesia, and synesthete
+    </p>
+    <p
+      className="MuiTypography-root About-paragraph-5 MuiTypography-body1"
+    >
+      Synesthesia is a neurological phenomenon that allows the senses to overlap. Roughly 4% of people have some form of synesthesia, and others have experienced it under the influence of psychedelic drugs. Chromesthetes in particular have sound-color synesthesia, which means that they hear music as colors. This makes listening to music an especially vibrant experience.
+    </p>
+    <p
+      className="MuiTypography-root About-paragraph-5 MuiTypography-body1"
+    >
+      Many famous people, both past and present, have had this phenomenon, including Pythagoras, Isaac Newton, George Field, Alexander Scriabin, Duke Ellington, Pharrell Williams, Stevie Wonder, and Kanye West. Synesthesia is, unsurprisingly, up to 7 times more common in artists and musicians, and many of them use their synesthesia in developing their artwork. However, synesthesia is different for everyone. Synesthetes can have any crossover of the senses -- sight, sound, smell, taste, and touch -- and can involve more than just two.
+    </p>
+    <p
+      className="MuiTypography-root About-paragraph-5 MuiTypography-body1"
+    >
+      When it comes to chromesthesia (sounds to colors), people's perceptions of the colors of music vary, too. Many chromesthetes see the same fixed hue for each note -- red for C and blue for G, for example. For others, the color spectrum is transposed.
+    </p>
+    <p
+      className="MuiTypography-root About-paragraph-5 MuiTypography-body1"
+    >
+      In Synesthete, each song has the full color spectrum, but the rainbow is offset based on the song's key. Other aspects of the song, such as its tempo, valence, and acousticness, affect other aspects of the visualization. It's not possible to simulate exactly what chromesthesia is like, but this is our closest bet -- so grab a pair of headphones and start hearing music in color!
+    </p>
+  </div>
+  <div
+    className="About-section-3"
+  >
+    <p
+      className="MuiTypography-root About-sectionHeading-4 MuiTypography-body1"
+    >
+      the creator
+    </p>
+    <p
+      className="MuiTypography-root About-paragraph-5 MuiTypography-body1"
+    >
+      Synesthete was created by Lucille Njoo for CMSI 370.
+    </p>
+  </div>
+</div>
+`;
+
+exports[`should have a title 1`] = `
+<div
+  className="About-root-1"
+>
+  <p
+    className="MuiTypography-root About-title-2 MuiTypography-body1"
+  >
+    about
+  </p>
+  <div
+    className="About-section-3"
+  >
+    <p
+      className="MuiTypography-root About-sectionHeading-4 MuiTypography-body1"
+    >
+      synesthesia, chromesthesia, and synesthete
+    </p>
+    <p
+      className="MuiTypography-root About-paragraph-5 MuiTypography-body1"
+    >
+      Synesthesia is a neurological phenomenon that allows the senses to overlap. Roughly 4% of people have some form of synesthesia, and others have experienced it under the influence of psychedelic drugs. Chromesthetes in particular have sound-color synesthesia, which means that they hear music as colors. This makes listening to music an especially vibrant experience.
+    </p>
+    <p
+      className="MuiTypography-root About-paragraph-5 MuiTypography-body1"
+    >
+      Many famous people, both past and present, have had this phenomenon, including Pythagoras, Isaac Newton, George Field, Alexander Scriabin, Duke Ellington, Pharrell Williams, Stevie Wonder, and Kanye West. Synesthesia is, unsurprisingly, up to 7 times more common in artists and musicians, and many of them use their synesthesia in developing their artwork. However, synesthesia is different for everyone. Synesthetes can have any crossover of the senses -- sight, sound, smell, taste, and touch -- and can involve more than just two.
+    </p>
+    <p
+      className="MuiTypography-root About-paragraph-5 MuiTypography-body1"
+    >
+      When it comes to chromesthesia (sounds to colors), people's perceptions of the colors of music vary, too. Many chromesthetes see the same fixed hue for each note -- red for C and blue for G, for example. For others, the color spectrum is transposed.
+    </p>
+    <p
+      className="MuiTypography-root About-paragraph-5 MuiTypography-body1"
+    >
+      In Synesthete, each song has the full color spectrum, but the rainbow is offset based on the song's key. Other aspects of the song, such as its tempo, valence, and acousticness, affect other aspects of the visualization. It's not possible to simulate exactly what chromesthesia is like, but this is our closest bet -- so grab a pair of headphones and start hearing music in color!
+    </p>
+  </div>
+  <div
+    className="About-section-3"
+  >
+    <p
+      className="MuiTypography-root About-sectionHeading-4 MuiTypography-body1"
+    >
+      the creator
+    </p>
+    <p
+      className="MuiTypography-root About-paragraph-5 MuiTypography-body1"
+    >
+      Synesthete was created by Lucille Njoo for CMSI 370.
+    </p>
+  </div>
+</div>
+`;
+
+exports[`should have two text sections 1`] = `
+<div
+  className="About-root-1"
+>
+  <p
+    className="MuiTypography-root About-title-2 MuiTypography-body1"
+  >
+    about
+  </p>
+  <div
+    className="About-section-3"
+  >
+    <p
+      className="MuiTypography-root About-sectionHeading-4 MuiTypography-body1"
+    >
+      synesthesia, chromesthesia, and synesthete
+    </p>
+    <p
+      className="MuiTypography-root About-paragraph-5 MuiTypography-body1"
+    >
+      Synesthesia is a neurological phenomenon that allows the senses to overlap. Roughly 4% of people have some form of synesthesia, and others have experienced it under the influence of psychedelic drugs. Chromesthetes in particular have sound-color synesthesia, which means that they hear music as colors. This makes listening to music an especially vibrant experience.
+    </p>
+    <p
+      className="MuiTypography-root About-paragraph-5 MuiTypography-body1"
+    >
+      Many famous people, both past and present, have had this phenomenon, including Pythagoras, Isaac Newton, George Field, Alexander Scriabin, Duke Ellington, Pharrell Williams, Stevie Wonder, and Kanye West. Synesthesia is, unsurprisingly, up to 7 times more common in artists and musicians, and many of them use their synesthesia in developing their artwork. However, synesthesia is different for everyone. Synesthetes can have any crossover of the senses -- sight, sound, smell, taste, and touch -- and can involve more than just two.
+    </p>
+    <p
+      className="MuiTypography-root About-paragraph-5 MuiTypography-body1"
+    >
+      When it comes to chromesthesia (sounds to colors), people's perceptions of the colors of music vary, too. Many chromesthetes see the same fixed hue for each note -- red for C and blue for G, for example. For others, the color spectrum is transposed.
+    </p>
+    <p
+      className="MuiTypography-root About-paragraph-5 MuiTypography-body1"
+    >
+      In Synesthete, each song has the full color spectrum, but the rainbow is offset based on the song's key. Other aspects of the song, such as its tempo, valence, and acousticness, affect other aspects of the visualization. It's not possible to simulate exactly what chromesthesia is like, but this is our closest bet -- so grab a pair of headphones and start hearing music in color!
+    </p>
+  </div>
+  <div
+    className="About-section-3"
+  >
+    <p
+      className="MuiTypography-root About-sectionHeading-4 MuiTypography-body1"
+    >
+      the creator
+    </p>
+    <p
+      className="MuiTypography-root About-paragraph-5 MuiTypography-body1"
+    >
+      Synesthete was created by Lucille Njoo for CMSI 370.
+    </p>
+  </div>
+</div>
+`;
