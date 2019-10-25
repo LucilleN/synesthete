@@ -50,7 +50,7 @@ const styles = theme => ({
     color: theme.palette.white,
     opacity: '0.6',
     textAlign: 'center',
-    width: '60%',
+    width: '50%',
     marginBottom: 10
   },
   buttonRow: {
@@ -77,6 +77,8 @@ const Homepage = props => {
           Synesthesia is a neurological phenomenon that allows the senses to overlap.
           Chromesthetes have sound-color synesthesia, which means that they naturally hear music as colors.
           This makes listening to music an especially vibrant experience, and helps a lot of artists create music.<br></br>
+        </Typography>
+        <Typography className={classes.paragraph}>
           Synesthete aims to simulate the experience of chromesthesia by pairing music with colors in realtime.
         </Typography>
       </div>

@@ -20,12 +20,6 @@ const UploadVisualization = props => {
   const fileRef = useRef(null)
 
   const handleReload = () => {
-    // setUrl('')
-    // setUploadFileSelected(false)
-    // setLoadUrlSelected(false)
-    // context = null
-    // audioNode = null
-    // analyser = null
     window.location.reload(false);
   }
 

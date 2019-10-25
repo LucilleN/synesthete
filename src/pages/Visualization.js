@@ -363,11 +363,11 @@ const Visualization = props => {
 
   }
 
-  console.log("--------------------------")
-  console.log('VISUALIZATION: ABOUT TO RETURN:')
-  console.log("audioFeatures: ", audioFeatures)
-  console.log("trackObject: ", trackObject)
-  console.log("--------------------------")
+  // console.log("--------------------------")
+  // console.log('VISUALIZATION: ABOUT TO RETURN:')
+  // console.log("audioFeatures: ", audioFeatures)
+  // console.log("trackObject: ", trackObject)
+  // console.log("--------------------------")
 
   return (
     <div className={classes.root}>
@@ -383,6 +383,7 @@ const Visualization = props => {
       <Typography className={classes.subtitle}>
         "{trackObject.name}" by {trackObject.artists[0].name}
       </Typography>
+      {/*
       <div className={classes.songInfoContainer}>
         <Typography className={classes.songInfo}>
           songID: {songID}<br></br>
@@ -399,7 +400,7 @@ const Visualization = props => {
           </Typography>
         }
       </div>
-      {/* <div id="background" className={classes.background}></div> */}
+      */}
       {recommendedSong &&
         <Redirect to={{
             pathname: `/visualization/${recommendedSong.id}`,
