@@ -3,67 +3,6 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import { styles } from './Visualization'
 
-/*
-const styles = theme => ({
-  root: {
-    // background: 'black',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  fileInput: {
-    // position: 'fixed',
-    // top: '10px',
-    // left: '10px',
-    zIndex: 3,
-    color: 'white'
-  },
-  canvas: {
-    // position: 'fixed',
-    // top: '0px',
-    // left: '0px',
-    width: '90vw',
-    height: '70vh',
-    // background: theme.palette.dark.purple
-    background: 'black'
-  },
-  audio:{
-    // position: 'fixed',
-    // left: '10px',
-    // bottom: '10px',
-    width: 'calc(100%-25px)',
-    width: '90vw',
-    // background: theme.palette.dark.purple,
-    // borderRadius: 0,
-    zIndex: 3
-  },
-  background: {
-    width: '100%',
-    // height: '100%',
-    height: 'calc(100% - 60px)',
-    // width: '90vw',
-    // height: '70vh',
-    position: 'absolute',
-    // top: '0px',
-    // left: '0px',
-    background: 'linear-gradient(transparent, #00035f, transparent)',
-    backgroundSize: '100% 7px',
-    // animation: 'bg 1s infinite linear',
-    zIndex: 2,
-    opacity: 0.3
-  },
-  '@keyframes bg': {
-    from: { backgroundPosition: '0 0' },
-    to: { backgroundPosition: '8px 8px' }
-  },
-  title: {
-    color: theme.palette.white,
-    fontSize: '2rem',
-    zIndex: 4
-  }
-})
-*/
-
 // TODO This is SUPER DIRTY but at least proves that if we maintain the same context, audioNode, and analyser,
 // then things stay OK.
 let context, audioNode, analyser
@@ -72,6 +11,8 @@ const UploadVisualization = props => {
   const { classes } = props
 
   const [url, setUrl] = useState('')
+  const [uploadFileSelected, setUploadFileSelected] = useState(false)
+  const [loadUrlSelected, setLoadUrlSelected] = useState(false)
 
   const audioRef = useRef(null)
   const canvasRef = useRef(null)
@@ -91,9 +32,6 @@ const UploadVisualization = props => {
     else {
       audio.src = url
     }
-    // audio.src = URL.createObjectURL(files[0])
-    // audio.src = url
-    // audio.crossOrigin = "anonymous";
     // audio.src = "https://p.scdn.co/mp3-preview/1c0da00b5c95a1a6c9dfc05b14a1a628a6e0ad73?cid=159ac88b1c534ed7ae41602f1e558a49"
     // audio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
     console.log("audio.src: " + audio.src)
@@ -221,12 +159,31 @@ const UploadVisualization = props => {
       <Typography className={classes.title}>
         Upload A Song to Visualize
       </Typography>
-      <input ref={fileRef} type="file" id="file-input" accept="audio/*,video/*,image/*" className={classes.fileInput} onChange={loadMusicFile}/>
       <canvas ref={canvasRef} id="canvas" width="300" height="300" className={classes.canvas}></canvas>
       <audio ref={audioRef} id="audio" controls className={classes.audio} crossOrigin="anonymous"></audio>
-      <input type="text" value={url} onChange={event => setUrl(event.target.value)} className={classes.urlInput} />
-      <button onClick={loadMusicFile} disabled={!url} className={classes.urlButton}>Load</button>
-      {/* <div id="background" className={classes.background}></div> */}
+      {!uploadFileSelected && !loadUrlSelected &&
+        <div className={classes.buttonBar}>
+          <button onClick={() => setUploadFileSelected(true)} className={classes.loadOptionButton}>
+            <Typography>
+              Upload a file from your computer
+            </Typography>
+          </button>
+          <button onClick={() => setLoadUrlSelected(true)} className={classes.loadOptionButton}>
+            <Typography>
+              Enter the URL of an audio file
+            </Typography>
+          </button>
+        </div>
+      }
+      {uploadFileSelected &&
+        <input ref={fileRef} type="file" id="file-input" accept="audio/*,video/*,image/*" className={classes.fileInput} onChange={loadMusicFile}/>
+      }
+      {loadUrlSelected &&
+        <>
+          <input type="text" value={url} onChange={event => setUrl(event.target.value)} className={classes.urlInput} />
+          <button onClick={loadMusicFile} disabled={!url} className={classes.urlButton}>Load</button>
+        </>
+      }
     </div>
   )
 }

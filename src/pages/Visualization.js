@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import RecommendationButton from '../components/RecommendationButton'
+import StartButton from '../components/StartButton'
 
 import { Redirect } from 'react-router-dom';
 
@@ -22,7 +23,9 @@ export const styles = theme => ({
   },
   urlInput: {
     zIndex: 3,
-    color: theme.palette.dark.pink
+    color: theme.palette.dark.pink,
+    width: 250,
+    margin: 15
   },
   urlButton: {
     zIndex: 3
@@ -59,33 +62,46 @@ export const styles = theme => ({
        opacity: 0.8,
     },
   },
-  background: {
+  // background: {
+  //   width: '100%',
+  //   // height: '80vh',
+  //   height: 'calc(100% - 60px)',
+  //   // width: '90vw',
+  //   // height: '70vh',
+  //   position: 'absolute',
+  //   // top: '0px',
+  //   bottom: '0px',
+  //   left: '0px',
+  //   background: 'linear-gradient(transparent, #00035f, transparent)',
+  //   backgroundSize: '100% 7px',
+  //   // animation: 'bg 1s infinite linear',
+  //   zIndex: 1,
+  //   opacity: 0.3
+  // },
+  // '@keyframes bg': {
+  //   from: { backgroundPosition: '0 0' },
+  //   to: { backgroundPosition: '8px 8px' }
+  // },
+  titleBar: {
     width: '100%',
-    // height: '80vh',
-    height: 'calc(100% - 60px)',
-    // width: '90vw',
-    // height: '70vh',
-    position: 'absolute',
-    // top: '0px',
-    bottom: '0px',
-    left: '0px',
-    background: 'linear-gradient(transparent, #00035f, transparent)',
-    backgroundSize: '100% 7px',
-    // animation: 'bg 1s infinite linear',
-    zIndex: 1,
-    opacity: 0.3
-  },
-  '@keyframes bg': {
-    from: { backgroundPosition: '0 0' },
-    to: { backgroundPosition: '8px 8px' }
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   title: {
     zIndex: 4,
     color: theme.palette.light.pink,
     fontSize: '3rem',
     textAlign: 'center',
-    marginBottom: 8,
     marginTop: 5
+  },
+  subtitle: {
+    zIndex: 4,
+    color: theme.palette.dark.pink,
+    fontSize: '1.75rem',
+    textAlign: 'center',
+    marginBottom: 8,
+    marginTop: -32
   },
   songInfoContainer: {
     zIndex: 4,
@@ -98,7 +114,29 @@ export const styles = theme => ({
     textAlign: 'left',
     width: '100%',
     marginLeft: 8
-  }
+  },
+  loadOptionButton: {
+    zIndex: 4,
+    color: theme.palette.white,
+    fontSize: '1rem',
+    background: theme.palette.dark.pink,
+    height: '60px',
+    width: '250px',
+    borderRadius: '30px',
+    border: 'none',
+    margin: '15px 100px',
+    '&:hover': {
+       background: theme.palette.white,
+       color: theme.palette.dark.pink
+    },
+  },
+  buttonBar: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+
 })
 
 const defaultErrorText = 'Sorry, but something went wrong.'
@@ -338,8 +376,17 @@ const Visualization = props => {
 
   return (
     <div className={classes.root}>
-      <Typography className={classes.title}>
-        Visualization
+      <canvas ref={canvasRef} id="canvas" width="300" height="300" className={classes.canvas}></canvas>
+      <audio ref={audioRef} id="audio" crossOrigin="anonymous" controls className={classes.audio}></audio>
+      <div className={classes.titleBar}>
+        <StartButton href="/search" text="< new search"/>
+        <Typography className={classes.title}>
+          Visualization:<br></br>
+        </Typography>
+        <RecommendationButton className={classes.recommendationButton} handleClick={performRecommendationQuery}/>
+      </div>
+      <Typography className={classes.subtitle}>
+        "{trackObject.name}" by {trackObject.artists[0].name}
       </Typography>
       <div className={classes.songInfoContainer}>
         <Typography className={classes.songInfo}>
@@ -357,10 +404,7 @@ const Visualization = props => {
           </Typography>
         }
       </div>
-      <canvas ref={canvasRef} id="canvas" width="300" height="300" className={classes.canvas}></canvas>
-      <audio ref={audioRef} id="audio" crossOrigin="anonymous" controls className={classes.audio}></audio>
       {/* <div id="background" className={classes.background}></div> */}
-      <RecommendationButton className={classes.recommendationButton} handleClick={performRecommendationQuery}/>
       {recommendedSong &&
         <Redirect to={{
             pathname: `/visualization/${recommendedSong.id}`,
