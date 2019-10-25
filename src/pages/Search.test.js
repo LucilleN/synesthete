@@ -23,21 +23,15 @@ beforeAll(() => {
     ReactDOM.createPortal = jest.fn((component, node) => {
         return component
     })
-});
+})
 
 describe('initial state', () => {
   it('should start with a search field with default text', () => {
-    // const component = TestRenderer.create(
-    //   <MuiThemeProvider theme={theme}>
-    //     <Search />
-    //   </MuiThemeProvider>
-    // )
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
 
   it('should start with a disabled search button', () => {
-    // const component = TestRenderer.create(unstyledSearch)
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
@@ -46,7 +40,6 @@ describe('initial state', () => {
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
-
 })
 
 describe('search button', () => {
@@ -92,7 +85,7 @@ describe('search button', () => {
   })
 })
 
-// Helper function for the next two test collections.
+// Helper function for the next three test collections.
 const setupAndQuerySearchForm = async () => {
   const div = document.createElement('div')
   ReactTestUtils.act(() => {
@@ -122,8 +115,7 @@ describe('normal API calls', () => {
   beforeEach(async () => {
     sinon.stub(api, 'searchSongs')
 
-    // To manage size, we supply a mock response that contains _only_ what the app will need. This does mean
-    // that we need to revise the mock response if our app starts using more (or different) data.
+    // Mock response contains only one track item for manageable size
     api.searchSongs.returns(Promise.resolve({
       "tracks" : {
         "href" : "https://api.spotify.com/v1/search?query=the+night+we+met&type=track&offset=0&limit=20",
@@ -205,7 +197,6 @@ describe('normal API calls', () => {
     }))
 
     div = await setupAndQuerySearchForm()
-    // console.log("div: "+ div)
   })
 
   afterEach(() => {
@@ -214,23 +205,16 @@ describe('normal API calls', () => {
   })
 
   it('should trigger a song search when the search button is clicked', () => {
-    // Note how this _isn’t_ a snapshot test because we’re checking whether a function was called with
-    // the right arguments.
-
-    // TODO: Why does it only work with the first and not the second way?
-
     expect(api.searchSongs.firstCall.args[0]).toEqual({
     // expect(api.searchSongs.getCall(0)).toEqual({
-      // rating: 'pg-13',
-      q: 'hello' // Our test search term.
+      q: 'hello'
     })
   })
 
   it('should populate the song results container when search results arrive', () => {
-    // Our mock search results yield one image, so we expect our results container to have one child.
+    // Mock search results yield only one song, so we expect results container to have one child.
     const searchResults = div.querySelector('div#searchResults') // use .find
-    console.log("searchResults: " + searchResults)
-    console.log(div)
+    // console.log("searchResults: ", searchResults)
     expect(searchResults.children.length).toEqual(1)
   })
 })
@@ -244,7 +228,7 @@ describe('API calls that return no search results', () => {
     api.searchSongs.returns(Promise.resolve({
       "tracks" : {
         "href" : "https://api.spotify.com/v1/search?query=the+night+we+met&type=track&offset=0&limit=20",
-        "items" : [], // no results returned
+        "items" : [], // no track items returned
         "limit" : 20,
         "next" : "https://api.spotify.com/v1/search?query=the+night+we+met&type=track&offset=20&limit=20",
         "offset" : 0,
@@ -282,7 +266,6 @@ describe('failed API calls', () => {
     api.searchSongs.returns(Promise.reject('Mock failure'))
 
     div = await setupAndQuerySearchForm()
-    console.log("div in beforeEach", div)
 
   })
 
@@ -292,7 +275,7 @@ describe('failed API calls', () => {
   })
 
   it('should display an alert when the API call fails', () => {
-    // The document should contain the error div.
+    // The document should render the div containing the error dialog.
 
     // const searchErrorText = div.querySelector('div#error')
     // expect(searchErrorText.textContent).toEqual('Sorry, but something went wrong.')
