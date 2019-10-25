@@ -79,27 +79,27 @@ const MenuBar = props => {
   return (
     <div>
       <Grid container className={classes.bar}>
-        <Grid item xs={3} onClick={handleHomeSelect}>
+        <Grid item xs={3} onClick={handleHomeSelect} id="logo">
           <Typography className={classes.logo}>
             synesthete
           </Typography>
         </Grid>
-        <Grid item xs={2} className={classes.button} onClick={handleHomeSelect}>
+        <Grid item xs={2} className={classes.button} onClick={handleHomeSelect} id="home">
           <Typography className={classes.textNotCurrentPage}>
             home
           </Typography>
         </Grid>
-        <Grid item xs={2} className={classes.button} onClick={handleSearchSelect}>
+        <Grid item xs={2} className={classes.button} onClick={handleSearchSelect} id="search">
           <Typography className={classes.textNotCurrentPage}>
             search
           </Typography>
         </Grid>
-        <Grid item xs={2} className={classes.button} onClick={handleUploadSelect}>
+        <Grid item xs={2} className={classes.button} onClick={handleUploadSelect} id="upload">
           <Typography className={classes.textNotCurrentPage}>
             upload
           </Typography>
         </Grid>
-        <Grid item xs={2} className={classes.button} onClick={handleAboutSelect}>
+        <Grid item xs={2} className={classes.button} onClick={handleAboutSelect} id="about">
           <Typography className={classes.textNotCurrentPage}>
             about
           </Typography>

@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`initial state should have four navigation buttons 1`] = `
+<div>
+  <div
+    className="MuiGrid-root MenuBar-bar-1 MuiGrid-container"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3"
+      id="logo"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MenuBar-logo-4 MuiTypography-body1"
+      >
+        synesthete
+      </p>
+    </div>
+    <div
+      className="MuiGrid-root MenuBar-button-2 MuiGrid-item MuiGrid-grid-xs-2"
+      id="home"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MenuBar-textNotCurrentPage-3 MuiTypography-body1"
+      >
+        home
+      </p>
+    </div>
+    <div
+      className="MuiGrid-root MenuBar-button-2 MuiGrid-item MuiGrid-grid-xs-2"
+      id="search"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MenuBar-textNotCurrentPage-3 MuiTypography-body1"
+      >
+        search
+      </p>
+    </div>
+    <div
+      className="MuiGrid-root MenuBar-button-2 MuiGrid-item MuiGrid-grid-xs-2"
+      id="upload"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MenuBar-textNotCurrentPage-3 MuiTypography-body1"
+      >
+        upload
+      </p>
+    </div>
+    <div
+      className="MuiGrid-root MenuBar-button-2 MuiGrid-item MuiGrid-grid-xs-2"
+      id="about"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MenuBar-textNotCurrentPage-3 MuiTypography-body1"
+      >
+        about
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`initial state should render the Synesthete logo 1`] = `
+<div>
+  <div
+    className="MuiGrid-root MenuBar-bar-1 MuiGrid-container"
+  >
+    <div
+      className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3"
+      id="logo"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MenuBar-logo-4 MuiTypography-body1"
+      >
+        synesthete
+      </p>
+    </div>
+    <div
+      className="MuiGrid-root MenuBar-button-2 MuiGrid-item MuiGrid-grid-xs-2"
+      id="home"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MenuBar-textNotCurrentPage-3 MuiTypography-body1"
+      >
+        home
+      </p>
+    </div>
+    <div
+      className="MuiGrid-root MenuBar-button-2 MuiGrid-item MuiGrid-grid-xs-2"
+      id="search"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MenuBar-textNotCurrentPage-3 MuiTypography-body1"
+      >
+        search
+      </p>
+    </div>
+    <div
+      className="MuiGrid-root MenuBar-button-2 MuiGrid-item MuiGrid-grid-xs-2"
+      id="upload"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MenuBar-textNotCurrentPage-3 MuiTypography-body1"
+      >
+        upload
+      </p>
+    </div>
+    <div
+      className="MuiGrid-root MenuBar-button-2 MuiGrid-item MuiGrid-grid-xs-2"
+      id="about"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MenuBar-textNotCurrentPage-3 MuiTypography-body1"
+      >
+        about
+      </p>
+    </div>
+  </div>
+</div>
+`;
