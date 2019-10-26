@@ -4,11 +4,13 @@ import TestRenderer from 'react-test-renderer'
 import ReactTestUtils from 'react-dom/test-utils'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 
-// import sinon from 'sinon'
+import sinon from 'sinon'
 
 import { theme } from '../App'
 import UploadVisualization from './UploadVisualization'
 // import * as api from '../api'
+
+const sampleURL = "https://p.scdn.co/mp3-preview/1c0da00b5c95a1a6c9dfc05b14a1a628a6e0ad73?cid=159ac88b1c534ed7ae41602f1e558a49"
 
 let component;
 beforeEach(() => {
@@ -67,7 +69,6 @@ describe('initial state', () => {
 
 describe('clicking on the Upload File button', () => {
   let div
-  let uploadButton
   beforeEach(() => {
     div = document.createElement('div')
     ReactTestUtils.act(() => {
@@ -77,8 +78,7 @@ describe('clicking on the Upload File button', () => {
         </MuiThemeProvider>
       , div)
     })
-    uploadButton = div.querySelector('#upload-file')
-    // console.log("FOUND UPLOAD BUTTON: ", uploadButton)
+    const uploadButton = div.querySelector('#upload-file')
     ReactTestUtils.act(() => {
       ReactTestUtils.Simulate.click(uploadButton)
     })
@@ -122,6 +122,8 @@ describe('clicking on the Load URL button', () => {
   it('should show the text input element', () => {
     const textInput = div.querySelector('#text-input')
     expect(textInput).not.toBeNull()
+    const tree = component.toJSON()
+    expect(tree).toMatchSnapshot()
   })
 
   it('should not show the load option buttons', () => {
@@ -148,6 +150,51 @@ describe('clicking on the Load URL button', () => {
       expect(loadButton.disabled).toBe(false)
     })
 
+  })
+
+})
+
+// ----------------------------------------------------------
+
+describe('loading a URL', () => {
+  let div
+  beforeEach(() => {
+    sinon.stub(UploadVisualization, 'loadMusicFile')
+
+    div = document.createElement('div')
+    ReactTestUtils.act(() => {
+      ReactDOM.render(
+        <MuiThemeProvider theme={theme}>
+          <UploadVisualization />
+        </MuiThemeProvider>
+      , div)
+    })
+    const loadUrlButton = div.querySelector('#load-url')
+    ReactTestUtils.act(() => {
+      ReactTestUtils.Simulate.click(loadUrlButton)
+    })
+    const textInput = div.querySelector('#text-input')
+    const loadButton = div.querySelector('#load-button')
+    ReactTestUtils.act(() => {
+      textInput.value = sampleURL
+      ReactTestUtils.Simulate.change(textInput)
+    })
+    ReactTestUtils.act(() => {
+      ReactTestUtils.Simulate.click(loadButton) //maybe put this in above act
+    })
+
+
+  })
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(div)
+    UploadVisualization.loadMusicFile.restore()
+  })
+
+  it('should trigger the music to load when the load button is clicked', () => {
+    const tree = component.toJSON()
+    expect(tree).toMatchSnapshot()
+    expect(UploadVisualization.loadMusicFile.calledOnce).toBe(true)
   })
 
 })
