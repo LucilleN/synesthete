@@ -149,11 +149,15 @@ const Visualization = props => {
     setAudioFeatures(null)
     performAudioFeaturesQuery()
     // loadMusicFile()
+    console.log("audioRef!!!!!!!!!!!!!!", audioRef)
 
   }, [])
 
   useEffect(() => {
+    setAudioFeatures(null)
+    performAudioFeaturesQuery()
     loadMusicFile()
+
   }, [trackObject])
 
   // Equivalent of componentDidMount and componentDidUpdate
