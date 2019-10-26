@@ -127,7 +127,6 @@ export const styles = theme => ({
 const Visualization = props => {
   const { classes } = props
   const { trackObject } = props.location.state
-  // console.log("VISUALIZATION, at the beginning, trackObject is", trackObject)
 
   const audioRef = useRef(null)
   const canvasRef = useRef(null)
@@ -139,22 +138,23 @@ const Visualization = props => {
   const [audioFeatures, setAudioFeatures] = useState(null)
   const [recommendedSong, setRecommendedSong] = useState(null)
 
-  // const [audio, setAudio] = useState(null)
-  // const [existingContext, setContext] = useState(null)
-  // const [existingAudioNode, setAudioNode] = useState(null)
-  // const [existingAnalyser, setAnalyser] = useState(null)
+  const [existingAudioNode, setAudioNode] = useState(null)
+  const [existingAnalyser, setAnalyser] = useState(null)
+  const [existingContext, setContext] = useState(null)
 
   const defaultErrorText = 'Sorry, but something went wrong.'
-  // let context, audioNode, analyser
-
 
   // Equivalent of componentDidMount (ONLY RUNS ONCE)
   useEffect(() => {
     setAudioFeatures(null)
     performAudioFeaturesQuery()
-    loadMusicFile()
+    // loadMusicFile()
 
   }, [])
+
+  useEffect(() => {
+    loadMusicFile()
+  }, [trackObject])
 
   // Equivalent of componentDidMount and componentDidUpdate
   useEffect(() => {
@@ -166,7 +166,6 @@ const Visualization = props => {
       performAudioFeaturesQuery()
     }
   })
-
 
 
   /*-------------------------------------------
@@ -228,6 +227,10 @@ const Visualization = props => {
     }
   }
 
+  // let audioNode
+  let MEDIA_ELEMENT_NODES = new WeakMap()
+  let context
+
   /*-------------------------------------------
                 LOAD MUSIC FILE
   -------------------------------------------*/
@@ -236,57 +239,43 @@ const Visualization = props => {
 
     const audio = audioRef.current
 
-    console.log("audio:", audio)
-    // console.log("audio.src: " + audio.src)
-
-    // const foundAudioRef = document.querySelector("#audio")
-    // console.log("foundAudioRef", foundAudioRef)
-
-    // if (context && audioNode && analyser) {
-
-    // if (existingContext && existingAudioNode && existingAnalyser) {
-    //   audio.src = trackObject.preview_url
-    //
-    //   audio.play();
-
     audio.src = trackObject.preview_url
 
     audio.play();
-
-  /*
-      let playPromise = audio.play()
-      if (playPromise !== undefined) {
-        playPromise
-          .then(_ => {
-            // Automatic playback started
-            console.log("audio played auto");
-          })
-          .catch(error => {
-            // Auto-play was prevented
-            console.log("playback prevented");
-            setError(defaultErrorText)
-        });
-      }
-*/
-    //   return
-    // }
 
     const canvas = canvasRef.current;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const ctx = canvas.getContext("2d");
 
-    // context = new AudioContext(); // (Interface) Audio-processing graph
-    // audioNode = context.createMediaElementSource(audio); // Give audio context an audio source
-    // analyser = context.createAnalyser(); // Create an analyser for the audio context
 
-    const context = new AudioContext(); // (Interface) Audio-processing graph
-    const audioNode = context.createMediaElementSource(audio); // Give audio context an audio source
-    const analyser = context.createAnalyser(); // Create an analyser for the audio context
+    // let context
+    // if (existingContext) {
+    //   context = existingContext
+    // }
+    // else {
+    //   context = new AudioContext()
+    // }
 
-    // const context = existingContext; // (Interface) Audio-processing graph
-    // const audioNode = existingAudioNode; // Give audio context an audio source
-    // const analyser = existingAnalyser; // Create an analyser for the audio context
+    const context = (existingContext) ? existingContext : new AudioContext()
+    const audioNode = (existingAudioNode) ? existingAudioNode : context.createMediaElementSource(audio)
+    const analyser = (existingAnalyser) ? existingAnalyser : context.createAnalyser()
+
+    // let audioNode
+    // if (existingAudioNode) {
+    //   audioNode = existingAudioNode
+    // }
+    // else {
+    //   audioNode = context.createMediaElementSource(audio)
+    // }
+
+    // let analyser;
+    // if (existingAnalyser) {
+    //   analyser = existingAnalyser
+    // }
+    // else {
+    //   analyser = context.createAnalyser()
+    // }
 
     audioNode.connect(analyser); // Connects the audio context source to the analyser
 
@@ -389,26 +378,21 @@ const Visualization = props => {
       }
     }
 
-    // if (!existingContext) {
-    //   setContext(context)
-    // }
-    // if (!existingAudioNode) {
-    //   setContext(audioNode)
-    // }
-    // if (!existingAnalyser) {
-    //   setContext(analyser)
-    // }
 
     audio.play();
     renderFrame();
 
-  }
+    if (!existingAudioNode) {
+      setAudioNode(audioNode)
+    }
+    if (!existingAnalyser) {
+      setAnalyser(analyser)
+    }
 
-  // console.log("--------------------------")
-  // console.log('VISUALIZATION: ABOUT TO RETURN:')
-  // console.log("audioFeatures: ", audioFeatures)
-  // console.log("trackObject: ", trackObject)
-  // console.log("--------------------------")
+    if (!existingContext) {
+      setContext(context)
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -424,24 +408,6 @@ const Visualization = props => {
       <Typography className={classes.subtitle}>
         "{trackObject.name}" by {trackObject.artists[0].name}
       </Typography>
-      {/*
-      <div className={classes.songInfoContainer}>
-        <Typography className={classes.songInfo}>
-          songID: {songID}<br></br>
-        </Typography>
-        {trackObject &&
-          <Typography className={classes.songInfo}>
-            trackObject songID: {trackObject.id}<br></br>
-            trackObject preview_url: {trackObject.preview_url}
-          </Typography>
-        }
-        {audioFeatures &&
-          <Typography className={classes.songInfo}>
-            Acousticness: {audioFeatures.acousticness}
-          </Typography>
-        }
-      </div>
-      */}
       {error && (
         <div id="error">
           <ErrorDialog error={error} errorSubtitle={"Try refreshing the page or starting a new search."}/>
