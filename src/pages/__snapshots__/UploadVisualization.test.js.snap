@@ -1,0 +1,371 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`clicking on the Upload File button should show the file input element 1`] = `
+<div
+  className="UploadVisualization-root-1"
+>
+  <div
+    className="UploadVisualization-titleBar-8"
+  >
+    <a
+      aria-disabled={false}
+      className="MuiButtonBase-root MuiFab-root UploadVisualization-button-15"
+      href="/"
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+    >
+      <span
+        className="MuiFab-label"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+        >
+          &lt; back to home
+        </p>
+      </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
+    </a>
+    <p
+      className="MuiTypography-root UploadVisualization-title-9 MuiTypography-body1"
+    >
+      Load a Song to Visualize
+    </p>
+    <button
+      className="UploadVisualization-button-15"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body1"
+      >
+        Reset
+      </p>
+    </button>
+  </div>
+  <canvas
+    className="UploadVisualization-canvas-6"
+    height="300"
+    id="canvas"
+    width="300"
+  />
+  <audio
+    className="UploadVisualization-audio-7"
+    controls={true}
+    crossOrigin="anonymous"
+    id="audio"
+  />
+  <div
+    className="UploadVisualization-buttonBar-14"
+  >
+    <button
+      className="UploadVisualization-loadOptionButton-13"
+      id="upload-file"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body1"
+      >
+        Upload a file from your computer
+      </p>
+    </button>
+    <button
+      className="UploadVisualization-loadOptionButton-13"
+      id="load-url"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body1"
+      >
+        Enter the URL of an audio file
+      </p>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`initial state should display a title and buttons to reset and navigate to home 1`] = `
+<div
+  className="UploadVisualization-root-1"
+>
+  <div
+    className="UploadVisualization-titleBar-8"
+  >
+    <a
+      aria-disabled={false}
+      className="MuiButtonBase-root MuiFab-root UploadVisualization-button-15"
+      href="/"
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+    >
+      <span
+        className="MuiFab-label"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+        >
+          &lt; back to home
+        </p>
+      </span>
+    </a>
+    <p
+      className="MuiTypography-root UploadVisualization-title-9 MuiTypography-body1"
+    >
+      Load a Song to Visualize
+    </p>
+    <button
+      className="UploadVisualization-button-15"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body1"
+      >
+        Reset
+      </p>
+    </button>
+  </div>
+  <canvas
+    className="UploadVisualization-canvas-6"
+    height="300"
+    id="canvas"
+    width="300"
+  />
+  <audio
+    className="UploadVisualization-audio-7"
+    controls={true}
+    crossOrigin="anonymous"
+    id="audio"
+  />
+  <div
+    className="UploadVisualization-buttonBar-14"
+  >
+    <button
+      className="UploadVisualization-loadOptionButton-13"
+      id="upload-file"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body1"
+      >
+        Upload a file from your computer
+      </p>
+    </button>
+    <button
+      className="UploadVisualization-loadOptionButton-13"
+      id="load-url"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body1"
+      >
+        Enter the URL of an audio file
+      </p>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`initial state should not display the file input or the text input 1`] = `
+<div
+  className="UploadVisualization-root-1"
+>
+  <div
+    className="UploadVisualization-titleBar-8"
+  >
+    <a
+      aria-disabled={false}
+      className="MuiButtonBase-root MuiFab-root UploadVisualization-button-15"
+      href="/"
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+    >
+      <span
+        className="MuiFab-label"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+        >
+          &lt; back to home
+        </p>
+      </span>
+    </a>
+    <p
+      className="MuiTypography-root UploadVisualization-title-9 MuiTypography-body1"
+    >
+      Load a Song to Visualize
+    </p>
+    <button
+      className="UploadVisualization-button-15"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body1"
+      >
+        Reset
+      </p>
+    </button>
+  </div>
+  <canvas
+    className="UploadVisualization-canvas-6"
+    height="300"
+    id="canvas"
+    width="300"
+  />
+  <audio
+    className="UploadVisualization-audio-7"
+    controls={true}
+    crossOrigin="anonymous"
+    id="audio"
+  />
+  <div
+    className="UploadVisualization-buttonBar-14"
+  >
+    <button
+      className="UploadVisualization-loadOptionButton-13"
+      id="upload-file"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body1"
+      >
+        Upload a file from your computer
+      </p>
+    </button>
+    <button
+      className="UploadVisualization-loadOptionButton-13"
+      id="load-url"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body1"
+      >
+        Enter the URL of an audio file
+      </p>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`initial state should start with two buttons for load options 1`] = `
+<div
+  className="UploadVisualization-root-1"
+>
+  <div
+    className="UploadVisualization-titleBar-8"
+  >
+    <a
+      aria-disabled={false}
+      className="MuiButtonBase-root MuiFab-root UploadVisualization-button-15"
+      href="/"
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+    >
+      <span
+        className="MuiFab-label"
+      >
+        <p
+          className="MuiTypography-root MuiTypography-body1"
+        >
+          &lt; back to home
+        </p>
+      </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
+    </a>
+    <p
+      className="MuiTypography-root UploadVisualization-title-9 MuiTypography-body1"
+    >
+      Load a Song to Visualize
+    </p>
+    <button
+      className="UploadVisualization-button-15"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body1"
+      >
+        Reset
+      </p>
+    </button>
+  </div>
+  <canvas
+    className="UploadVisualization-canvas-6"
+    height="300"
+    id="canvas"
+    width="300"
+  />
+  <audio
+    className="UploadVisualization-audio-7"
+    controls={true}
+    crossOrigin="anonymous"
+    id="audio"
+  />
+  <div
+    className="UploadVisualization-buttonBar-14"
+  >
+    <button
+      className="UploadVisualization-loadOptionButton-13"
+      id="upload-file"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body1"
+      >
+        Upload a file from your computer
+      </p>
+    </button>
+    <button
+      className="UploadVisualization-loadOptionButton-13"
+      id="load-url"
+      onClick={[Function]}
+    >
+      <p
+        className="MuiTypography-root MuiTypography-body1"
+      >
+        Enter the URL of an audio file
+      </p>
+    </button>
+  </div>
+</div>
+`;
