@@ -3,10 +3,9 @@ import Typography from '@material-ui/core/Typography'
 import Fab from '@material-ui/core/Fab'
 import { withStyles } from '@material-ui/core/styles'
 import { styles } from './Visualization'
+import ErrorDialog from '../components/ErrorDialog'
 
-// TODO This is SUPER DIRTY but at least proves that if we maintain the same context, audioNode, and analyser,
-// then things stay OK.
-let context, audioNode, analyser
+// window.AudioContext = window.AudioContext || window.webkitAudioContext
 
 const UploadVisualization = props => {
   const { classes } = props
@@ -14,6 +13,8 @@ const UploadVisualization = props => {
   const [url, setUrl] = useState('')
   const [uploadFileSelected, setUploadFileSelected] = useState(false)
   const [loadUrlSelected, setLoadUrlSelected] = useState(false)
+
+  const [error, setError] = useState(null)
 
   const audioRef = useRef(null)
   const canvasRef = useRef(null)
@@ -31,36 +32,31 @@ const UploadVisualization = props => {
   /*-------------------------------------------
                 LOAD MUSIC FILE
   -------------------------------------------*/
-  const loadMusicFile = () => {
+  // const loadMusicFile = () => {
+  function loadMusicFile() {
     const audio = audioRef.current
 
-    const file = fileRef.current
-    if (file && file.files.length > 0) {
-      audio.src = URL.createObjectURL(file.files[0])
+    try {
+      const file = fileRef.current
+      if (file && file.files.length > 0) {
+        audio.src = URL.createObjectURL(file.files[0])
+      }
+      else {
+        audio.src = url
+      }
+    } catch (error) {
+      setError("Sorry, but something went wrong.")
     }
-    else {
-      audio.src = url
-    }
-    // audio.src = "https://p.scdn.co/mp3-preview/1c0da00b5c95a1a6c9dfc05b14a1a628a6e0ad73?cid=159ac88b1c534ed7ae41602f1e558a49"
-    // audio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
-    console.log("audio.src: " + audio.src)
-
-    // // The hookup only needs to be done once.
-    // if (context && audioNode && analyser) {
-    //   audio.play();
-    //   return
-    // }
 
     const canvas = canvasRef.current;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const ctx = canvas.getContext("2d");
 
-    // context = new AudioContext(); // (Interface) Audio-processing graph
-    // audioNode = context.createMediaElementSource(audio); // Give audio context an audio source
-    // analyser = context.createAnalyser(); // Create an analyser for the audio context
+    // const context = new (window.audioContext || window.webkitAudioContext)
 
     const context = (existingContext) ? existingContext : new AudioContext()
+    // const context = (existingContext) ? existingContext : new (window.audioContext || window.webkitAudioContext)
     const audioNode = (existingAudioNode) ? existingAudioNode : context.createMediaElementSource(audio)
     const analyser = (existingAnalyser) ? existingAnalyser : context.createAnalyser()
 
@@ -220,6 +216,11 @@ const UploadVisualization = props => {
           <button id="load-button" onClick={loadMusicFile} disabled={!url} className={classes.urlButton}>Load</button>
         </>
       }
+      {error && (
+        <div id="error">
+          <ErrorDialog error={error} errorSubtitle={"Try refreshing the page or starting a new search."}/>
+        </div>
+      )}
     </div>
   )
 }
