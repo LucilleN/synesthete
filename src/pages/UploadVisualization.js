@@ -181,12 +181,12 @@ const UploadVisualization = props => {
       <audio ref={audioRef} id="audio" controls className={classes.audio} crossOrigin="anonymous"></audio>
       {!uploadFileSelected && !loadUrlSelected &&
         <div className={classes.buttonBar}>
-          <button onClick={() => setUploadFileSelected(true)} className={classes.loadOptionButton}>
+          <button id="upload-file" onClick={() => setUploadFileSelected(true)} className={classes.loadOptionButton}>
             <Typography>
               Upload a file from your computer
             </Typography>
           </button>
-          <button onClick={() => setLoadUrlSelected(true)} className={classes.loadOptionButton}>
+          <button id="load-url" onClick={() => setLoadUrlSelected(true)} className={classes.loadOptionButton}>
             <Typography>
               Enter the URL of an audio file
             </Typography>
@@ -198,8 +198,8 @@ const UploadVisualization = props => {
       }
       {loadUrlSelected &&
         <>
-          <input type="text" value={url} onChange={event => setUrl(event.target.value)} className={classes.urlInput} />
-          <button onClick={loadMusicFile} disabled={!url} className={classes.urlButton}>Load</button>
+          <input type="text" id="text-input" value={url} onChange={event => setUrl(event.target.value)} className={classes.urlInput} />
+          <button id="load-button" onClick={loadMusicFile} disabled={!url} className={classes.urlButton}>Load</button>
         </>
       }
     </div>
