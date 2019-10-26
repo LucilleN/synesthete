@@ -18,12 +18,11 @@ beforeEach(() => {
     </MuiThemeProvider>
   )
 })
-// console.log("UploadVisualization test, component", component)
 
 beforeAll(() => {
-    ReactDOM.createPortal = jest.fn((component, node) => {
-        return component
-    })
+  ReactDOM.createPortal = jest.fn((component, node) => {
+      return component
+  })
 })
 
 describe('initial state', () => {
@@ -81,33 +80,15 @@ describe('clicking on the Upload File button', () => {
     uploadButton = div.querySelector('#upload-file')
     // console.log("FOUND UPLOAD BUTTON: ", uploadButton)
     ReactTestUtils.act(() => {
-      // uploadButton.dispatchEvent(new MouseEvent('click', {bubbles: true}))
-      // uploadButton.find('button').simulate('click')
       ReactTestUtils.Simulate.click(uploadButton)
-      process.nextTick(() => {
-        const fileInput = div.querySelector('file-input')
-        const tree = component.toJSON()
-        expect(tree).toMatchSnapshot()
-        expect(fileInput).not.toBeNull()
-        done()
-      })
     })
   })
 
   afterEach(() => ReactDOM.unmountComponentAtNode(div))
 
-  it.only('should show the file input element', () => {
-    // process.nextTick(() => {
-    //   const fileInput = div.querySelector('file-input')
-    //   expect(fileInput).not.toBeNull()
-    //   done()
-    // })
-
-    const fileInput = div.querySelector('file-input')
+  it('should show the file input element', () => {
+    const fileInput = div.querySelector('#file-input')
     expect(fileInput).not.toBeNull()
-
-    const tree = component.toJSON()
-    expect(tree).toMatchSnapshot()
   })
 
   it('should not show the load option buttons', () => {
@@ -132,7 +113,6 @@ describe('clicking on the Load URL button', () => {
     })
     const loadUrlButton = div.querySelector('#load-url')
     ReactTestUtils.act(() => {
-      // loadUrlButton.dispatchEvent(new MouseEvent('click', {bubbles: true}))
       ReactTestUtils.Simulate.click(loadUrlButton)
     })
   })
@@ -140,7 +120,7 @@ describe('clicking on the Load URL button', () => {
   afterEach(() => ReactDOM.unmountComponentAtNode(div))
 
   it('should show the text input element', () => {
-    const textInput = div.querySelector('text-input')
+    const textInput = div.querySelector('#text-input')
     expect(textInput).not.toBeNull()
   })
 
