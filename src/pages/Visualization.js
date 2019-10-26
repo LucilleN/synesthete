@@ -123,22 +123,39 @@ export const styles = theme => ({
   }
 })
 
-export const loadMusic = (
+export const loadMusic = ({
   audioRef,
   canvasRef,
+  fileRef,
   srcUrl,
   existingContext,
   setContext,
   existingAudioNode,
   setAudioNode,
   existingAnalyser,
-  setAnalyser
-) => {
+  setAnalyser,
+  setError
+}) => {
   console.log("CALLING SETUPANDPLAYANIMATION!!")
 
   const audio = audioRef.current
 
-  audio.src = srcUrl
+  if (fileRef) {
+    try {
+      const file = fileRef.current
+      if (file && file.files.length > 0) {
+        audio.src = URL.createObjectURL(file.files[0])
+      }
+    } catch (error) {
+      setError("Sorry, but something went wrong.")
+    }
+  }
+  else {
+    audio.src = srcUrl
+  }
+
+
+  // audio.src = srcUrl
 
   const canvas = canvasRef.current
   canvas.width = window.innerWidth
@@ -264,17 +281,18 @@ const Visualization = props => {
   useEffect(() => {
     setAudioFeatures(null)
     performAudioFeaturesQuery()
-    loadMusic(
-      audioRef,
-      canvasRef,
-      trackObject.preview_url,
-      existingContext,
-      setContext,
-      existingAudioNode,
-      setAudioNode,
-      existingAnalyser,
-      setAnalyser
-    )
+    loadMusic({
+      audioRef: audioRef,
+      canvasRef: canvasRef,
+      srcUrl: trackObject.preview_url,
+      existingContext: existingContext,
+      setContext: setContext,
+      existingAudioNode: existingAudioNode,
+      setAudioNode: setAudioNode,
+      existingAnalyser: existingAnalyser,
+      setAnalyser: setAnalyser,
+      setError: setError
+    })
 
   }, [trackObject])
 
