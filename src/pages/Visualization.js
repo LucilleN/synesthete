@@ -5,7 +5,7 @@ import RecommendationButton from '../components/RecommendationButton'
 import StartButton from '../components/StartButton'
 import ErrorDialog from '../components/ErrorDialog'
 
-import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom'
 
 import { getAudioFeatures, getRecommendation } from '../api'
 
@@ -184,39 +184,39 @@ export const loadMusic = (
     return colors[newIndex]
   }
 
-  const WIDTH = canvas.width;
-  const HEIGHT = canvas.height;
+  const canvasWidth = canvas.width
+  const canvasHeight = canvas.height
   const totalNumberOfBars = 120
-  const barWidth = (WIDTH / bufferLength) * 40
-  const barHeightMax = 500;
+  const barWidth = (canvasWidth / bufferLength) * 40
+  const barHeightMax = 500
   const barSpacing = 10
   const barsPerColorSection = 6
 
-  let barHeight;
-  let x = 0;
+  let barHeight
+  let x = 0
 
   function renderFrame() {
     requestAnimationFrame(renderFrame)
 
-    x = 0;
+    x = 0
 
     analyser.getByteFrequencyData(dataArray)
 
     // Clears canvas with black and use opacity 0.1 to create fade effect
     ctx.fillStyle = "rgba(0,0,0,0.1)"
-    ctx.fillRect(0, 0, WIDTH, HEIGHT)
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight)
 
     for (let barIndex = 0; barIndex < totalNumberOfBars; barIndex++) {
-      barHeight = (dataArray[barIndex] * 2);
+      barHeight = (dataArray[barIndex] * 2)
 
       // offset = -10 // Lord Huron, the Night We Met (key: A major)
       let offset = -7 // Kina Grannis, Iris (key: F# Major)
 
       let [r, g, b] = getColorOfSoundBars(Math.floor(barIndex/barsPerColorSection), offset)
-      let a = (barHeight / barHeightMax) ** 3.5;
+      let a = (barHeight / barHeightMax) ** 3.5
 
-      ctx.fillStyle = `rgba(${r},${g},${b},${a})`;
-      ctx.fillRect(x, (HEIGHT - barHeight), barWidth, barHeight);
+      ctx.fillStyle = `rgba(${r},${g},${b},${a})`
+      ctx.fillRect(x, (canvasHeight - barHeight), barWidth, barHeight)
 
       x += barWidth + barSpacing
     }
@@ -245,8 +245,6 @@ const Visualization = props => {
 
   const [songID, setSongID] = useState(null)
   const [error, setError] = useState(null)
-  // ONLY FOR SEEING IN LOCALHOST
-  // const [error, setError] = useState('something')
   const [audioFeatures, setAudioFeatures] = useState(null)
   const [recommendedSong, setRecommendedSong] = useState(null)
 
@@ -254,9 +252,9 @@ const Visualization = props => {
   const [existingAnalyser, setAnalyser] = useState(null)
   const [existingContext, setContext] = useState(null)
 
+  // TODO: move this to app.js and import it wherever you need
   const defaultErrorText = 'Sorry, but something went wrong.'
 
-  // Equivalent of componentDidMount (ONLY RUNS ONCE)
   useEffect(() => {
     setAudioFeatures(null)
     performAudioFeaturesQuery()
@@ -266,7 +264,6 @@ const Visualization = props => {
   useEffect(() => {
     setAudioFeatures(null)
     performAudioFeaturesQuery()
-    // loadMusicFile()
     loadMusic(
       audioRef,
       canvasRef,
@@ -281,7 +278,6 @@ const Visualization = props => {
 
   }, [trackObject])
 
-  // Equivalent of componentDidMount and componentDidUpdate
   useEffect(() => {
     const { songID } = props.match.params
     setSongID(songID)
@@ -320,7 +316,7 @@ const Visualization = props => {
     event.preventDefault()
     setError(null)
 
-    let currentRecommendation;
+    let currentRecommendation
 
     try {
       const result = await getRecommendation({
@@ -334,7 +330,7 @@ const Visualization = props => {
       })
       currentRecommendation = result.tracks[0]
 
-      // recommendation might be a song with a null preview url; if so, recommend another one
+      // Recommendation might be a song with a null preview_url; if so, recommend another one
       while (!currentRecommendation.preview_url) {
         const result = await getRecommendation({
           limit: 1,
@@ -370,13 +366,13 @@ const Visualization = props => {
           <ErrorDialog error={error} errorSubtitle={"Try refreshing the page or starting a new search."}/>
         </div>
       )}
-      {recommendedSong &&
+      {recommendedSong && (
         <Redirect to={{
             pathname: `/visualization/${recommendedSong.id}`,
             state: { trackObject: recommendedSong }
           }}
         />
-      }
+      )}
     </div>
   )
 }
