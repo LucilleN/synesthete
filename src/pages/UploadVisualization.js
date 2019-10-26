@@ -19,6 +19,11 @@ const UploadVisualization = props => {
   const canvasRef = useRef(null)
   const fileRef = useRef(null)
 
+  const [existingAudioNode, setAudioNode] = useState(null)
+  const [existingAnalyser, setAnalyser] = useState(null)
+  const [existingContext, setContext] = useState(null)
+
+
   const handleReload = () => {
     window.location.reload(false);
   }
@@ -30,9 +35,8 @@ const UploadVisualization = props => {
     const audio = audioRef.current
 
     const file = fileRef.current
-    const files = file.files
-    if (files.length > 0) {
-      audio.src = URL.createObjectURL(files[0])
+    if (file && file.files.length > 0) {
+      audio.src = URL.createObjectURL(file.files[0])
     }
     else {
       audio.src = url
@@ -41,20 +45,24 @@ const UploadVisualization = props => {
     // audio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
     console.log("audio.src: " + audio.src)
 
-    // The hookup only needs to be done once.
-    if (context && audioNode && analyser) {
-      audio.play();
-      return
-    }
+    // // The hookup only needs to be done once.
+    // if (context && audioNode && analyser) {
+    //   audio.play();
+    //   return
+    // }
 
     const canvas = canvasRef.current;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const ctx = canvas.getContext("2d");
 
-    context = new AudioContext(); // (Interface) Audio-processing graph
-    audioNode = context.createMediaElementSource(audio); // Give audio context an audio source
-    analyser = context.createAnalyser(); // Create an analyser for the audio context
+    // context = new AudioContext(); // (Interface) Audio-processing graph
+    // audioNode = context.createMediaElementSource(audio); // Give audio context an audio source
+    // analyser = context.createAnalyser(); // Create an analyser for the audio context
+
+    const context = (existingContext) ? existingContext : new AudioContext()
+    const audioNode = (existingAudioNode) ? existingAudioNode : context.createMediaElementSource(audio)
+    const analyser = (existingAnalyser) ? existingAnalyser : context.createAnalyser()
 
     audioNode.connect(analyser); // Connects the audio context source to the analyser
     analyser.connect(context.destination); // End destination of an audio graph in a given context
@@ -157,6 +165,16 @@ const UploadVisualization = props => {
 
     audio.play();
     renderFrame();
+
+    if (!existingAudioNode) {
+      setAudioNode(audioNode)
+    }
+    if (!existingAnalyser) {
+      setAnalyser(analyser)
+    }
+    if (!existingContext) {
+      setContext(context)
+    }
   }
 
   return (
