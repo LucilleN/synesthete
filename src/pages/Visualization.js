@@ -134,9 +134,9 @@ export const loadMusic = ({
   setAudioNode,
   existingAnalyser,
   setAnalyser,
-  setError
+  setError,
+  keyOffset=0
 }) => {
-  console.log("CALLING SETUPANDPLAYANIMATION!!")
 
   const audio = audioRef.current
 
@@ -153,9 +153,6 @@ export const loadMusic = ({
   else {
     audio.src = srcUrl
   }
-
-
-  // audio.src = srcUrl
 
   const canvas = canvasRef.current
   canvas.width = window.innerWidth
@@ -226,10 +223,11 @@ export const loadMusic = ({
     for (let barIndex = 0; barIndex < totalNumberOfBars; barIndex++) {
       barHeight = (dataArray[barIndex] * 2)
 
-      // offset = -10 // Lord Huron, the Night We Met (key: A major)
-      let offset = -7 // Kina Grannis, Iris (key: F# Major)
+      // let offset = -10 // Lord Huron, the Night We Met (key: A major)
+      // let offset = -7 // Kina Grannis, Iris (key: F# Major)
 
-      let [r, g, b] = getColorOfSoundBars(Math.floor(barIndex/barsPerColorSection), offset)
+      // let [r, g, b] = getColorOfSoundBars(Math.floor(barIndex/barsPerColorSection), offset)
+      let [r, g, b] = getColorOfSoundBars(Math.floor(barIndex/barsPerColorSection), keyOffset)
       let a = (barHeight / barHeightMax) ** 3.5
 
       ctx.fillStyle = `rgba(${r},${g},${b},${a})`
@@ -273,13 +271,11 @@ const Visualization = props => {
   const defaultErrorText = 'Sorry, but something went wrong.'
 
   useEffect(() => {
-    setAudioFeatures(null)
     performAudioFeaturesQuery()
 
   }, [])
 
   useEffect(() => {
-    setAudioFeatures(null)
     performAudioFeaturesQuery()
     loadMusic({
       audioRef: audioRef,
@@ -291,9 +287,9 @@ const Visualization = props => {
       setAudioNode: setAudioNode,
       existingAnalyser: existingAnalyser,
       setAnalyser: setAnalyser,
-      setError: setError
+      setError: setError,
+      keyOffset: audioFeatures ? audioFeatures.key : 0
     })
-
   }, [trackObject])
 
   useEffect(() => {
@@ -305,10 +301,6 @@ const Visualization = props => {
     }
   })
 
-
-  /*-------------------------------------------
-                  API STUFF
-  -------------------------------------------*/
   const performAudioFeaturesQuery = async () => {
     console.log("performAudioFeaturesQuery")
 
@@ -328,7 +320,6 @@ const Visualization = props => {
       setError(defaultErrorText)
     }
   }
-
 
   const performRecommendationQuery = async event => {
     event.preventDefault()
