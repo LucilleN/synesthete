@@ -8,6 +8,7 @@ import sinon from 'sinon'
 
 import { theme } from '../App'
 import Visualization from './Visualization'
+import * as visualizationModule from './Visualization'
 import * as api from '../api'
 
 const track = {
@@ -110,19 +111,19 @@ describe('initial state', () => {
   //   })
   // })
 
-  it('should have a button to navigate back to search and a button to get a recommendation', () => {
+  xit('should have a button to navigate back to search and a button to get a recommendation', () => {
     // console.log("component", component)
     // console.log("props.location", component.props.location)
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
 
-  it('should display the title and artist of the current song being played', () => {
+  xit('should display the title and artist of the current song being played', () => {
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
 
-  it('should render a canvas', () => {
+  xit('should render a canvas', () => {
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
@@ -133,6 +134,35 @@ describe('initial state', () => {
   })
 
 })
+
+describe('loading music', () => {
+  let div
+  beforeEach(() => {
+    sinon.stub(visualizationModule, 'loadMusic')
+
+    div = document.createElement('div')
+    ReactTestUtils.act(() => {
+      ReactDOM.render(
+        <MuiThemeProvider theme={theme}>
+          <Visualization location={{ state: { trackObject: track } }}/>
+        </MuiThemeProvider>
+      , div)
+    })
+  })
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(div)
+    visualizationModule.loadMusic.restore()
+  })
+
+  it('should automatically load music', () => {
+    // const tree = component.toJSON()
+    // expect(tree).toMatchSnapshot()
+    expect(visualizationModule.loadMusic.called).toBe(true)
+  })
+
+})
+
 
 // describe('search button', () => {
 //   let div
