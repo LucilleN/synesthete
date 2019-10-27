@@ -64,10 +64,7 @@ const SearchResults = props => {
           {results.filter(song => song.preview_url !== null).map(song => (
             <SearchResultRow
               key={song.id}
-              songName={song.name}
               song={song}
-              songID={song.id}
-              artistName={song.artists[0].name}
             />
           ))}
         </Grid>

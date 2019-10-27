@@ -27,7 +27,7 @@ const styles = theme => ({
 
 const SearchResultRow = props => {
 
-  const { classes, songName, song, songID, artistName } = props
+  const { classes, song } = props
 
   const [clicked, setClicked] = useState(false)
 
@@ -40,7 +40,7 @@ const SearchResultRow = props => {
     return (
       <Grid item xs={12} id="search-result-row" className={classes.row} onClick={handleClick}>
         <Typography className={classes.text}>
-          "{songName}," Artist: {artistName}
+          "{song.name}," Artist: {song.artists[0].name}
         </Typography>
         <Typography>
           {">>> Visualize This Sample >>>"}
@@ -51,7 +51,7 @@ const SearchResultRow = props => {
   else {
     return (
       <Redirect to={{
-          pathname: `/visualization/${songID}`,
+          pathname: `/visualization/${song.id}`,
           state: { trackObject: song }
         }}
       />
