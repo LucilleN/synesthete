@@ -40,6 +40,7 @@ const ErrorDialog = (props) => {
         onClose={handleClose}
         aria-labelledby="error-title"
         aria-describedby="error-subtitle"
+        id="error-dialog"
       >
         <DialogTitle id="error-title" className={classes.title}>{error}</DialogTitle>
         <DialogContent>
@@ -48,7 +49,7 @@ const ErrorDialog = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="primary" id="close-button">
             Ok
           </Button>
         </DialogActions>
