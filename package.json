@@ -17,6 +17,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "canvas": "^2.6.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "react-test-renderer": "^16.9.0",
     "sinon": "^7.4.2"
