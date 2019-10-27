@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`initial state should render the song title and artist name 1`] = `
+<div
+  className="MuiGrid-root SearchResultRow-row-1 MuiGrid-item MuiGrid-grid-xs-12"
+  id="search-result-row"
+  onClick={[Function]}
+>
+  <p
+    className="MuiTypography-root SearchResultRow-text-2 MuiTypography-body1"
+  >
+    "
+    ," Artist: 
+  </p>
+  <p
+    className="MuiTypography-root MuiTypography-body1"
+  >
+    &gt;&gt;&gt; Visualize This Sample &gt;&gt;&gt;
+  </p>
+</div>
+`;

@@ -38,8 +38,8 @@ const SearchResultRow = props => {
 
   if (!clicked) {
     return (
-      <Grid item xs={12} id={songID} className={classes.row} onClick={handleClick}>
-        <Typography id={songID} className={classes.text}>
+      <Grid item xs={12} id="search-result-row" className={classes.row} onClick={handleClick}>
+        <Typography className={classes.text}>
           "{songName}," Artist: {artistName}
         </Typography>
         <Typography>
