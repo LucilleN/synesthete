@@ -21,12 +21,6 @@ beforeEach(() => {
   )
 })
 
-beforeAll(() => {
-  ReactDOM.createPortal = jest.fn((component, node) => {
-      return component
-  })
-})
-
 describe('initial state', () => {
   let div
   beforeEach(() => {

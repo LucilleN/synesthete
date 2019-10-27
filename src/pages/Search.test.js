@@ -19,12 +19,6 @@ beforeEach(() => {
   )
 })
 
-beforeAll(() => {
-    ReactDOM.createPortal = jest.fn((component, node) => {
-        return component
-    })
-})
-
 describe('initial state', () => {
   it('should start with a search field with default text', () => {
     const tree = component.toJSON()

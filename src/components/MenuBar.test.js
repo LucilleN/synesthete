@@ -22,19 +22,6 @@ beforeEach(() => {
   )
 })
 
-const TestingRouter = ({ ComponentWithRedirection, redirectUrl }) => (
-  <Router>
-    <Route path="/" exact={true} render={() => <ComponentWithRedirection />} />
-    <Route path={redirectUrl} render={() => <div>{redirectUrl}</div>} />
-  </Router>
-)
-
-// beforeAll(() => {
-//     ReactDOM.createPortal = jest.fn((component, node) => {
-//         return component
-//     })
-// })
-
 describe('initial state', () => {
   it('should render the Synesthete logo', () => {
     const tree = component.toJSON()
