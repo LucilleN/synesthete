@@ -16,7 +16,7 @@ beforeEach(() => {
   )
 })
 
-describe('initial state', () => {
+xdescribe('initial state', () => {
   it('should render the error title', () => {
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
@@ -28,7 +28,7 @@ describe('initial state', () => {
   })
 })
 
-describe('clicking on the OK button', () => {
+xdescribe('clicking on the OK button', () => {
   let div
   beforeEach(() => {
     div = document.createElement('div')
