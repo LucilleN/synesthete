@@ -8,7 +8,7 @@ import sinon from 'sinon'
 
 import { theme } from '../App'
 import UploadVisualization from './UploadVisualization'
-import * as visualizationModule from './Visualization'
+import * as visualizationUtilities from './visualizationUtilities'
 
 const sampleURL = "https://p.scdn.co/mp3-preview/1c0da00b5c95a1a6c9dfc05b14a1a628a6e0ad73?cid=159ac88b1c534ed7ae41602f1e558a49"
 
@@ -153,7 +153,7 @@ describe('clicking on the Load URL button', () => {
 describe('loading a URL', () => {
   let div
   beforeEach(() => {
-    sinon.stub(visualizationModule, 'loadMusic')
+    sinon.stub(visualizationUtilities, 'loadMusic')
 
     div = document.createElement('div')
     ReactTestUtils.act(() => {
@@ -182,13 +182,13 @@ describe('loading a URL', () => {
 
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(div)
-    visualizationModule.loadMusic.restore()
+    visualizationUtilities.loadMusic.restore()
   })
 
   it('should trigger the music to load when the load button is clicked', () => {
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
-    expect(visualizationModule.loadMusic.calledOnce).toBe(true)
+    expect(visualizationUtilities.loadMusic.calledOnce).toBe(true)
   })
 
 })
