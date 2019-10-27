@@ -10,7 +10,9 @@ exports[`initial state should render the song title and artist name 1`] = `
     className="MuiTypography-root SearchResultRow-text-2 MuiTypography-body1"
   >
     "
+    The Night We Met
     ," Artist: 
+    Lord Huron
   </p>
   <p
     className="MuiTypography-root MuiTypography-body1"
