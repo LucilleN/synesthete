@@ -13,9 +13,11 @@ import MenuBar from './MenuBar'
 let component
 beforeEach(() => {
   component = TestRenderer.create(
-    <MuiThemeProvider theme={theme}>
-      <MenuBar />
-    </MuiThemeProvider>
+    <Router>
+      <MuiThemeProvider theme={theme}>
+        <MenuBar />
+      </MuiThemeProvider>
+    </Router>
   )
 })
 

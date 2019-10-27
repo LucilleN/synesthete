@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
-import { Redirect } from 'react-router-dom'
+import { Redirect, NavLink } from 'react-router-dom'
 
 const styles = theme => ({
   bar: {
@@ -19,8 +19,7 @@ const styles = theme => ({
        background: theme.palette.light.pink,
     }
   },
-  textNotCurrentPage: {
-    color: theme.palette.light.pink,
+  text: {
     fontSize: '1.625rem',
     padding: 10,
     fontWeight: 'bold',
@@ -28,12 +27,10 @@ const styles = theme => ({
        color: theme.palette.dark.purple
     }
   },
-  // textCurrentPage: {
-  //   color: theme.palette.light.pink,
-  //   '&:hover': {
-  //      color: theme.palette.dark.purple
-  //   },
-  // },
+  link: {
+    textDecoration: 'none',
+    color: theme.palette.light.pink
+  },
   logo: {
     color: theme.palette.white,
     display: 'flex',
@@ -43,81 +40,48 @@ const styles = theme => ({
 })
 
 const MenuBar = props => {
-  const [homeSelected, setHomeSelected] = useState(false)
-  const [searchSelected, setSearchSelected] = useState(false)
-  const [uploadSelected, setUploadSelected] = useState(false)
-  const [aboutSelected, setAboutSelected] = useState(false)
-
-  const handleHomeSelect = event => {
-    // console.log("handleHomeSelect called")
-    // event.preventDefault()
-    setHomeSelected(true)
-    // console.log(`homeSelected is ${homeSelected}`)
-  }
-
-  const handleSearchSelect = event => {
-    setSearchSelected(true)
-  }
-
-  const handleUploadSelect = event => {
-    setUploadSelected(true)
-  }
-
-  const handleAboutSelect = event => {
-    setAboutSelected(true)
-  }
-
-  useEffect(() => {
-    setHomeSelected(false)
-    setSearchSelected(false)
-    setUploadSelected(false)
-    setAboutSelected(false)
-  })
 
   const { classes } = props
-
 
   return (
     <div>
       <Grid container className={classes.bar} id="bar">
-        <Grid item xs={3} onClick={handleHomeSelect} id="logo">
-          <Typography className={classes.logo}>
-            synesthete
-          </Typography>
+        <Grid item xs={3} id="logo">
+          <NavLink to="/" className={classes.link}>
+            <Typography className={classes.logo}>
+              synesthete ♬
+            </Typography>
+          </NavLink>
         </Grid>
-        <Grid item xs={2} className={classes.button} onClick={handleHomeSelect} id="home">
-          <Typography className={classes.textNotCurrentPage}>
-            home
-          </Typography>
+        <Grid item xs={2} className={classes.button} id="home">
+          <NavLink to="/" className={classes.link}>
+            <Typography className={classes.text}>
+              home
+            </Typography>
+          </NavLink>
         </Grid>
-        <Grid item xs={2} className={classes.button} onClick={handleSearchSelect} id="search">
-          <Typography className={classes.textNotCurrentPage}>
-            search
-          </Typography>
+        <Grid item xs={2} className={classes.button} id="search">
+          <NavLink to="/search" className={classes.link}>
+            <Typography className={classes.text}>
+              search
+            </Typography>
+          </NavLink>
         </Grid>
-        <Grid item xs={2} className={classes.button} onClick={handleUploadSelect} id="upload">
-          <Typography className={classes.textNotCurrentPage}>
-            upload
-          </Typography>
+        <Grid item xs={2} className={classes.button} id="upload">
+          <NavLink to="/upload" className={classes.link}>
+            <Typography className={classes.text}>
+              upload
+            </Typography>
+          </NavLink>
         </Grid>
-        <Grid item xs={2} className={classes.button} onClick={handleAboutSelect} id="about">
-          <Typography className={classes.textNotCurrentPage}>
-            about
-          </Typography>
+        <Grid item xs={2} className={classes.button} id="about">
+          <NavLink to="/about" className={classes.link}>
+            <Typography className={classes.text}>
+              about
+            </Typography>
+          </NavLink>
         </Grid>
       </Grid>
-      {homeSelected &&
-        <Redirect to={'/'} />
-      }
-      {searchSelected &&
-        <Redirect to={'/search'} />
-      }
-      {uploadSelected &&
-        <Redirect to={'/upload'} />
-      }
-      {aboutSelected &&
-        <Redirect to={'/about'} />
-      }
     </div>
   )
 }
