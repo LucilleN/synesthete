@@ -7,7 +7,8 @@ import ErrorDialog from '../components/ErrorDialog'
 
 import { Redirect } from 'react-router-dom'
 
-import { getAudioFeatures, getRecommendation } from '../api'
+import { getRecommendation } from '../api'
+import { loadMusic, performAudioFeaturesQuery } from './visualizationUtilities'
 
 export const styles = theme => ({
   root: {
@@ -123,134 +124,6 @@ export const styles = theme => ({
   }
 })
 
-export const loadMusic = ({
-  audioRef,
-  canvasRef,
-  fileRef,
-  srcUrl,
-  existingContext,
-  setContext,
-  existingAudioNode,
-  setAudioNode,
-  existingAnalyser,
-  setAnalyser,
-  setError,
-  keyOffset=0
-}) => {
-
-  const audio = audioRef.current
-
-  if (fileRef) {
-    try {
-      const file = fileRef.current
-      if (file && file.files.length > 0) {
-        audio.src = URL.createObjectURL(file.files[0])
-      }
-    } catch (error) {
-      setError("Sorry, but something went wrong.")
-    }
-  }
-  else {
-    audio.src = srcUrl
-  }
-
-  const canvas = canvasRef.current
-  canvas.width = window.innerWidth
-  canvas.height = window.innerHeight
-  const ctx = canvas.getContext("2d")
-
-  const context = (existingContext) ? existingContext : new AudioContext()
-  const audioNode = (existingAudioNode) ? existingAudioNode : context.createMediaElementSource(audio)
-  const analyser = (existingAnalyser) ? existingAnalyser : context.createAnalyser()
-
-  audioNode.connect(analyser)
-
-  analyser.connect(context.destination) // End destination of an audio graph in a given context
-  analyser.fftSize = 16384
-
-  const bufferLength = analyser.frequencyBinCount
-  const dataArray = new Uint8Array(bufferLength)
-
-  const colors = [
-    [179, 0, 54], // red
-    [255, 60, 0], // red-orange
-    [255, 123, 0], // orange
-    [255, 178, 0], // honey yellow
-    [255, 243, 163], // light yellow
-    [203, 247, 57], // yellow-green
-    [25, 191, 0], // green
-    [0, 161, 155], // blue-green
-    [0, 181, 169], // green-blue
-    [0, 113, 212], // blue
-    [39, 16, 173], // indigo
-    [75, 0, 145], // dark purple
-    [145, 10, 145], // magenta
-  ]
-
-  function getColorOfSoundBars(keyIndex, offset) {
-    let newIndex = keyIndex + offset
-    if (newIndex >= colors.length) {
-      newIndex -= colors.length
-    }
-    if (newIndex < 0) {
-      newIndex += colors.length
-    }
-    return colors[newIndex]
-  }
-
-  const canvasWidth = canvas.width
-  const canvasHeight = canvas.height
-  const totalNumberOfBars = 120
-  const barWidth = (canvasWidth / bufferLength) * 40
-  const barHeightMax = 500
-  const barSpacing = 10
-  const barsPerColorSection = 6
-
-  let barHeight
-  let x = 0
-
-  function renderFrame() {
-    requestAnimationFrame(renderFrame)
-
-    x = 0
-
-    analyser.getByteFrequencyData(dataArray)
-
-    // Clears canvas with black and use opacity 0.1 to create fade effect
-    ctx.fillStyle = "rgba(0,0,0,0.1)"
-    ctx.fillRect(0, 0, canvasWidth, canvasHeight)
-
-    for (let barIndex = 0; barIndex < totalNumberOfBars; barIndex++) {
-      barHeight = (dataArray[barIndex] * 2)
-
-      // let offset = -10 // Lord Huron, the Night We Met (key: A major)
-      // let offset = -7 // Kina Grannis, Iris (key: F# Major)
-
-      // let [r, g, b] = getColorOfSoundBars(Math.floor(barIndex/barsPerColorSection), offset)
-      let [r, g, b] = getColorOfSoundBars(Math.floor(barIndex/barsPerColorSection), keyOffset)
-      let a = (barHeight / barHeightMax) ** 3.5
-
-      ctx.fillStyle = `rgba(${r},${g},${b},${a})`
-      ctx.fillRect(x, (canvasHeight - barHeight), barWidth, barHeight)
-
-      x += barWidth + barSpacing
-    }
-  }
-
-  audio.play()
-  renderFrame()
-
-  if (!existingAudioNode) {
-    setAudioNode(audioNode)
-  }
-  if (!existingAnalyser) {
-    setAnalyser(analyser)
-  }
-  if (!existingContext) {
-    setContext(context)
-  }
-}
-
 const Visualization = props => {
   const { classes } = props
   const { trackObject } = props.location.state
@@ -258,7 +131,7 @@ const Visualization = props => {
   const audioRef = useRef(null)
   const canvasRef = useRef(null)
 
-  const [songID, setSongID] = useState(null)
+  const [songID, setSongID] = useState(props.match && props.match.params ? props.match.params.songID : null)
   const [error, setError] = useState(null)
   const [audioFeatures, setAudioFeatures] = useState(null)
   const [recommendedSong, setRecommendedSong] = useState(null)
@@ -271,12 +144,24 @@ const Visualization = props => {
   const defaultErrorText = 'Sorry, but something went wrong.'
 
   useEffect(() => {
-    performAudioFeaturesQuery()
+    performAudioFeaturesQuery({
+      setError,
+      songID,
+      setAudioFeatures,
+      defaultErrorText
+    })
 
-  }, [])
+  }, [songID])
 
+  const keyOffset = audioFeatures ? audioFeatures.key : 0
   useEffect(() => {
-    performAudioFeaturesQuery()
+    performAudioFeaturesQuery({
+      setError,
+      songID,
+      setAudioFeatures,
+      defaultErrorText
+    })
+
     loadMusic({
       audioRef: audioRef,
       canvasRef: canvasRef,
@@ -288,38 +173,26 @@ const Visualization = props => {
       existingAnalyser: existingAnalyser,
       setAnalyser: setAnalyser,
       setError: setError,
-      keyOffset: audioFeatures ? audioFeatures.key : 0
+      keyOffset
     })
-  }, [trackObject])
+  }, [trackObject, songID, existingAnalyser, existingAudioNode, existingContext, keyOffset])
 
   useEffect(() => {
-    const { songID } = props.match.params
+    if (!songID) {
+      return
+    }
+
     setSongID(songID)
 
     if (!audioFeatures) {
-      performAudioFeaturesQuery()
-    }
-  })
-
-  const performAudioFeaturesQuery = async () => {
-    console.log("performAudioFeaturesQuery")
-
-    setError(null)
-
-    try {
-      const result = await getAudioFeatures({
-        id: songID,
-        headers: {
-          'Authorization': 'Bearer '
-        }
+      performAudioFeaturesQuery({
+        setError,
+        songID,
+        setAudioFeatures,
+        defaultErrorText
       })
-
-      setAudioFeatures(result)
-
-    } catch (error) {
-      setError(defaultErrorText)
     }
-  }
+  }, [songID, audioFeatures])
 
   const performRecommendationQuery = async event => {
     event.preventDefault()
