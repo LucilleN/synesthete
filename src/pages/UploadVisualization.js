@@ -2,7 +2,8 @@ import React, { useState, useRef } from 'react'
 import Typography from '@material-ui/core/Typography'
 import Fab from '@material-ui/core/Fab'
 import { withStyles } from '@material-ui/core/styles'
-import { styles, loadMusic } from './Visualization'
+import { styles } from './Visualization'
+import { loadMusic } from './visualizationUtilities'
 import ErrorDialog from '../components/ErrorDialog'
 
 // window.AudioContext = window.AudioContext || window.webkitAudioContext

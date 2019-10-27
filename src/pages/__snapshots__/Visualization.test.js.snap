@@ -1,6 +1,106 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`initial state should display the title and artist of the current song being played 1`] = `null`;
+exports[`initial state should display the title and artist of the current song being played 1`] = `
+<div
+  className="Visualization-root-1"
+>
+  <canvas
+    className="Visualization-canvas-6"
+    height="300"
+    id="canvas"
+    width="300"
+  />
+  <audio
+    className="Visualization-audio-7"
+    controls={true}
+    crossOrigin="anonymous"
+    id="audio"
+  />
+  <div
+    className="Visualization-titleBar-8"
+  >
+    <a
+      aria-disabled={false}
+      aria-label="Start"
+      className="MuiButtonBase-root MuiFab-root StartButton-fab-16 MuiFab-extended MuiFab-primary"
+      href="/search"
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+    >
+      <span
+        className="MuiFab-label"
+      >
+         
+        <p
+          className="MuiTypography-root StartButton-text-17 MuiTypography-body1"
+        >
+          &lt; new search
+        </p>
+      </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
+    </a>
+    <p
+      className="MuiTypography-root Visualization-title-9 MuiTypography-body1"
+    >
+      Visualization:
+      <br />
+    </p>
+    <a
+      aria-disabled={false}
+      aria-label="Get Recommendation"
+      className="MuiButtonBase-root MuiFab-root RecommendationButton-fab-61 MuiFab-extended MuiFab-primary"
+      href="/visualization"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+    >
+      <span
+        className="MuiFab-label"
+      >
+         
+        <p
+          className="MuiTypography-root RecommendationButton-text-62 MuiTypography-body1"
+        >
+          get a visually similar song
+        </p>
+      </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
+    </a>
+  </div>
+  <p
+    className="MuiTypography-root Visualization-subtitle-10 MuiTypography-body1"
+  >
+    "
+    The Night We Met
+    " by 
+    Lord Huron
+  </p>
+</div>
+`;
 
 exports[`initial state should have a button to navigate back to search and a button to get a recommendation 1`] = `
 <div
@@ -49,6 +149,9 @@ exports[`initial state should have a button to navigate back to search and a but
           &lt; new search
         </p>
       </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
     </a>
     <p
       className="MuiTypography-root Visualization-title-9 MuiTypography-body1"
@@ -85,6 +188,9 @@ exports[`initial state should have a button to navigate back to search and a but
           get a visually similar song
         </p>
       </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
     </a>
   </div>
   <p
@@ -100,27 +206,27 @@ exports[`initial state should have a button to navigate back to search and a but
 
 exports[`initial state should render a canvas 1`] = `
 <div
-  className="Visualization-root-63"
+  className="Visualization-root-1"
 >
   <canvas
-    className="Visualization-canvas-68"
+    className="Visualization-canvas-6"
     height="300"
     id="canvas"
     width="300"
   />
   <audio
-    className="Visualization-audio-69"
+    className="Visualization-audio-7"
     controls={true}
     crossOrigin="anonymous"
     id="audio"
   />
   <div
-    className="Visualization-titleBar-70"
+    className="Visualization-titleBar-8"
   >
     <a
       aria-disabled={false}
       aria-label="Start"
-      className="MuiButtonBase-root MuiFab-root StartButton-fab-78 MuiFab-extended MuiFab-primary"
+      className="MuiButtonBase-root MuiFab-root StartButton-fab-16 MuiFab-extended MuiFab-primary"
       href="/search"
       onBlur={[Function]}
       onDragLeave={[Function]}
@@ -140,14 +246,17 @@ exports[`initial state should render a canvas 1`] = `
       >
          
         <p
-          className="MuiTypography-root StartButton-text-79 MuiTypography-body1"
+          className="MuiTypography-root StartButton-text-17 MuiTypography-body1"
         >
           &lt; new search
         </p>
       </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
     </a>
     <p
-      className="MuiTypography-root Visualization-title-71 MuiTypography-body1"
+      className="MuiTypography-root Visualization-title-9 MuiTypography-body1"
     >
       Visualization:
       <br />
@@ -155,7 +264,7 @@ exports[`initial state should render a canvas 1`] = `
     <a
       aria-disabled={false}
       aria-label="Get Recommendation"
-      className="MuiButtonBase-root MuiFab-root RecommendationButton-fab-123 MuiFab-extended MuiFab-primary"
+      className="MuiButtonBase-root MuiFab-root RecommendationButton-fab-61 MuiFab-extended MuiFab-primary"
       href="/visualization"
       onBlur={[Function]}
       onClick={[Function]}
@@ -176,15 +285,18 @@ exports[`initial state should render a canvas 1`] = `
       >
          
         <p
-          className="MuiTypography-root RecommendationButton-text-124 MuiTypography-body1"
+          className="MuiTypography-root RecommendationButton-text-62 MuiTypography-body1"
         >
           get a visually similar song
         </p>
       </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
     </a>
   </div>
   <p
-    className="MuiTypography-root Visualization-subtitle-72 MuiTypography-body1"
+    className="MuiTypography-root Visualization-subtitle-10 MuiTypography-body1"
   >
     "
     The Night We Met
@@ -241,6 +353,9 @@ exports[`initial state should render an audio element 1`] = `
           &lt; new search
         </p>
       </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
     </a>
     <p
       className="MuiTypography-root Visualization-title-9 MuiTypography-body1"
@@ -277,6 +392,9 @@ exports[`initial state should render an audio element 1`] = `
           get a visually similar song
         </p>
       </span>
+      <span
+        className="MuiTouchRipple-root"
+      />
     </a>
   </div>
   <p
@@ -289,5 +407,3 @@ exports[`initial state should render an audio element 1`] = `
   </p>
 </div>
 `;
-
-exports[`loading music should automatically load music 1`] = `null`;

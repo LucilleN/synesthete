@@ -8,8 +8,7 @@ import sinon from 'sinon'
 
 import { theme } from '../App'
 import Visualization from './Visualization'
-import * as visualizationModule from './Visualization'
-import * as api from '../api'
+import * as visualizationUtilities from './visualizationUtilities'
 
 const track = {
   "album" : {
@@ -82,21 +81,17 @@ const track = {
 }
 
 let component;
-beforeEach(() => {
-  component = TestRenderer.create(
-    <MuiThemeProvider theme={theme}>
-      <Visualization location={{ state: { trackObject: track } }}/>
-    </MuiThemeProvider>
-  )
+beforeEach(async () => {
+  await TestRenderer.act(async () => {
+    component = TestRenderer.create(
+      <MuiThemeProvider theme={theme}>
+        <Visualization location={{ state: { trackObject: track } }}/>
+      </MuiThemeProvider>
+    )
+  })
   // console.log("beforeEach: component", component)
 })
 //put this in a router too??? idk?
-
-beforeAll(() => {
-  ReactDOM.createPortal = jest.fn((component, node) => {
-    return component
-  })
-})
 
 describe('initial state', () => {
   // let div
@@ -137,12 +132,12 @@ describe('initial state', () => {
 
 describe('loading music', () => {
   let div
-  beforeEach(() => {
-    sinon.stub(visualizationModule, 'loadMusic')
+  beforeEach(async () => {
+    sinon.stub(visualizationUtilities, 'loadMusic')
 
     div = document.createElement('div')
-    ReactTestUtils.act(() => {
-      ReactDOM.render(
+    await ReactTestUtils.act(async () => {
+      await ReactDOM.render(
         <MuiThemeProvider theme={theme}>
           <Visualization location={{ state: { trackObject: track } }}/>
         </MuiThemeProvider>
@@ -152,13 +147,13 @@ describe('loading music', () => {
 
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(div)
-    visualizationModule.loadMusic.restore()
+    visualizationUtilities.loadMusic.restore()
   })
 
   it('should automatically load music', () => {
     // const tree = component.toJSON()
     // expect(tree).toMatchSnapshot()
-    expect(visualizationModule.loadMusic.called).toBe(true)
+    expect(visualizationUtilities.loadMusic.called).toBe(true)
   })
 
 })
