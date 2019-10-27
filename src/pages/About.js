@@ -1,4 +1,5 @@
 import React from 'react'
+
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
@@ -16,7 +17,6 @@ const styles = theme => ({
   },
   title: {
     color: theme.palette.light.pink,
-    // padding: 5,
     fontSize: '3rem',
     textAlign: 'center',
     marginTop: 5

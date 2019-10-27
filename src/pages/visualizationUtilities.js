@@ -1,5 +1,11 @@
 import { getAudioFeatures } from '../api'
 
+/**
+Loads either an audio file or URL and plays an animation of colored bars in sync
+with the music.
+Based on Gina Lee's music visualizer:
+https://github.com/gg-1414/music-visualizer
+*/
 export const loadMusic = ({
   audioRef,
   canvasRef,
@@ -45,7 +51,7 @@ export const loadMusic = ({
 
   audioNode.connect(analyser)
 
-  analyser.connect(context.destination) // End destination of an audio graph in a given context
+  analyser.connect(context.destination)
   analyser.fftSize = 16384
 
   const bufferLength = analyser.frequencyBinCount
@@ -103,10 +109,6 @@ export const loadMusic = ({
     for (let barIndex = 0; barIndex < totalNumberOfBars; barIndex++) {
       barHeight = (dataArray[barIndex] * 2)
 
-      // let offset = -10 // Lord Huron, the Night We Met (key: A major)
-      // let offset = -7 // Kina Grannis, Iris (key: F# Major)
-
-      // let [r, g, b] = getColorOfSoundBars(Math.floor(barIndex/barsPerColorSection), offset)
       let [r, g, b] = getColorOfSoundBars(Math.floor(barIndex/barsPerColorSection), keyOffset)
       let a = (barHeight / barHeightMax) ** 3.5
 

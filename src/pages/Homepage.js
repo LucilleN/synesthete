@@ -12,9 +12,6 @@ const styles = theme => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '100%'
-    // overflow: 'auto',
-    // maxHeight: 'calc(100% - 60px)',
-    // minHeight: 'calc(100% - 60px)'
   },
   title: {
     fontSize: '6rem',
@@ -25,7 +22,6 @@ const styles = theme => ({
   subTitle: {
     fontSize: '3rem',
     fontWeight: 800,
-    // color: theme.palette.light.purple,
     color: theme.palette.white,
     opacity: '0.4',
     marginTop: -40,
@@ -76,7 +72,7 @@ const Homepage = props => {
         <Typography className={classes.paragraph}>
           Synesthesia is a neurological phenomenon that allows the senses to overlap.
           Chromesthetes have sound-color synesthesia, which means that they naturally hear music as colors.
-          This makes listening to music an especially vibrant experience, and helps a lot of artists create music.<br></br>
+          This makes listening to music an especially vibrant experience, and helps a lot of artists create music.
         </Typography>
         <Typography className={classes.paragraph}>
           Synesthete aims to simulate the experience of chromesthesia by pairing music with colors in realtime.

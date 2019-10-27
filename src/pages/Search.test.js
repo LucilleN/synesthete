@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import TestRenderer from 'react-test-renderer'
 import ReactTestUtils from 'react-dom/test-utils'
+
 import { MuiThemeProvider } from '@material-ui/core/styles'
 
 import sinon from 'sinon'
@@ -10,7 +11,7 @@ import { theme } from '../App'
 import Search from './Search'
 import * as api from '../api'
 
-let component;
+let component
 beforeEach(() => {
   component = TestRenderer.create(
     <MuiThemeProvider theme={theme}>
@@ -200,15 +201,13 @@ describe('normal API calls', () => {
 
   it('should trigger a song search when the search button is clicked', () => {
     expect(api.searchSongs.firstCall.args[0]).toEqual({
-    // expect(api.searchSongs.getCall(0)).toEqual({
       q: 'hello'
     })
   })
 
   it('should populate the song results container when search results arrive', () => {
     // Mock search results yield only one song, so we expect results container to have one child.
-    const searchResults = div.querySelector('div#searchResults') // use .find
-    // console.log("searchResults: ", searchResults)
+    const searchResults = div.querySelector('div#searchResults')
     expect(searchResults.children.length).toEqual(1)
   })
 })
@@ -246,12 +245,10 @@ describe('API calls that return no search results', () => {
   })
 
   it('should render the noResults div', () => {
-    // Our mock search results yield one image, so we expect our results container to have one child.
     const searchResults = div.querySelector('div#noResults')
     expect(searchResults).not.toBeNull()
   })
 })
-
 
 describe('failed API calls', () => {
   let div
@@ -260,7 +257,6 @@ describe('failed API calls', () => {
     api.searchSongs.returns(Promise.reject('Mock failure'))
 
     div = await setupAndQuerySearchForm()
-
   })
 
   afterEach(() => {
@@ -270,18 +266,8 @@ describe('failed API calls', () => {
 
   it('should display an alert when the API call fails', () => {
     // The document should render the div containing the error dialog.
-
-    // const searchErrorText = div.querySelector('div#error')
-    // expect(searchErrorText.textContent).toEqual('Sorry, but something went wrong.')
-
     const searchErrorDiv = div.querySelector('div#error')
     expect(searchErrorDiv !== null).toBe(true)
     expect(searchErrorDiv.children.length).toBeGreaterThan(0)
-
-    // console.log("div", div)
-
-    // OLD ERROR STUFF
-    // const searchError = div.querySelector('div#error-title')
-    // expect(searchError.textContent).toEqual('Sorry, but something went wrong.')
   })
 })

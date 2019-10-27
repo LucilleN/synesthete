@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-// import { Redirect } from 'react-router-dom';
 
 import SearchResults from '../components/SearchResults'
 import ErrorDialog from '../components/ErrorDialog'
@@ -12,7 +11,6 @@ import { searchSongs } from '../api'
 const styles = theme => ({
   title: {
     color: theme.palette.light.pink,
-    // padding: 5,
     fontSize: '3rem',
     textAlign: 'center'
   },
@@ -37,7 +35,7 @@ const styles = theme => ({
       outline: 'none',
       border: `2px solid ${theme.palette.dark.pink}`,
       color: theme.palette.dark.pink
-    },
+    }
   },
   buttonEnabled: {
     color: theme.palette.white,
@@ -51,7 +49,7 @@ const styles = theme => ({
     '&:hover': {
        background: theme.palette.white,
        color: theme.palette.dark.pink
-    },
+    }
   },
   buttonDisabled: {
     color: theme.palette.white,
@@ -95,8 +93,6 @@ const SearchForm = (props) => {
   // const defaultErrorText = 'Sorry, but something went wrong.'
 
   const [error, setError] = useState(null)
-  // ONLY FOR SEEING IN LOCALHOST
-  // const [error, setError] = useState(defaultErrorText)
   const [query, setQuery] = useState('')
   const [songs, setSongs] = useState([])
 
@@ -115,7 +111,7 @@ const SearchForm = (props) => {
   }
 
   const performQuery = async event => {
-    event.preventDefault() // why?
+    event.preventDefault()
 
     setError(null)
 
@@ -136,7 +132,6 @@ const SearchForm = (props) => {
       <Typography className={classes.title}>
         search
       </Typography>
-
       <Grid container justify="center" className={classes.searchBar}>
         <input name="query" type="text" value={showDefaultText ? defaultText : query} onChange={handleQueryChange} className={classes.searchField} onFocus={handleFocus} onBlur={handleFocusOut}/>
         <button type="submit" disabled={!query} className={query ? classes.buttonEnabled : classes.buttonDisabled}>
@@ -145,29 +140,16 @@ const SearchForm = (props) => {
           </Typography>
         </button>
       </Grid>
-
-{/*
-      {error && (
-        <div className="error">
-          {error}
-        </div>
-
-      )}
-*/}
-
       {error && (
         <div id="error">
           <ErrorDialog error={error} errorSubtitle={"Try refreshing the page and starting a new search."}/>
         </div>
       )}
-
-
       <Grid container className={classes.resultsContainer}>
         <SearchResults results={songs} submitted={formSubmitted}/>
       </Grid>
-
     </form>
   )
 }
 
-export default withStyles(styles, { withTheme: true })(SearchForm)
+export default withStyles(styles)(SearchForm)

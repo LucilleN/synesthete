@@ -1,25 +1,25 @@
 import React, { useState, useRef } from 'react'
+
 import Typography from '@material-ui/core/Typography'
 import Fab from '@material-ui/core/Fab'
 import { withStyles } from '@material-ui/core/styles'
+
 import { styles } from './Visualization'
 import { loadMusic } from './visualizationUtilities'
 import ErrorDialog from '../components/ErrorDialog'
 
-// window.AudioContext = window.AudioContext || window.webkitAudioContext
-
 const UploadVisualization = props => {
   const { classes } = props
+
+  const audioRef = useRef(null)
+  const canvasRef = useRef(null)
+  const fileRef = useRef(null)
 
   const [url, setUrl] = useState('')
   const [uploadFileSelected, setUploadFileSelected] = useState(false)
   const [loadUrlSelected, setLoadUrlSelected] = useState(false)
 
   const [error, setError] = useState(null)
-
-  const audioRef = useRef(null)
-  const canvasRef = useRef(null)
-  const fileRef = useRef(null)
 
   const [existingAudioNode, setAudioNode] = useState(null)
   const [existingAnalyser, setAnalyser] = useState(null)
@@ -76,7 +76,6 @@ const UploadVisualization = props => {
           </Typography>
         </button>
       </div>
-
       <canvas ref={canvasRef} id="canvas" width="300" height="300" className={classes.canvas}></canvas>
       <audio ref={audioRef} id="audio" controls className={classes.audio} crossOrigin="anonymous"></audio>
       {!uploadFileSelected && !loadUrlSelected &&
@@ -93,15 +92,15 @@ const UploadVisualization = props => {
           </button>
         </div>
       }
-      {uploadFileSelected &&
+      {uploadFileSelected && (
         <input ref={fileRef} type="file" id="file-input" accept="audio/*,video/*,image/*" className={classes.fileInput} onChange={handleFileChange}/>
-      }
-      {loadUrlSelected &&
+      )}
+      {loadUrlSelected && (
         <>
           <input type="text" id="text-input" value={url} onChange={event => setUrl(event.target.value)} className={classes.urlInput} />
           <button id="load-button" onClick={handleLoadButtonClick} disabled={!url} className={classes.urlButton}>Load</button>
         </>
-      }
+      )}
       {error && (
         <div id="error">
           <ErrorDialog error={error} errorSubtitle={"Try refreshing the page or starting a new search."}/>

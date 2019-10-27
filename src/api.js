@@ -73,35 +73,6 @@ const getRecommendation = () => Promise.resolve({
 })
 
 const searchSongs = () => Promise.resolve({
-  // data: [
-  //   {
-  //     id: '26BRBupa6nRXMGBP2',
-  //     source_tld: '',
-  //     images: {
-  //       fixed_width: {
-  //         url: 'https://media2.giphy.com/media/26BRBupa6nRXMGBP2/200w.gif?cid=e1bb72ff5ba9df1d5249616f457f56c5'
-  //       }
-  //     }
-  //   },
-  //   {
-  //     id: 'hklv9aNS7Gcda',
-  //     source_tld: '',
-  //     images: {
-  //       fixed_width: {
-  //         url: 'https://media2.giphy.com/media/hklv9aNS7Gcda/200w.gif?cid=e1bb72ff5ba9df1d5249616f457f56c5'
-  //       }
-  //     }
-  //   },
-  //   {
-  //     id: 'YJBNjrvG5Ctmo',
-  //     source_tld: '',
-  //     images: {
-  //       fixed_width: {
-  //         url: 'https://media0.giphy.com/media/YJBNjrvG5Ctmo/200w.gif?cid=e1bb72ff5ba9df1d5249616f457f56c5'
-  //       }
-  //     }
-  //   }
-  // ]
   "tracks" : {
     "href" : "https://api.spotify.com/v1/search?query=the+night+we+met&type=track&offset=0&limit=20",
     "items" : [ {

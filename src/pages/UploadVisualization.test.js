@@ -12,7 +12,7 @@ import * as visualizationUtilities from './visualizationUtilities'
 
 const sampleURL = "https://p.scdn.co/mp3-preview/1c0da00b5c95a1a6c9dfc05b14a1a628a6e0ad73?cid=159ac88b1c534ed7ae41602f1e558a49"
 
-let component;
+let component
 beforeEach(() => {
   component = TestRenderer.create(
     <MuiThemeProvider theme={theme}>
@@ -35,7 +35,6 @@ describe('initial state', () => {
   })
 
   it('should display a title and buttons to reset and navigate to home', () => {
-    // console.log("UploadVisualization test, component", component)
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
@@ -57,8 +56,6 @@ describe('initial state', () => {
     const textInput = div.querySelector('#text-input')
     expect(textInput).toBeNull()
   })
-
-
 })
 
 describe('clicking on the Upload File button', () => {
@@ -91,7 +88,6 @@ describe('clicking on the Upload File button', () => {
     const loadUrlButton = div.querySelector('#load-url')
     expect(loadUrlButton).toBeNull()
   })
-
 })
 
 describe('clicking on the Load URL button', () => {
@@ -143,12 +139,8 @@ describe('clicking on the Load URL button', () => {
       const loadButton = div.querySelector('#load-button')
       expect(loadButton.disabled).toBe(false)
     })
-
   })
-
 })
-
-// ----------------------------------------------------------
 
 describe('loading a URL', () => {
   let div
@@ -174,10 +166,8 @@ describe('loading a URL', () => {
       ReactTestUtils.Simulate.change(textInput)
     })
     ReactTestUtils.act(() => {
-      ReactTestUtils.Simulate.click(loadButton) //maybe put this in above act
+      ReactTestUtils.Simulate.click(loadButton)
     })
-
-
   })
 
   afterEach(() => {
@@ -190,5 +180,4 @@ describe('loading a URL', () => {
     expect(tree).toMatchSnapshot()
     expect(visualizationUtilities.loadMusic.calledOnce).toBe(true)
   })
-
 })
