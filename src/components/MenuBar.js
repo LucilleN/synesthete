@@ -78,7 +78,7 @@ const MenuBar = props => {
 
   return (
     <div>
-      <Grid container className={classes.bar}>
+      <Grid container className={classes.bar} id="bar">
         <Grid item xs={3} onClick={handleHomeSelect} id="logo">
           <Typography className={classes.logo}>
             synesthete
