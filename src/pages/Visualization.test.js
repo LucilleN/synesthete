@@ -111,24 +111,24 @@ describe('initial state', () => {
   //   })
   // })
 
-  xit('should have a button to navigate back to search and a button to get a recommendation', () => {
+  it('should have a button to navigate back to search and a button to get a recommendation', () => {
     // console.log("component", component)
     // console.log("props.location", component.props.location)
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
 
-  xit('should display the title and artist of the current song being played', () => {
+  it('should display the title and artist of the current song being played', () => {
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
 
-  xit('should render a canvas', () => {
+  it('should render a canvas', () => {
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
 
-  xit('should render an audio element', () => {
+  it('should render an audio element', () => {
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
