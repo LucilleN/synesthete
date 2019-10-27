@@ -194,7 +194,7 @@ describe('loading music', () => {
 describe('the recommendation button', () => {
   let div
   beforeEach(async () => {
-    // sinon.stub(visualizationUtilities, 'loadMusic')
+    sinon.stub(visualizationUtilities, 'loadMusic')
     sinon.stub(api, 'getRecommendation')
 
     div = document.createElement('div')
@@ -210,11 +210,27 @@ describe('the recommendation button', () => {
 
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(div)
+    visualizationUtilities.loadMusic.restore()
     api.getRecommendation.restore()
   })
 
-  xit('should call the getRecommendation function when clicked', () => {
+  it('automatically loads music when clicked', () => {
     const recommendationButton = div.querySelector("#recommendation-button")
+    // await ReactTestUtils.act(async () => {
+    //   await ReactTestUtils.Simulate.click(recommendationButton)
+    // })
+    ReactTestUtils.act(() => {
+      ReactTestUtils.Simulate.click(recommendationButton)
+    })
+    expect(visualizationUtilities.loadMusic.called).toBe(true)
+    expect(visualizationUtilities.loadMusic.callCount).toBeGreaterThan(1)
+  })
+
+  it('should call the getRecommendation function when clicked', () => {
+    const recommendationButton = div.querySelector("#recommendation-button")
+    // await ReactTestUtils.act(async () => {
+    //   await ReactTestUtils.Simulate.click(recommendationButton)
+    // })
     ReactTestUtils.act(() => {
       ReactTestUtils.Simulate.click(recommendationButton)
     })

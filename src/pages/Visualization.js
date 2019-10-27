@@ -178,8 +178,8 @@ const Visualization = props => {
       setError: setError,
       keyOffset
     })
-  // }, [trackObject, songID, existingAnalyser, existingAudioNode, existingContext, keyOffset])
-  }, [trackObject, songID])
+  }, [trackObject, songID, existingAnalyser, existingAudioNode, existingContext, keyOffset])
+  // }, [trackObject, songID])
 
   useEffect(() => {
     if (!songID) {
