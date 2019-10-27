@@ -7,8 +7,8 @@ import ErrorDialog from '../components/ErrorDialog'
 
 import { Redirect } from 'react-router-dom'
 
-import { getAudioFeatures, getRecommendation } from '../api'
-import { loadMusic } from './visualizationUtilities'
+import { getRecommendation } from '../api'
+import { loadMusic, performAudioFeaturesQuery } from './visualizationUtilities'
 
 export const styles = theme => ({
   root: {
@@ -131,7 +131,7 @@ const Visualization = props => {
   const audioRef = useRef(null)
   const canvasRef = useRef(null)
 
-  const [songID, setSongID] = useState(null)
+  const [songID, setSongID] = useState(props.match && props.match.params ? props.match.params.songID : null)
   const [error, setError] = useState(null)
   const [audioFeatures, setAudioFeatures] = useState(null)
   const [recommendedSong, setRecommendedSong] = useState(null)
@@ -144,12 +144,24 @@ const Visualization = props => {
   const defaultErrorText = 'Sorry, but something went wrong.'
 
   useEffect(() => {
-    performAudioFeaturesQuery()
+    performAudioFeaturesQuery({
+      setError,
+      songID,
+      setAudioFeatures,
+      defaultErrorText
+    })
 
-  }, [])
+  }, [songID])
 
+  const keyOffset = audioFeatures ? audioFeatures.key : 0
   useEffect(() => {
-    performAudioFeaturesQuery()
+    performAudioFeaturesQuery({
+      setError,
+      songID,
+      setAudioFeatures,
+      defaultErrorText
+    })
+
     loadMusic({
       audioRef: audioRef,
       canvasRef: canvasRef,
@@ -161,12 +173,11 @@ const Visualization = props => {
       existingAnalyser: existingAnalyser,
       setAnalyser: setAnalyser,
       setError: setError,
-      keyOffset: audioFeatures ? audioFeatures.key : 0
+      keyOffset
     })
-  }, [trackObject])
+  }, [trackObject, songID, existingAnalyser, existingAudioNode, existingContext, keyOffset])
 
   useEffect(() => {
-    const { songID } = props.match ? props.match.params : {}
     if (!songID) {
       return
     }
@@ -174,29 +185,14 @@ const Visualization = props => {
     setSongID(songID)
 
     if (!audioFeatures) {
-      performAudioFeaturesQuery()
-    }
-  })
-
-  const performAudioFeaturesQuery = async () => {
-    console.log("performAudioFeaturesQuery")
-
-    setError(null)
-
-    try {
-      const result = await getAudioFeatures({
-        id: songID,
-        headers: {
-          'Authorization': 'Bearer '
-        }
+      performAudioFeaturesQuery({
+        setError,
+        songID,
+        setAudioFeatures,
+        defaultErrorText
       })
-
-      setAudioFeatures(result)
-
-    } catch (error) {
-      setError(defaultErrorText)
     }
-  }
+  }, [songID, audioFeatures])
 
   const performRecommendationQuery = async event => {
     event.preventDefault()

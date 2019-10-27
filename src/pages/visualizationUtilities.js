@@ -1,3 +1,5 @@
+import { getAudioFeatures } from '../api'
+
 export const loadMusic = ({
   audioRef,
   canvasRef,
@@ -126,5 +128,30 @@ export const loadMusic = ({
   }
   if (!existingContext) {
     setContext(context)
+  }
+}
+
+export const performAudioFeaturesQuery = async ({
+  setError,
+  songID,
+  setAudioFeatures,
+  defaultErrorText
+}) => {
+  console.log("performAudioFeaturesQuery")
+
+  setError(null)
+
+  try {
+    const result = await getAudioFeatures({
+      id: songID,
+      headers: {
+        'Authorization': 'Bearer '
+      }
+    })
+
+    setAudioFeatures(result)
+
+  } catch (error) {
+    setError(defaultErrorText)
   }
 }
