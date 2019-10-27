@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles'
 import SearchResults from '../components/SearchResults'
 import ErrorDialog from '../components/ErrorDialog'
 
+import { defaultErrorText } from '../App'
 import { searchSongs } from '../api'
 
 const styles = theme => ({
@@ -89,9 +90,6 @@ const SearchForm = (props) => {
   const { classes } = props
   const defaultText = 'search for a song'
 
-  // TODO: move to App.js
-  // const defaultErrorText = 'Sorry, but something went wrong.'
-
   const [error, setError] = useState(null)
   const [query, setQuery] = useState('')
   const [songs, setSongs] = useState([])
@@ -123,7 +121,7 @@ const SearchForm = (props) => {
       setSongs(result.tracks.items)
       setFormSubmitted(true)
     } catch (error) {
-      setError('Sorry, but something went wrong.')
+      setError(defaultErrorText)
     }
   }
 

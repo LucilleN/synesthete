@@ -1,4 +1,5 @@
 import { getAudioFeatures } from '../api'
+import { defaultErrorText } from '../App'
 
 /**
 Loads either an audio file or URL and plays an animation of colored bars in sync
@@ -33,7 +34,7 @@ export const loadMusic = ({
         audio.src = URL.createObjectURL(file.files[0])
       }
     } catch (error) {
-      setError("Sorry, but something went wrong.")
+      setError(defaultErrorText)
     }
   }
   else {

@@ -38,6 +38,8 @@ export const theme = createMuiTheme({
   }
 })
 
+export const defaultErrorText = 'Sorry, but something went wrong.'
+
 const styles = () => ({
   root: {
     width: '100vw',

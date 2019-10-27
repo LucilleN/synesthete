@@ -9,6 +9,7 @@ import { Redirect } from 'react-router-dom'
 
 import { getRecommendation } from '../api'
 import { loadMusic, performAudioFeaturesQuery } from './visualizationUtilities'
+import { defaultErrorText } from '../App'
 
 export const styles = theme => ({
   root: {
@@ -140,9 +141,6 @@ const Visualization = props => {
   const [existingAudioNode, setAudioNode] = useState(null)
   const [existingAnalyser, setAnalyser] = useState(null)
   const [existingContext, setContext] = useState(null)
-
-  // TODO: move this to app.js and import it wherever you need
-  const defaultErrorText = 'Sorry, but something went wrong.'
 
   useEffect(() => {
     performAudioFeaturesQuery({
