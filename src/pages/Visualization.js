@@ -155,6 +155,9 @@ const Visualization = props => {
 
   const keyOffset = audioFeatures ? audioFeatures.key : 0
   useEffect(() => {
+    console.log("--calling useEffect--")
+    console.log("dependencies: ", songID, existingAnalyser, existingAudioNode, existingContext, keyOffset)
+
     performAudioFeaturesQuery({
       setError,
       songID,
@@ -175,7 +178,8 @@ const Visualization = props => {
       setError: setError,
       keyOffset
     })
-  }, [trackObject, songID, existingAnalyser, existingAudioNode, existingContext, keyOffset])
+  // }, [trackObject, songID, existingAnalyser, existingAudioNode, existingContext, keyOffset])
+  }, [trackObject, songID])
 
   useEffect(() => {
     if (!songID) {
@@ -238,7 +242,7 @@ const Visualization = props => {
         <Typography className={classes.title}>
           Visualization:<br></br>
         </Typography>
-        <RecommendationButton className={classes.recommendationButton} handleClick={performRecommendationQuery}/>
+        <RecommendationButton id="recommendation-button" className={classes.recommendationButton} handleClick={performRecommendationQuery}/>
       </div>
       <Typography className={classes.subtitle}>
         "{trackObject.name}" by {trackObject.artists[0].name}
