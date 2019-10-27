@@ -91,7 +91,8 @@ const SearchForm = (props) => {
   const { classes } = props
   const defaultText = 'search for a song'
 
-  const defaultErrorText = 'Sorry, but something went wrong.'
+  // TODO: move to App.js
+  // const defaultErrorText = 'Sorry, but something went wrong.'
 
   const [error, setError] = useState(null)
   // ONLY FOR SEEING IN LOCALHOST
