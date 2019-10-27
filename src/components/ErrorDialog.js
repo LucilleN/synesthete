@@ -8,9 +8,6 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
-  dialog: {
-    // background: theme.palette.dark.pink
-  },
   title: {
     color: theme.palette.dark.pink
   }
@@ -24,14 +21,10 @@ const ErrorDialog = (props) => {
   useEffect(() => {
     setOpen(true)
   }, [])
-  //
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
 
   const handleClose = () => {
     setOpen(false)
-  };
+  }
 
   return (
     <div>
@@ -55,7 +48,7 @@ const ErrorDialog = (props) => {
         </DialogActions>
       </Dialog>
     </div>
-  );
+  )
 }
 
 export default withStyles(styles)(ErrorDialog)

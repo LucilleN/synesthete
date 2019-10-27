@@ -49,7 +49,7 @@ exports[`clicking on the Load URL button should show the text input element 1`] 
       <p
         className="MuiTypography-root MuiTypography-body1"
       >
-        Reset
+        reset
       </p>
     </button>
   </div>
@@ -76,7 +76,7 @@ exports[`clicking on the Load URL button should show the text input element 1`] 
       <p
         className="MuiTypography-root MuiTypography-body1"
       >
-        Upload a file from your computer
+        upload a file from your computer
       </p>
     </button>
     <button
@@ -87,7 +87,7 @@ exports[`clicking on the Load URL button should show the text input element 1`] 
       <p
         className="MuiTypography-root MuiTypography-body1"
       >
-        Enter the URL of an audio file
+        enter the URL of an audio file
       </p>
     </button>
   </div>
@@ -140,7 +140,7 @@ exports[`initial state should display a title and buttons to reset and navigate 
       <p
         className="MuiTypography-root MuiTypography-body1"
       >
-        Reset
+        reset
       </p>
     </button>
   </div>
@@ -167,7 +167,7 @@ exports[`initial state should display a title and buttons to reset and navigate 
       <p
         className="MuiTypography-root MuiTypography-body1"
       >
-        Upload a file from your computer
+        upload a file from your computer
       </p>
     </button>
     <button
@@ -178,7 +178,7 @@ exports[`initial state should display a title and buttons to reset and navigate 
       <p
         className="MuiTypography-root MuiTypography-body1"
       >
-        Enter the URL of an audio file
+        enter the URL of an audio file
       </p>
     </button>
   </div>
@@ -231,7 +231,7 @@ exports[`initial state should not display the file input or the text input 1`] =
       <p
         className="MuiTypography-root MuiTypography-body1"
       >
-        Reset
+        reset
       </p>
     </button>
   </div>
@@ -258,7 +258,7 @@ exports[`initial state should not display the file input or the text input 1`] =
       <p
         className="MuiTypography-root MuiTypography-body1"
       >
-        Upload a file from your computer
+        upload a file from your computer
       </p>
     </button>
     <button
@@ -269,7 +269,7 @@ exports[`initial state should not display the file input or the text input 1`] =
       <p
         className="MuiTypography-root MuiTypography-body1"
       >
-        Enter the URL of an audio file
+        enter the URL of an audio file
       </p>
     </button>
   </div>
@@ -325,7 +325,7 @@ exports[`initial state should start with two buttons for load options 1`] = `
       <p
         className="MuiTypography-root MuiTypography-body1"
       >
-        Reset
+        reset
       </p>
     </button>
   </div>
@@ -352,7 +352,7 @@ exports[`initial state should start with two buttons for load options 1`] = `
       <p
         className="MuiTypography-root MuiTypography-body1"
       >
-        Upload a file from your computer
+        upload a file from your computer
       </p>
     </button>
     <button
@@ -363,7 +363,7 @@ exports[`initial state should start with two buttons for load options 1`] = `
       <p
         className="MuiTypography-root MuiTypography-body1"
       >
-        Enter the URL of an audio file
+        enter the URL of an audio file
       </p>
     </button>
   </div>
@@ -419,7 +419,7 @@ exports[`loading a URL should trigger the music to load when the load button is 
       <p
         className="MuiTypography-root MuiTypography-body1"
       >
-        Reset
+        reset
       </p>
     </button>
   </div>
@@ -446,7 +446,7 @@ exports[`loading a URL should trigger the music to load when the load button is 
       <p
         className="MuiTypography-root MuiTypography-body1"
       >
-        Upload a file from your computer
+        upload a file from your computer
       </p>
     </button>
     <button
@@ -457,7 +457,7 @@ exports[`loading a URL should trigger the music to load when the load button is 
       <p
         className="MuiTypography-root MuiTypography-body1"
       >
-        Enter the URL of an audio file
+        enter the URL of an audio file
       </p>
     </button>
   </div>

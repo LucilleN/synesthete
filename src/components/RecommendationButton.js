@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+
 import { withStyles } from '@material-ui/core/styles'
 import Fab from '@material-ui/core/Fab'
 import Typography from '@material-ui/core/Typography'
@@ -21,15 +21,15 @@ const styles = theme => ({
     '&:hover': {
        background: theme.palette.white,
        color: theme.palette.dark.pink
-    },
+    }
   },
   text: {
-    testTransform: 'none'
+    textTransform: 'none'
   }
 })
 
 const RecommendationButton = props => {
-  const { classes, handleClick } = props //TODO: change to currentSong rather than just ID, we want whole object
+  const { classes, handleClick } = props
 
   return (
     <Fab variant="extended" color="primary" aria-label="Get Recommendation" href="/visualization" className={classes.fab} onClick={handleClick}> {/*href="/search"*/}
@@ -38,10 +38,6 @@ const RecommendationButton = props => {
       </Typography>
     </Fab>
   )
-}
-
-RecommendationButton.propTypes = {
-  classes: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(RecommendationButton)

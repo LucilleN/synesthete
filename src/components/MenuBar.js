@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react'
+
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-import { Redirect } from 'react-router-dom';
+
+import { Redirect } from 'react-router-dom'
 
 const styles = theme => ({
   bar: {
     background: theme.palette.dark.pink,
     height: '60px',
     textAlign: 'center',
-    // opacity: '0.8',
     zIndex: 10
   },
   button: {
     height: '100%',
     '&:hover': {
        background: theme.palette.light.pink,
-    },
+    }
   },
   textNotCurrentPage: {
     color: theme.palette.light.pink,
@@ -25,7 +26,7 @@ const styles = theme => ({
     fontWeight: 'bold',
     '&:hover': {
        color: theme.palette.dark.purple
-    },
+    }
   },
   // textCurrentPage: {
   //   color: theme.palette.light.pink,

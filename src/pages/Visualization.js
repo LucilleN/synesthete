@@ -117,6 +117,7 @@ export const styles = theme => ({
     borderRadius: '30px',
     border: 'none',
     margin: '10px 20px',
+    textTransform: 'none',
     '&:hover': {
        background: theme.palette.white,
        color: theme.palette.dark.purple

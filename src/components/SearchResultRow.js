@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
-import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom'
 
 const styles = theme => ({
   row: {
@@ -15,13 +16,13 @@ const styles = theme => ({
     justifyContent: 'space-between',
     '&:hover': {
        background: theme.palette.white,
-    },
+    }
   },
   text: {
     color: theme.palette.dark.purple,
     '&:hover': {
        color: theme.palette.dark.purple
-    },
+    }
   }
 })
 
@@ -32,7 +33,6 @@ const SearchResultRow = props => {
   const [clicked, setClicked] = useState(false)
 
   const handleClick = () => {
-    console.log("SEARCH RESULT ROW", "handleClick called")
     setClicked(true)
   }
 

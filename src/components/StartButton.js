@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+
 import { withStyles } from '@material-ui/core/styles'
 import Fab from '@material-ui/core/Fab'
 import Typography from '@material-ui/core/Typography'
@@ -21,10 +21,10 @@ const styles = theme => ({
     '&:hover': {
        background: theme.palette.white,
        color: theme.palette.dark.purple
-    },
+    }
   },
   text: {
-    testTransform: 'none'
+    textTransform: 'none'
   }
 })
 
@@ -37,10 +37,6 @@ const StartButton = props => {
       </Typography>
     </Fab>
   )
-}
-
-StartButton.propTypes = {
-  classes: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(StartButton)

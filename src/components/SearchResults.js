@@ -9,7 +9,7 @@ const styles = theme => ({
   searchResults: {
     display: 'flex',
     flexWrap: 'wrap',
-    marginTop: '1rem',
+    marginTop: '1rem'
   },
   noResults: {
     display: 'flex',
@@ -32,10 +32,6 @@ const SearchResults = props => {
 
   const { classes, results, submitted } = props
 
-  // const handleTrackSelect = (song) => {
-  //   onTrackSelect(song)
-  // }
-
   if (!submitted) {
     return (
       <div className={classes.noResults}>
@@ -44,7 +40,6 @@ const SearchResults = props => {
         </Typography>
       </div>
     )
-
   }
 
   else if (submitted && results.length === 0) {
@@ -71,7 +66,6 @@ const SearchResults = props => {
       </div>
     )
   }
-
 }
 
 export default withStyles(styles)(SearchResults)

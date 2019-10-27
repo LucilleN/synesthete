@@ -102,7 +102,7 @@ const audioFeatures = {
   "time_signature": 3
 }
 
-let component;
+let component
 beforeEach(async () => {
   await TestRenderer.act(async () => {
     component = TestRenderer.create(

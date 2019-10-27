@@ -26,7 +26,7 @@ const UploadVisualization = props => {
   const [existingContext, setContext] = useState(null)
 
   const handleReload = () => {
-    window.location.reload(false);
+    window.location.reload(false)
   }
 
   const handleLoadButtonClick = () => {
@@ -72,7 +72,7 @@ const UploadVisualization = props => {
         </Typography>
         <button onClick={handleReload} className={classes.button}>
           <Typography>
-            Reset
+            reset
           </Typography>
         </button>
       </div>
@@ -82,12 +82,12 @@ const UploadVisualization = props => {
         <div className={classes.buttonBar}>
           <button id="upload-file" onClick={() => setUploadFileSelected(true)} className={classes.loadOptionButton}>
             <Typography>
-              Upload a file from your computer
+              upload a file from your computer
             </Typography>
           </button>
           <button id="load-url" onClick={() => setLoadUrlSelected(true)} className={classes.loadOptionButton}>
             <Typography>
-              Enter the URL of an audio file
+              enter the URL of an audio file
             </Typography>
           </button>
         </div>

@@ -2,8 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import TestRenderer from 'react-test-renderer'
 import ReactTestUtils from 'react-dom/test-utils'
+
 import { MuiThemeProvider } from '@material-ui/core/styles'
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+
+import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 import { theme } from '../App'
 import SearchResultRow from './SearchResultRow'
@@ -78,7 +80,7 @@ const track = {
   "uri" : "spotify:track:0QZ5yyl6B6utIWkxeBDxQN"
 }
 
-let component;
+let component
 beforeEach(() => {
   component = TestRenderer.create(
     <MuiThemeProvider theme={theme}>

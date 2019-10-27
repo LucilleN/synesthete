@@ -7,7 +7,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles'
 import { theme } from '../App'
 import ErrorDialog from './ErrorDialog'
 
-let component;
+let component
 beforeEach(() => {
   component = TestRenderer.create(
     <MuiThemeProvider theme={theme}>
