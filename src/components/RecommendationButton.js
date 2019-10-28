@@ -32,7 +32,7 @@ const RecommendationButton = props => {
   const { classes, handleClick } = props
 
   return (
-    <Fab variant="extended" color="primary" aria-label="Get Recommendation" href="/visualization" className={classes.fab} onClick={handleClick}> {/*href="/search"*/}
+    <Fab variant="extended" color="primary" aria-label="Get Recommendation" href="/visualization" className={classes.fab} onClick={handleClick} id="recommendation-button">
       <Typography className={classes.text}>
         get a visually similar song
       </Typography>
