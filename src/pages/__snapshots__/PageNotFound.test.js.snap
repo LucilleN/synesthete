@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`initial state should have a button that redirects to home 1`] = `
+<div
+  className="PageNotFound-root-1"
+>
+  <p
+    className="MuiTypography-root PageNotFound-title-2 MuiTypography-body1"
+    id="title"
+  >
+    page not found
+  </p>
+  <a
+    aria-disabled={false}
+    aria-label="Start"
+    className="MuiButtonBase-root MuiFab-root StartButton-fab-33 MuiFab-extended MuiFab-primary"
+    href="/"
+    onBlur={[Function]}
+    onDragLeave={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex={0}
+  >
+    <span
+      className="MuiFab-label"
+    >
+       
+      <p
+        className="MuiTypography-root StartButton-text-34 MuiTypography-body1"
+      >
+        back to home
+      </p>
+    </span>
+    <span
+      className="MuiTouchRipple-root"
+    />
+  </a>
+</div>
+`;
+
+exports[`initial state should have the title "page not found" 1`] = `
+<div
+  className="PageNotFound-root-1"
+>
+  <p
+    className="MuiTypography-root PageNotFound-title-2 MuiTypography-body1"
+    id="title"
+  >
+    page not found
+  </p>
+  <a
+    aria-disabled={false}
+    aria-label="Start"
+    className="MuiButtonBase-root MuiFab-root StartButton-fab-33 MuiFab-extended MuiFab-primary"
+    href="/"
+    onBlur={[Function]}
+    onDragLeave={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex={0}
+  >
+    <span
+      className="MuiFab-label"
+    >
+       
+      <p
+        className="MuiTypography-root StartButton-text-34 MuiTypography-body1"
+      >
+        back to home
+      </p>
+    </span>
+  </a>
+</div>
+`;
