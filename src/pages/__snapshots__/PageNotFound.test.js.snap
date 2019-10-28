@@ -31,7 +31,6 @@ exports[`initial state should have a button that redirects to home 1`] = `
     <span
       className="MuiFab-label"
     >
-       
       <p
         className="MuiTypography-root StartButton-text-34 MuiTypography-body1"
       >
@@ -76,7 +75,6 @@ exports[`initial state should have the title "page not found" 1`] = `
     <span
       className="MuiFab-label"
     >
-       
       <p
         className="MuiTypography-root StartButton-text-34 MuiTypography-body1"
       >
