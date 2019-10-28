@@ -31,31 +31,31 @@ const UploadVisualization = props => {
 
   const handleLoadButtonClick = () => {
     loadMusic({
-      audioRef: audioRef,
-      canvasRef: canvasRef,
+      audioRef,
+      canvasRef,
       srcUrl: url,
-      existingContext: existingContext,
-      setContext: setContext,
-      existingAudioNode: existingAudioNode,
-      setAudioNode: setAudioNode,
-      existingAnalyser: existingAnalyser,
-      setAnalyser: setAnalyser,
-      setError: setError
+      existingContext,
+      setContext,
+      existingAudioNode,
+      setAudioNode,
+      existingAnalyser,
+      setAnalyser,
+      setError
     })
   }
 
   const handleFileChange = () => {
     loadMusic({
-      audioRef: audioRef,
-      canvasRef: canvasRef,
-      fileRef: fileRef,
-      existingContext: existingContext,
-      setContext: setContext,
-      existingAudioNode: existingAudioNode,
-      setAudioNode: setAudioNode,
-      existingAnalyser: existingAnalyser,
-      setAnalyser: setAnalyser,
-      setError: setError
+      audioRef,
+      canvasRef,
+      fileRef,
+      existingContext,
+      setContext,
+      existingAudioNode,
+      setAudioNode,
+      existingAnalyser,
+      setAnalyser,
+      setError
     })
   }
 

@@ -142,7 +142,6 @@ const Visualization = props => {
   const [existingAnalyser, setAnalyser] = useState(null)
   const [existingContext, setContext] = useState(null)
 
-  // let canLoadMusic = false
   const [canLoadMusic, setCanLoadMusic] = useState(false)
 
   useEffect(() => {
@@ -170,77 +169,21 @@ const Visualization = props => {
     console.log("by third useEffect, audioFeatures is: ", audioFeatures)
     if (canLoadMusic && audioFeatures) {
       loadMusic({
-        audioRef: audioRef,
-        canvasRef: canvasRef,
+        audioRef,
+        canvasRef,
         srcUrl: trackObject.preview_url,
-        existingContext: existingContext,
-        setContext: setContext,
-        existingAudioNode: existingAudioNode,
-        setAudioNode: setAudioNode,
-        existingAnalyser: existingAnalyser,
-        setAnalyser: setAnalyser,
-        setError: setError,
+        existingContext,
+        setContext,
+        existingAudioNode,
+        setAudioNode,
+        existingAnalyser,
+        setAnalyser,
+        setError,
         audioFeatures
       })
     }
     setCanLoadMusic(false)
   }, [canLoadMusic])
-  // useEffect(() => {
-  //   performAudioFeaturesQuery({
-  //     setError,
-  //     songID,
-  //     setAudioFeatures,
-  //     defaultErrorText
-  //   })
-  //
-  // }, [songID])
-  //
-  // const keyOffset = audioFeatures ? audioFeatures.key : 0
-  //
-  // useEffect(() => {
-  //   console.log("--calling useEffect--")
-  //   console.log("dependencies: ", songID, existingAnalyser, existingAudioNode, existingContext, keyOffset)
-  //
-  //   performAudioFeaturesQuery({
-  //     setError,
-  //     songID,
-  //     setAudioFeatures,
-  //     defaultErrorText
-  //   })
-  //
-  //   loadMusic({
-  //     audioRef: audioRef,
-  //     canvasRef: canvasRef,
-  //     srcUrl: trackObject.preview_url,
-  //     existingContext: existingContext,
-  //     setContext: setContext,
-  //     existingAudioNode: existingAudioNode,
-  //     setAudioNode: setAudioNode,
-  //     existingAnalyser: existingAnalyser,
-  //     setAnalyser: setAnalyser,
-  //     setError: setError,
-  //     keyOffset,
-  //     audioFeatures
-  //   })
-  // }, [trackObject, audioFeatures, songID, existingAnalyser, existingAudioNode, existingContext, keyOffset])
-  // // }, [trackObject, songID])
-  //
-  // useEffect(() => {
-  //   if (!songID) {
-  //     return
-  //   }
-  //
-  //   setSongID(songID)
-  //
-  //   if (!audioFeatures) {
-  //     performAudioFeaturesQuery({
-  //       setError,
-  //       songID,
-  //       setAudioFeatures,
-  //       defaultErrorText
-  //     })
-  //   }
-  // }, [songID, audioFeatures])
 
   const performRecommendationQuery = async event => {
     event.preventDefault()
