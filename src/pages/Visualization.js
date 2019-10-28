@@ -130,10 +130,15 @@ const Visualization = props => {
   const { classes } = props
   const { trackObject } = props.location.state
 
+  // May need this in the future to allow users to access a song's visualization just by
+  // clicking on a saved link rather than going through the search every time, but this
+  // would require another API call to get the trackObject based on the songID, so I
+  // chose not to implement it for this project.
+  // const { songID } = props.match.params
+
   const audioRef = useRef(null)
   const canvasRef = useRef(null)
 
-  const [songID, setSongID] = useState(props.match && props.match.params ? props.match.params.songID : null)
   const [error, setError] = useState(null)
   const [audioFeatures, setAudioFeatures] = useState(null)
   const [recommendedSong, setRecommendedSong] = useState(null)
@@ -150,7 +155,7 @@ const Visualization = props => {
     if (trackObject) {
       performAudioFeaturesQuery({
         setError,
-        songID,
+        songID: trackObject.id,
         setAudioFeatures,
         defaultErrorText
       })
