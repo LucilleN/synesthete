@@ -40,7 +40,6 @@ exports[`initial state should display the title and artist of the current song b
       <span
         className="MuiFab-label"
       >
-         
         <p
           className="MuiTypography-root StartButton-text-17 MuiTypography-body1"
         >
@@ -62,6 +61,7 @@ exports[`initial state should display the title and artist of the current song b
       aria-label="Get Recommendation"
       className="MuiButtonBase-root MuiFab-root RecommendationButton-fab-61 MuiFab-extended MuiFab-primary"
       href="/visualization"
+      id="recommendation-button"
       onBlur={[Function]}
       onClick={[Function]}
       onDragLeave={[Function]}
@@ -79,7 +79,6 @@ exports[`initial state should display the title and artist of the current song b
       <span
         className="MuiFab-label"
       >
-         
         <p
           className="MuiTypography-root RecommendationButton-text-62 MuiTypography-body1"
         >
@@ -142,7 +141,6 @@ exports[`initial state should have a button to navigate back to search and a but
       <span
         className="MuiFab-label"
       >
-         
         <p
           className="MuiTypography-root StartButton-text-17 MuiTypography-body1"
         >
@@ -164,6 +162,7 @@ exports[`initial state should have a button to navigate back to search and a but
       aria-label="Get Recommendation"
       className="MuiButtonBase-root MuiFab-root RecommendationButton-fab-61 MuiFab-extended MuiFab-primary"
       href="/visualization"
+      id="recommendation-button"
       onBlur={[Function]}
       onClick={[Function]}
       onDragLeave={[Function]}
@@ -181,7 +180,6 @@ exports[`initial state should have a button to navigate back to search and a but
       <span
         className="MuiFab-label"
       >
-         
         <p
           className="MuiTypography-root RecommendationButton-text-62 MuiTypography-body1"
         >
@@ -244,7 +242,6 @@ exports[`initial state should render a canvas 1`] = `
       <span
         className="MuiFab-label"
       >
-         
         <p
           className="MuiTypography-root StartButton-text-17 MuiTypography-body1"
         >
@@ -266,6 +263,7 @@ exports[`initial state should render a canvas 1`] = `
       aria-label="Get Recommendation"
       className="MuiButtonBase-root MuiFab-root RecommendationButton-fab-61 MuiFab-extended MuiFab-primary"
       href="/visualization"
+      id="recommendation-button"
       onBlur={[Function]}
       onClick={[Function]}
       onDragLeave={[Function]}
@@ -283,7 +281,6 @@ exports[`initial state should render a canvas 1`] = `
       <span
         className="MuiFab-label"
       >
-         
         <p
           className="MuiTypography-root RecommendationButton-text-62 MuiTypography-body1"
         >
@@ -346,7 +343,6 @@ exports[`initial state should render an audio element 1`] = `
       <span
         className="MuiFab-label"
       >
-         
         <p
           className="MuiTypography-root StartButton-text-17 MuiTypography-body1"
         >
@@ -368,6 +364,7 @@ exports[`initial state should render an audio element 1`] = `
       aria-label="Get Recommendation"
       className="MuiButtonBase-root MuiFab-root RecommendationButton-fab-61 MuiFab-extended MuiFab-primary"
       href="/visualization"
+      id="recommendation-button"
       onBlur={[Function]}
       onClick={[Function]}
       onDragLeave={[Function]}
@@ -385,7 +382,6 @@ exports[`initial state should render an audio element 1`] = `
       <span
         className="MuiFab-label"
       >
-         
         <p
           className="MuiTypography-root RecommendationButton-text-62 MuiTypography-body1"
         >

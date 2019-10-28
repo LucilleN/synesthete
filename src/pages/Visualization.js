@@ -241,7 +241,7 @@ const Visualization = props => {
         <Typography className={classes.title}>
           Visualization:<br></br>
         </Typography>
-        <RecommendationButton id="recommendation-button" className={classes.recommendationButton} handleClick={performRecommendationQuery}/>
+        <RecommendationButton className={classes.recommendationButton} handleClick={performRecommendationQuery}/>
       </div>
       <Typography className={classes.subtitle}>
         "{trackObject.name}" by {trackObject.artists[0].name}

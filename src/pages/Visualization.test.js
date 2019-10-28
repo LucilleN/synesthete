@@ -111,26 +111,10 @@ beforeEach(async () => {
       </MuiThemeProvider>
     )
   })
-  // console.log("beforeEach: component", component)
 })
-//put this in a router too??? idk?
 
 describe('initial state', () => {
-  // let div
-  // beforeEach(() => {
-  //   div = document.createElement('div')
-  //   ReactTestUtils.act(() => {
-  //     ReactDOM.render(
-  //       <MuiThemeProvider theme={theme}>
-  //         <Visualization />
-  //       </MuiThemeProvider>
-  //     , div)
-  //   })
-  // })
-
   it('should have a button to navigate back to search and a button to get a recommendation', () => {
-    // console.log("component", component)
-    // console.log("props.location", component.props.location)
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
@@ -180,8 +164,6 @@ describe('loading music', () => {
   })
 
   it('automatically loads music', () => {
-    // const tree = component.toJSON()
-    // expect(tree).toMatchSnapshot()
     expect(visualizationUtilities.loadMusic.called).toBe(true)
   })
 
@@ -205,6 +187,10 @@ describe('the recommendation button', () => {
         </MuiThemeProvider>
       , div)
     })
+    const recommendationButton = div.querySelector("#recommendation-button")
+    await ReactTestUtils.act(async() => {
+      await ReactTestUtils.Simulate.click(recommendationButton)
+    })
 
   })
 
@@ -215,35 +201,11 @@ describe('the recommendation button', () => {
   })
 
   it('automatically loads music when clicked', () => {
-    const recommendationButton = div.querySelector("#recommendation-button")
-    console.log("RECOMMENDATION BUTTON", recommendationButton)
-    // await ReactTestUtils.act(async () => {
-    //   await ReactTestUtils.Simulate.click(recommendationButton)
-    // })
-    ReactTestUtils.act(() => {
-      ReactTestUtils.Simulate.click(recommendationButton)
-    })
     expect(visualizationUtilities.loadMusic.called).toBe(true)
     expect(visualizationUtilities.loadMusic.callCount).toBeGreaterThan(1)
   })
 
   it('should call the getRecommendation function when clicked', () => {
-    const recommendationButton = div.querySelector("#recommendation-button")
-    // await ReactTestUtils.act(async () => {
-    //   await ReactTestUtils.Simulate.click(recommendationButton)
-    // })
-    ReactTestUtils.act(() => {
-      ReactTestUtils.Simulate.click(recommendationButton)
-    })
-    // expect(api.getRecommendation.firstCall.args[0]).toEqual({
-    //   limit: 1,
-    //   seed_tracks: `${track.id}`,
-    //   seed_artists: `${track.artists[0].id}`,
-    //   target_energy: `${audioFeatures.energy}`,
-    //   target_valence: `${audioFeatures.valence}`,
-    //   target_acousticness: `${audioFeatures.acousticness}`,
-    //   target_key: `${audioFeatures.key}`
-    // })
     expect(api.getRecommendation.called).toBe(true)
   })
 
