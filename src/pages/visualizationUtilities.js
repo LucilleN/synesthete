@@ -19,7 +19,7 @@ export const loadMusic = ({
   existingAnalyser,
   setAnalyser,
   setError,
-  keyOffset=0
+  audioFeatures
 }) => {
 
   const audio = audioRef.current
@@ -87,11 +87,12 @@ export const loadMusic = ({
 
   const canvasWidth = canvas.width
   const canvasHeight = canvas.height
-  const totalNumberOfBars = 120
   const barWidth = (canvasWidth / bufferLength) * 40
   const barHeightMax = 500
-  const barSpacing = 10
   const barsPerColorSection = 6
+  const totalNumberOfBars = barsPerColorSection * colors.length
+  const barSpacing = (canvasWidth - (totalNumberOfBars-1) * barWidth) / totalNumberOfBars
+  const offset = (audioFeatures) ? audioFeatures.key : 0
 
   let barHeight
   let x = 0
@@ -110,7 +111,7 @@ export const loadMusic = ({
     for (let barIndex = 0; barIndex < totalNumberOfBars; barIndex++) {
       barHeight = (dataArray[barIndex] * 2)
 
-      let [r, g, b] = getColorOfSoundBars(Math.floor(barIndex/barsPerColorSection), keyOffset)
+      let [r, g, b] = getColorOfSoundBars(Math.floor(barIndex/barsPerColorSection), offset)
       let a = (barHeight / barHeightMax) ** 3.5
 
       ctx.fillStyle = `rgba(${r},${g},${b},${a})`
