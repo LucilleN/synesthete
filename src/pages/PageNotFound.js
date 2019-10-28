@@ -29,7 +29,7 @@ const PageNotFound = props => {
       <Typography className={classes.title} id="title">
         page not found
       </Typography>
-      <StartButton href={"/"} text={"back to home"} id="back-to-home" />
+      <StartButton href={"/"} text={"back to home"} />
     </div>
   )
 }

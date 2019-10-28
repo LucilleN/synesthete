@@ -16,7 +16,7 @@ beforeEach(() => {
   )
 })
 
-xdescribe('initial state', () => {
+describe('initial state', () => {
   it('should render the error title', () => {
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
@@ -28,7 +28,7 @@ xdescribe('initial state', () => {
   })
 })
 
-xdescribe('clicking on the OK button', () => {
+describe('clicking on the OK button', () => {
   let div
   beforeEach(() => {
     div = document.createElement('div')
@@ -40,8 +40,9 @@ xdescribe('clicking on the OK button', () => {
       , div)
     })
     const closeButton = div.querySelector('#close-button')
-    ReactTestUtils.act(() => {
-      ReactTestUtils.Simulate.click(closeButton)
+    console.log("CLOSE BUTTON", closeButton)
+    ReactTestUtils.act(async () => {
+      await ReactTestUtils.Simulate.click(closeButton)
     })
   })
 

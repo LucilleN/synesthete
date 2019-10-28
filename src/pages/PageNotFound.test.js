@@ -47,7 +47,7 @@ describe('initial state', () => {
 
 describe('when the "back to home" button is clicked', () => {
   let div
-  beforeEach(() => {
+  beforeEach(async() => {
     div = document.createElement('div')
     ReactTestUtils.act(() => {
       ReactDOM.render(
@@ -56,9 +56,9 @@ describe('when the "back to home" button is clicked', () => {
         </MuiThemeProvider>
       , div)
     })
-    const button = div.querySelector('button')
-    ReactTestUtils.act(() => {
-      ReactTestUtils.Simulate.click(button)
+    const button = div.querySelector('#back-to-home')
+    await ReactTestUtils.act(async () => {
+      await ReactTestUtils.Simulate.click(button)
     })
   })
 

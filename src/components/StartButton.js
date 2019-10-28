@@ -31,7 +31,7 @@ const styles = theme => ({
 const StartButton = props => {
   const { classes, href, text } = props
   return (
-    <Fab variant="extended" color="primary" aria-label="Start" href={href} className={classes.fab}> {/*href="/search"*/}
+    <Fab variant="extended" color="primary" aria-label="Start" href={href} className={classes.fab}>
       <Typography className={classes.text}>
         {text}
       </Typography>

@@ -216,6 +216,7 @@ describe('the recommendation button', () => {
 
   it('automatically loads music when clicked', () => {
     const recommendationButton = div.querySelector("#recommendation-button")
+    console.log("RECOMMENDATION BUTTON", recommendationButton)
     // await ReactTestUtils.act(async () => {
     //   await ReactTestUtils.Simulate.click(recommendationButton)
     // })
