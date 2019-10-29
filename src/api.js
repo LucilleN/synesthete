@@ -1,7 +1,6 @@
 const apiHost = () => { } // No-op in our mock version.
 
 const getAudioFeatures = () => {
-  console.log("getAudioFeatures called")
   return Promise.resolve({
     "danceability": 0.441,
     "energy": 0.379,

@@ -150,8 +150,6 @@ const Visualization = props => {
   const [canLoadMusic, setCanLoadMusic] = useState(false)
 
   useEffect(() => {
-    console.log("--first useEffect called")
-    console.log("by first useEffect, trackObject is: ", trackObject)
     if (trackObject) {
       performAudioFeaturesQuery({
         setError,
@@ -163,15 +161,10 @@ const Visualization = props => {
   }, [trackObject])
 
   useEffect(() => {
-    console.log("---second useEffect called")
-    console.log("by second useEffect, audioFeatures is: ", audioFeatures)
     setCanLoadMusic(true)
   }, [audioFeatures])
 
   useEffect(() => {
-    console.log("-----third useEffect called")
-    console.log("by third useEffect, canLoadMusic is: ", canLoadMusic)
-    console.log("by third useEffect, audioFeatures is: ", audioFeatures)
     if (canLoadMusic && audioFeatures) {
       loadMusic({
         audioRef,

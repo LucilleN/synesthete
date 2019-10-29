@@ -184,7 +184,6 @@ describe('initial state', () => {
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
-
 })
 
 describe('loading music', () => {
@@ -192,7 +191,6 @@ describe('loading music', () => {
   let visualizationUtilitiesStub
   beforeEach(async () => {
     sinon.stub(visualizationUtilities, 'loadMusic')
-    // visualizationUtilitiesStub = sinon.stub(visualizationUtilities, 'loadMusic')
     sinon.stub(api, 'getAudioFeatures')
 
     api.getAudioFeatures.returns(Promise.resolve(audioFeatures))
@@ -235,22 +233,6 @@ describe('loading music', () => {
     }
 
     process.nextTick(nextEffect)
-    // process.nextTick(()=> {
-    //   process.nextTick(()=> {
-    //     process.nextTick(() => {
-    //       process.nextTick(() => {
-    //         process.nextTick(() => {
-    //           expect(visualizationUtilities.loadMusic.called).toBe(true)
-    //           done()
-    //         })
-    //         // done()
-    //       })
-    //       // done()
-    //     })
-    //     // done()
-    //   })
-    //   // done()
-    // })
   })
 })
 
@@ -285,26 +267,7 @@ describe('the recommendation button', () => {
     api.getRecommendation.restore()
   })
 
-
   it('should call the getRecommendation function when clicked', () => {
     expect(api.getRecommendation.called).toBe(true)
   })
-
-  // xit('automatically loads music when clicked', () => {
-  //   let counter = 0
-  //   const nextEffect = () => {
-  //     if (counter < 4) {
-  //       counter += 1
-  //       process.nextTick(nextEffect)
-  //     } else {
-  //       expect(visualizationUtilities.loadMusic.called).toBe(true)
-  //       done()
-  //     }
-  //   }
-  //
-  //   process.nextTick(nextEffect)
-  //
-  //   // expect(visualizationUtilities.loadMusic.called).toBe(true)
-  //   // expect(visualizationUtilities.loadMusic.callCount).toBeGreaterThan(1)
-  // })
 })

@@ -102,7 +102,6 @@ const SearchForm = (props) => {
     setShowDefaultText(false)
   }
   const handleFocusOut = event => {
-    console.log("handleFocusOut")
     if (query === "") {
       setShowDefaultText(true)
     }

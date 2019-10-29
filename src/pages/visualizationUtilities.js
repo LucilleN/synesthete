@@ -141,7 +141,6 @@ export const performAudioFeaturesQuery = async ({
   setAudioFeatures,
   defaultErrorText
 }) => {
-  console.log("performAudioFeaturesQuery")
 
   setError(null)
 
