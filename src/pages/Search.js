@@ -118,7 +118,11 @@ const SearchForm = (props) => {
         type: 'track'
       })
 
+      console.log("search result", result)
+
       setSongs(result.tracks.items)
+      console.log("GOT HERE")
+
       setFormSubmitted(true)
     } catch (error) {
       setError(defaultErrorText)

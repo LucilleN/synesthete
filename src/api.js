@@ -22,8 +22,15 @@ const urlFor = resource => `${api}${resource}`
 const HTTP_OK = 200
 
 const throwResponseError = response => {
+  console.log("before response", response)
+  console.log("before response.statusText", response.statusText)
+
   const error = new Error(response.statusText)
   error.response = response
+
+  console.log("after response", response)
+  console.log("after response.statusText", response.statusText)
+
   throw error
 }
 
@@ -74,15 +81,20 @@ const getHeaders = () => {
 // (for those who aren’t used to functional-style programming). YMMV
 
 // const query = (resource, params) => fetch(`${urlFor(resource)}?${paramsWithApiKey(params)}`, {
-const query = (resource, params) => {
+const query = async (resource, params) => {
   const optionalParams = (params) ? `?${new URLSearchParams(params)}` : ""
 
   const headers = getHeaders()
 
-  fetch(`${urlFor(resource)}${optionalParams}`, {
-    headers
-  }).then(okCheck, emitNativeError)
-    .then(response => response.json())
+  try {
+    await fetch(`${urlFor(resource)}${optionalParams}`, {
+      headers
+    }).then(okCheck, emitNativeError)
+      .then(response => response.json())
+      .catch(error => { throw error })
+  } catch (error) {
+    throw error
+  }
 }
 
 // const searchGifs = params => query('gifs/search', params)
