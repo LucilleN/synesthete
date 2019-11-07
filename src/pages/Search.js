@@ -115,7 +115,7 @@ const SearchForm = (props) => {
     try {
       const result = await searchSongs({
         q: query,
-        type: track
+        type: 'track'
       })
 
       setSongs(result.tracks.items)
