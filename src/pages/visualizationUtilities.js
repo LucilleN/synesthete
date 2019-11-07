@@ -145,12 +145,7 @@ export const performAudioFeaturesQuery = async ({
   setError(null)
 
   try {
-    const result = await getAudioFeatures({
-      id: songID,
-      headers: {
-        'Authorization': 'Bearer '
-      }
-    })
+    const result = await getAudioFeatures(songID)
 
     setAudioFeatures(result)
 
