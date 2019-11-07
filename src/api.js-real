@@ -1,5 +1,20 @@
 let api = 'https://misconfigured-app.com/'
-const API_KEY = 'dc6zaTOxFJmzC' // Giphy's public beta key (thank you Giphy).
+// const API_KEY = 'dc6zaTOxFJmzC' // Giphy's public beta key (thank you Giphy).
+const authorizationUrl = 'https://accounts.spotify.com/api/token'
+const authorizationKey = 'Basic MTU5YWM4OGIxYzUzNGVkN2FlNDE2MDJmMWU1NThhNDk6YmUxOTFmMTg3ZGZlNDgzMjg3MDAxZDNhNWZlYTEyNTM='
+const authorizationHeaders = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Authorization': authorizationKey
+}
+
+const getAccessToken = () => {
+  const response = fetch(authorizationUrl, {
+    authorizationHeaders
+  }).then(okCheck, emitNativeError)
+    .then(response => response.json())
+
+  return response.access_token
+}
 
 const apiHost = host => { api = host }
 const urlFor = resource => `${api}${resource}`
@@ -26,15 +41,20 @@ const statusCheck = successStatuses => response => {
 
 const okCheck = statusCheck([HTTP_OK])
 
-const headers = {
-  'Content-Type': 'application/json'
+const getHeaders = () => {
+  const token = getAccessToken()
+  const headers = {
+    'Authorization': `Bearer ${token}`
+  }
+  return headers
 }
 
-const paramsWithApiKey = params => {
-  const result = new URLSearchParams(params)
-  result.set('api_key', API_KEY)
-  return result
-}
+//
+// const paramsWithApiKey = params => {
+//   const result = new URLSearchParams(params)
+//   result.set('api_key', API_KEY)
+//   return result
+// }
 
 // The fetch function initiates a connection to the web service.
 // fetch returns a _promise_: an object that represents a future result.
@@ -52,14 +72,29 @@ const paramsWithApiKey = params => {
 // _single statement_, thus obviating the need for curly braces but
 // resulting in what many will view to be a decrease in readability
 // (for those who aren’t used to functional-style programming). YMMV
-const query = (resource, params) => fetch(`${urlFor(resource)}?${paramsWithApiKey(params)}`, {
-  headers
-}).then(okCheck, emitNativeError)
-  .then(response => response.json())
 
-const searchGifs = params => query('gifs/search', params)
+// const query = (resource, params) => fetch(`${urlFor(resource)}?${paramsWithApiKey(params)}`, {
+const query = (resource, params) => {
+  const optionalParams = (params) ? `?${new URLSearchParams(params)}` : ""
+
+  fetch(`${urlFor(resource)}${optionalParams}`, {
+    getHeaders()
+  })
+}.then(okCheck, emitNativeError)
+ .then(response => response.json())
+
+// const searchGifs = params => query('gifs/search', params)
+const searchSongs = params => query('search', params)
+
+const getRecommendation = params => query('recommendations', params)
+
+const getAudioFeatures = songID => query(`audio-features/${songID}`)
+
 
 export {
   apiHost,
-  searchGifs
+  // searchGifs
+  searchSongs,
+  getAudioFeatures,
+  getRecommendation
 }
