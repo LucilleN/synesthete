@@ -268,6 +268,19 @@ describe('the recommendation button', () => {
   })
 
   it('should call the getRecommendation function when clicked', () => {
-    expect(api.getRecommendation.called).toBe(true)
+    let counter = 0
+    const nextEffect = () => {
+      if (counter < 2) {
+        counter += 1
+        process.nextTick(nextEffect)
+      } else {
+        expect(api.getRecommendation.called).toBe(true)
+        done()
+      }
+    }
+
+    process.nextTick(nextEffect)
+
+
   })
 })
