@@ -1,24 +1,26 @@
 let api = 'https://misconfigured-app.com/' // what is this lol
-// const API_KEY = 'dc6zaTOxFJmzC' // Giphy's public beta key (thank you Giphy).
+
 
 // original api url below
 const authorizationUrl = 'https://accounts.spotify.com/api/token'
-// use this instead
+// use this instead:
 // const corsAuthorizationUrl = 'http://localhost:3000/token'
 const corsAuthorizationUrl = 'http://localhost:3000/api/token'
 const authorizationKey = 'Basic MTU5YWM4OGIxYzUzNGVkN2FlNDE2MDJmMWU1NThhNDk6YmUxOTFmMTg3ZGZlNDgzMjg3MDAxZDNhNWZlYTEyNTM='
-
 const authorizationHeaders = {
   'Content-Type': 'application/x-www-form-urlencoded',
   'Authorization': authorizationKey
 }
-
 const authorizationBody = {
   'grant_type': 'client_credentials'
 }
 const authSearchParams = Object.keys(authorizationBody).map((key) => {
   return encodeURIComponent(key) + '=' + encodeURIComponent(authorizationBody[key])
 }).join('&')
+
+
+let tokenIsValid = false
+let currentToken = ""
 
 const getAccessToken = async () => {
   console.log("in getAccessToken")
@@ -31,8 +33,16 @@ const getAccessToken = async () => {
     .then(response => response.json())
 
   console.log("Got here in getAccessToken")
+
+  tokenIsValid = true
+  setTimeout(() => {
+    tokenIsValid = false
+  }, 3000)
+  currentToken = response.access_token
+
   return response.access_token
 }
+
 
 const apiHost = host => { api = host }
 const urlFor = resource => `${api}${resource}`
@@ -67,7 +77,13 @@ const statusCheck = successStatuses => response => {
 const okCheck = statusCheck([HTTP_OK])
 
 const getHeaders = async () => {
-  const token = await getAccessToken()
+  let token = ""
+  if (tokenIsValid) {
+    token = currentToken
+  }
+  else {
+    token = await getAccessToken()
+  }
   const headers = {
     'Authorization': `Bearer ${token}`
   }
