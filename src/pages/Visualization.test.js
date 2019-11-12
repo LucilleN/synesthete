@@ -268,19 +268,20 @@ describe('the recommendation button', () => {
   })
 
   it('should call the getRecommendation function when clicked', () => {
-    let counter = 0
-    const nextEffect = () => {
-      if (counter < 2) {
-        counter += 1
-        process.nextTick(nextEffect)
-      } else {
-        expect(api.getRecommendation.called).toBe(true)
-        done()
-      }
-    }
+    // let counter = 0
+    // const nextEffect = () => {
+    //   if (counter < 2) {
+    //     counter += 1
+    //     process.nextTick(nextEffect)
+    //   } else {
+    //     expect(api.getRecommendation.called).toBe(true)
+    //     done()
+    //   }
+    // }
+    //
+    // process.nextTick(nextEffect)
 
-    process.nextTick(nextEffect)
-
+    expect(api.getRecommendation.called).toBe(true)
 
   })
 })
