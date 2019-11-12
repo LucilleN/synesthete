@@ -201,7 +201,8 @@ describe('normal API calls', () => {
 
   it('should trigger a song search when the search button is clicked', () => {
     expect(api.searchSongs.firstCall.args[0]).toEqual({
-      q: 'hello'
+      q: 'hello',
+      type: 'track'
     })
   })
 
@@ -240,7 +241,8 @@ describe('API calls that return no search results', () => {
 
   it('should trigger a song search when the search button is clicked', () => {
     expect(api.searchSongs.firstCall.args[0]).toEqual({
-      q: 'hello'
+      q: 'hello',
+      type: 'track'
     })
   })
 
