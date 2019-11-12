@@ -206,9 +206,17 @@ const Visualization = props => {
       })
       currentRecommendation = result.tracks[0]
 
+      const isSameSong = (track1, track2) => {
+        return (
+          track1.id === track2.id &&
+          track1.artists[0].id === track2.artists[0].id &&
+          track1.title === track2.title
+        )
+      }
+
       // Recommendation might be a song with a null preview_url; if so, recommend another one
       // Recommendation might also be the current song itself; if so, recommend another
-      while (!currentRecommendation.preview_url || currentRecommendation.id === trackObject.id) {
+      while (!currentRecommendation.preview_url || isSameSong(trackObject, currentRecommendation)) {
         console.log("currentTrack's id", trackObject.id)
         console.log("currentTrack's preview_url", trackObject.preview_url)
         console.log("currentRecommendation.id", currentRecommendation.id)
