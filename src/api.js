@@ -106,11 +106,12 @@ const query = async (resource, params) => {
   console.log("regular api call headers: ", headers)
 
   try {
-    await fetch(`${urlFor(resource)}${optionalParams}`, {
+    const response = await fetch(`${urlFor(resource)}${optionalParams}`, {
       headers
     }).then(okCheck, emitNativeError)
       .then(response => response.json())
       .catch(error => { throw error })
+    return response
   } catch (error) {
     throw error
   }

@@ -113,6 +113,8 @@ const SearchForm = (props) => {
     setError(null)
 
     try {
+      console.log("search query", query)
+
       const result = await searchSongs({
         q: query,
         type: 'track'
