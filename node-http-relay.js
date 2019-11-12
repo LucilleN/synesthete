@@ -9,7 +9,8 @@ var express = require('express');
 var request = require('request');
 var app = express();
 
-var API_HOST = "https://accounts.spotify.com/api"; // Put your actual API host here.
+// var API_HOST = "https://accounts.spotify.com/api"; // Put your actual API host here.
+var API_HOST = "https://accounts.spotify.com"; // Put your actual API host here.
 
 app.use('/', function (req, res) {
     var url = API_HOST + req.url;
@@ -18,7 +19,7 @@ app.use('/', function (req, res) {
     console.log("Using parameters:", req.query);
 
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept, Authorization");
     req.pipe(request({url: url, followAllRedirects: true, followOriginalHttpMethod: true})).pipe(res);
 });
 

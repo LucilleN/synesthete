@@ -4,7 +4,8 @@ let api = 'https://misconfigured-app.com/' // what is this lol
 // original api url below
 const authorizationUrl = 'https://accounts.spotify.com/api/token'
 // use this instead
-const corsAuthorizationUrl = 'http://localhost:3000/token'
+// const corsAuthorizationUrl = 'http://localhost:3000/token'
+const corsAuthorizationUrl = 'http://localhost:3000/api/token'
 const authorizationKey = 'Basic MTU5YWM4OGIxYzUzNGVkN2FlNDE2MDJmMWU1NThhNDk6YmUxOTFmMTg3ZGZlNDgzMjg3MDAxZDNhNWZlYTEyNTM='
 
 const authorizationHeaders = {
@@ -24,7 +25,7 @@ const getAccessToken = async () => {
   const response = await fetch(corsAuthorizationUrl, {
     method: 'POST',
     headers: authorizationHeaders,
-    mode: 'no-cors',
+    // mode: 'no-cors',
     body: authSearchParams
   }).then(okCheck, emitNativeError)
     .then(response => response.json())
