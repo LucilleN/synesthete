@@ -1,15 +1,29 @@
-let api = 'https://misconfigured-app.com/'
+let api = 'https://misconfigured-app.com/' // what is this lol
 // const API_KEY = 'dc6zaTOxFJmzC' // Giphy's public beta key (thank you Giphy).
+
 const authorizationUrl = 'https://accounts.spotify.com/api/token'
+const corsAuthorizationUrl = 'https://localhost:3000/token'
 const authorizationKey = 'Basic MTU5YWM4OGIxYzUzNGVkN2FlNDE2MDJmMWU1NThhNDk6YmUxOTFmMTg3ZGZlNDgzMjg3MDAxZDNhNWZlYTEyNTM='
+
 const authorizationHeaders = {
   'Content-Type': 'application/x-www-form-urlencoded',
   'Authorization': authorizationKey
 }
 
-const getAccessToken = () => {
-  const response = fetch(authorizationUrl, {
-    authorizationHeaders
+const authorizationBody = {
+  'grant_type': 'client_credentials'
+}
+const authSearchParams = Object.keys(authorizationBody).map((key) => {
+  return encodeURIComponent(key) + '=' + encodeURIComponent(authorizationBody[key])
+}).join('&')
+
+const getAccessToken = async () => {
+  console.log("in getAccessToken")
+  const response = await fetch(corsAuthorizationUrl, {
+    method: 'POST',
+    headers: authorizationHeaders,
+    mode: 'no-cors',
+    body: authSearchParams
   }).then(okCheck, emitNativeError)
     .then(response => response.json())
 
@@ -85,6 +99,7 @@ const query = async (resource, params) => {
   const optionalParams = (params) ? `?${new URLSearchParams(params)}` : ""
 
   const headers = getHeaders()
+  console.log("headers: ", headers)
 
   try {
     await fetch(`${urlFor(resource)}${optionalParams}`, {
