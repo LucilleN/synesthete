@@ -130,6 +130,11 @@ const Visualization = props => {
   const { classes } = props
   const { trackObject } = props.location.state
 
+  if (!trackObject) {
+    console.log("no track object")
+    setError(defaultErrorText)
+  }
+
   // May need this in the future to allow users to access a song's visualization just by
   // clicking on a saved link rather than going through the search every time, but this
   // would require another API call to get the trackObject based on the songID, so I
@@ -202,13 +207,19 @@ const Visualization = props => {
       currentRecommendation = result.tracks[0]
 
       // Recommendation might be a song with a null preview_url; if so, recommend another one
-      while (!currentRecommendation.preview_url) {
+      // Recommendation might also be the current song itself; if so, recommend another
+      while (!currentRecommendation.preview_url || currentRecommendation.id === trackObject.id) {
+        console.log("currentTrack's id", trackObject.id)
+        console.log("currentTrack's preview_url", trackObject.preview_url)
+        console.log("currentRecommendation.id", currentRecommendation.id)
         const result = await getRecommendation({
           limit: 1,
           seed_tracks: `${currentRecommendation.id}`,
           seed_artists: `${currentRecommendation.artists[0].id}`
         })
         currentRecommendation = result.tracks[0]
+        console.log("got a new recommendation with id", currentRecommendation.id)
+        console.log("new recommendation's preview url", currentRecommendation.preview_url)
       }
 
       setRecommendedSong(result.tracks[0])
@@ -232,17 +243,17 @@ const Visualization = props => {
       <Typography className={classes.subtitle}>
         "{trackObject.name}" by {trackObject.artists[0].name}
       </Typography>
-      {error && (
-        <div id="error">
-          <ErrorDialog error={error} errorSubtitle={"Try refreshing the page or starting a new search."}/>
-        </div>
-      )}
       {recommendedSong && (
         <Redirect to={{
             pathname: `/visualization/${recommendedSong.id}`,
             state: { trackObject: recommendedSong }
           }}
         />
+      )}
+      {error && (
+        <div id="error">
+          <ErrorDialog error={error} errorSubtitle={"Try refreshing the page or starting a new search."}/>
+        </div>
       )}
     </div>
   )
