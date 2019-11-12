@@ -121,7 +121,13 @@ export const loadMusic = ({
     }
   }
 
-  audio.play()
+  try {
+    const audioPlay = audio.play().catch(() => {
+      setError(defaultErrorText)
+    })
+  } catch (error) {
+    setError(defaultErrorText)
+  }
   renderFrame()
 
   if (!existingAudioNode) {
