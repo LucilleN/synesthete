@@ -1,8 +1,10 @@
 let api = 'https://misconfigured-app.com/' // what is this lol
 // const API_KEY = 'dc6zaTOxFJmzC' // Giphy's public beta key (thank you Giphy).
 
+// original api url below
 const authorizationUrl = 'https://accounts.spotify.com/api/token'
-const corsAuthorizationUrl = 'https://localhost:3000/token'
+// use this instead
+const corsAuthorizationUrl = 'http://localhost:3000/token'
 const authorizationKey = 'Basic MTU5YWM4OGIxYzUzNGVkN2FlNDE2MDJmMWU1NThhNDk6YmUxOTFmMTg3ZGZlNDgzMjg3MDAxZDNhNWZlYTEyNTM='
 
 const authorizationHeaders = {
@@ -27,6 +29,7 @@ const getAccessToken = async () => {
   }).then(okCheck, emitNativeError)
     .then(response => response.json())
 
+  console.log("Got here in getAccessToken")
   return response.access_token
 }
 
@@ -36,14 +39,14 @@ const urlFor = resource => `${api}${resource}`
 const HTTP_OK = 200
 
 const throwResponseError = response => {
-  console.log("before response", response)
-  console.log("before response.statusText", response.statusText)
+  // console.log("before response", response)
+  // console.log("before response.statusText", response.statusText)
 
   const error = new Error(response.statusText)
   error.response = response
 
-  console.log("after response", response)
-  console.log("after response.statusText", response.statusText)
+  // console.log("after response", response)
+  // console.log("after response.statusText", response.statusText)
 
   throw error
 }
@@ -62,8 +65,8 @@ const statusCheck = successStatuses => response => {
 
 const okCheck = statusCheck([HTTP_OK])
 
-const getHeaders = () => {
-  const token = getAccessToken()
+const getHeaders = async () => {
+  const token = await getAccessToken()
   const headers = {
     'Authorization': `Bearer ${token}`
   }
@@ -98,8 +101,8 @@ const getHeaders = () => {
 const query = async (resource, params) => {
   const optionalParams = (params) ? `?${new URLSearchParams(params)}` : ""
 
-  const headers = getHeaders()
-  console.log("headers: ", headers)
+  const headers = await getHeaders()
+  console.log("regular api call headers: ", headers)
 
   try {
     await fetch(`${urlFor(resource)}${optionalParams}`, {

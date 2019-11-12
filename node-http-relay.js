@@ -19,7 +19,7 @@ app.use('/', function (req, res) {
 
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
-    req.pipe(request(url)).pipe(res);
+    req.pipe(request({url: url, followAllRedirects: true, followOriginalHttpMethod: true})).pipe(res);
 });
 
 console.log("Starting super-simple HTTP relay server...");
