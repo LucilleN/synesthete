@@ -1,10 +1,8 @@
 let api = 'https://misconfigured-app.com/' // what is this lol
 
-
 // original api url below
 const authorizationUrl = 'https://accounts.spotify.com/api/token'
 // use this instead:
-// const corsAuthorizationUrl = 'http://localhost:3000/token'
 const corsAuthorizationUrl = 'http://localhost:3000/api/token'
 const authorizationKey = 'Basic MTU5YWM4OGIxYzUzNGVkN2FlNDE2MDJmMWU1NThhNDk6YmUxOTFmMTg3ZGZlNDgzMjg3MDAxZDNhNWZlYTEyNTM='
 const authorizationHeaders = {
@@ -17,7 +15,6 @@ const authorizationBody = {
 const authSearchParams = Object.keys(authorizationBody).map((key) => {
   return encodeURIComponent(key) + '=' + encodeURIComponent(authorizationBody[key])
 }).join('&')
-
 
 let tokenIsValid = false
 let currentToken = ""
@@ -43,22 +40,14 @@ const getAccessToken = async () => {
   return response.access_token
 }
 
-
 const apiHost = host => { api = host }
 const urlFor = resource => `${api}${resource}`
 
 const HTTP_OK = 200
 
 const throwResponseError = response => {
-  // console.log("before response", response)
-  // console.log("before response.statusText", response.statusText)
-
   const error = new Error(response.statusText)
   error.response = response
-
-  // console.log("after response", response)
-  // console.log("after response.statusText", response.statusText)
-
   throw error
 }
 
@@ -90,13 +79,6 @@ const getHeaders = async () => {
   return headers
 }
 
-//
-// const paramsWithApiKey = params => {
-//   const result = new URLSearchParams(params)
-//   result.set('api_key', API_KEY)
-//   return result
-// }
-
 // The fetch function initiates a connection to the web service.
 // fetch returns a _promise_: an object that represents a future result.
 // Thus, the function actually returns right away. However, when the
@@ -114,7 +96,6 @@ const getHeaders = async () => {
 // resulting in what many will view to be a decrease in readability
 // (for those who aren’t used to functional-style programming). YMMV
 
-// const query = (resource, params) => fetch(`${urlFor(resource)}?${paramsWithApiKey(params)}`, {
 const query = async (resource, params) => {
   const optionalParams = (params) ? `?${new URLSearchParams(params)}` : ""
 
@@ -133,17 +114,12 @@ const query = async (resource, params) => {
   }
 }
 
-// const searchGifs = params => query('gifs/search', params)
 const searchSongs = params => query('search', params)
-
 const getRecommendation = params => query('recommendations', params)
-
 const getAudioFeatures = songID => query(`audio-features/${songID}`)
-
 
 export {
   apiHost,
-  // searchGifs
   searchSongs,
   getAudioFeatures,
   getRecommendation
