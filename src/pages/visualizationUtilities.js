@@ -47,6 +47,9 @@ export const loadMusic = ({
   const ctx = canvas.getContext("2d")
 
   const context = (existingContext) ? existingContext : new AudioContext()
+  if (existingContext) {
+    context.resume() // this one line fixed everything lol
+  }
   const audioNode = (existingAudioNode) ? existingAudioNode : context.createMediaElementSource(audio)
   const analyser = (existingAnalyser) ? existingAnalyser : context.createAnalyser()
 

@@ -260,7 +260,7 @@ const Visualization = props => {
       )}
       {error && (
         <div id="error">
-          <ErrorDialog error={error} errorSubtitle={"Try refreshing the page or starting a new search."}/>
+          <ErrorDialog error={error} errorSubtitle={"The Visualizer doesn't work when it's been loaded externally. Try refreshing the page or starting a new search."}/>
         </div>
       )}
     </div>
