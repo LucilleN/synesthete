@@ -212,6 +212,7 @@ describe('loading music', () => {
   })
 
   it('still renders a canvas', () => {
+    console.log("TESTING CANVAS")
     const canvas = div.querySelector('#canvas')
     expect(canvas).not.toBeNull()
   })
@@ -220,13 +221,16 @@ describe('loading music', () => {
     expect(api.getAudioFeatures.called).toBe(true)
   })
 
-  it('automatically loads music', (done) => {
+  it('automatically loads music', async (done) => {
     let counter = 0
     const nextEffect = () => {
       if (counter < 4) {
         counter += 1
         process.nextTick(nextEffect)
       } else {
+        console.log("visualizationUtilities", visualizationUtilities)
+        console.log("visualizationUtilities.loadMusic", visualizationUtilities.loadMusic)
+        console.log("visualizationUtilities.loadMusic.called", visualizationUtilities.loadMusic.called)
         expect(visualizationUtilities.loadMusic.called).toBe(true)
         done()
       }
@@ -270,7 +274,7 @@ describe('the recommendation button', () => {
   it('should call the getRecommendation function when clicked', () => {
     // let counter = 0
     // const nextEffect = () => {
-    //   if (counter < 2) {
+    //   if (counter <2) {
     //     counter += 1
     //     process.nextTick(nextEffect)
     //   } else {
@@ -281,6 +285,10 @@ describe('the recommendation button', () => {
     //
     // process.nextTick(nextEffect)
 
+    // process.nextTick(() => {
+    //   expect(api.getRecommendation.called).toBe(true)
+    //   done()
+    // })
     expect(api.getRecommendation.called).toBe(true)
 
   })

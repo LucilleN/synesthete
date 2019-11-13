@@ -204,6 +204,7 @@ describe('normal API calls', () => {
       q: 'hello',
       type: 'track'
     })
+    expect(api.searchSongs.called).toBe(true)
   })
 
   it('should populate the song results container when search results arrive', () => {
