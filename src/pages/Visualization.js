@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+import { Redirect } from 'react-router-dom'
+
 import RecommendationButton from '../components/RecommendationButton'
 import StartButton from '../components/StartButton'
 import ErrorDialog from '../components/ErrorDialog'
-
-import { Redirect } from 'react-router-dom'
 
 import { getRecommendation } from '../api'
 import { loadMusic, performAudioFeaturesQuery } from './visualizationUtilities'
@@ -15,24 +15,24 @@ export const styles = theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   fileInput: {
     zIndex: 3,
-    color: 'white'
+    color: 'white',
   },
   urlInput: {
     zIndex: 3,
     color: theme.palette.dark.pink,
     width: 250,
-    margin: 15
+    margin: 15,
   },
   urlButton: {
-    zIndex: 3
+    zIndex: 3,
   },
   recommendationButton: {
     zIndex: 10,
-    marginTop: 200
+    marginTop: 200,
   },
   canvas: {
     position: 'fixed',
@@ -41,9 +41,9 @@ export const styles = theme => ({
     width: '100%',
     height: 'calc(100%-60px)',
     background: 'black',
-    zIndex: 0
+    zIndex: 0,
   },
-  audio:{
+  audio: {
     position: 'fixed',
     bottom: '20px',
     width: '90vw',
@@ -51,21 +51,21 @@ export const styles = theme => ({
     zIndex: 3,
     opacity: 0.1,
     '&:hover': {
-       opacity: 0.8,
-    }
+      opacity: 0.8,
+    },
   },
   titleBar: {
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   title: {
     zIndex: 4,
     color: theme.palette.light.pink,
     fontSize: '3rem',
     textAlign: 'center',
-    marginTop: 5
+    marginTop: 5,
   },
   subtitle: {
     zIndex: 4,
@@ -73,11 +73,11 @@ export const styles = theme => ({
     fontSize: '1.75rem',
     textAlign: 'center',
     marginBottom: 8,
-    marginTop: -32
+    marginTop: -32,
   },
   songInfoContainer: {
     zIndex: 4,
-    width: '100%'
+    width: '100%',
   },
   songInfo: {
     zIndex: 4,
@@ -85,7 +85,7 @@ export const styles = theme => ({
     fontSize: '0.75rem',
     textAlign: 'left',
     width: '100%',
-    marginLeft: 8
+    marginLeft: 8,
   },
   loadOptionButton: {
     zIndex: 4,
@@ -98,15 +98,15 @@ export const styles = theme => ({
     border: 'none',
     margin: '10px 20px',
     '&:hover': {
-       background: theme.palette.white,
-       color: theme.palette.dark.pink
-    }
+      background: theme.palette.white,
+      color: theme.palette.dark.pink,
+    },
   },
   buttonBar: {
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
   },
   button: {
     zIndex: 4,
@@ -120,10 +120,10 @@ export const styles = theme => ({
     margin: '10px 20px',
     textTransform: 'none',
     '&:hover': {
-       background: theme.palette.white,
-       color: theme.palette.dark.purple
-    }
-  }
+      background: theme.palette.white,
+      color: theme.palette.dark.purple,
+    },
+  },
 })
 
 const Visualization = props => {
@@ -131,7 +131,7 @@ const Visualization = props => {
   const { trackObject } = props.location.state
 
   if (!trackObject) {
-    console.log("no track object")
+    console.log('No track object')
     setError(defaultErrorText)
   }
 
@@ -162,7 +162,7 @@ const Visualization = props => {
         setError,
         songID: trackObject.id,
         setAudioFeatures,
-        defaultErrorText
+        defaultErrorText,
       })
     }
   }, [trackObject])
@@ -184,23 +184,22 @@ const Visualization = props => {
         existingAnalyser,
         setAnalyser,
         setError,
-        audioFeatures
+        audioFeatures,
       })
     }
     setCanLoadMusic(false)
   }, [canLoadMusic])
 
   const performRecommendationQuery = async event => {
-
     event.preventDefault()
     setError(null)
 
     let currentRecommendation
 
-    console.log("in performRecommendationQuery")
+    console.log('in performRecommendationQuery')
 
     try {
-      console.log("in performRecommendationQuery TRY")
+      console.log('in performRecommendationQuery TRY')
 
       const result = await getRecommendation({
         limit: 1,
@@ -209,63 +208,57 @@ const Visualization = props => {
         target_energy: `${audioFeatures.energy}`,
         target_valence: `${audioFeatures.valence}`,
         target_acousticness: `${audioFeatures.acousticness}`,
-        target_key: `${audioFeatures.key}`
+        target_key: `${audioFeatures.key}`,
       })
 
       currentRecommendation = result.tracks[0]
 
       const isSameSong = (track1, track2) => {
-        console.log("isSameSong: " + (track1.id === track2.id))
-        return (
-          track1.id === track2.id //&&
-          // track1.artists[0].id === track2.artists[0].id &&
-          // track1.title === track2.title
-        )
+        console.log('isSameSong: ' + (track1.id === track2.id))
+        return track1.id === track2.id
       }
 
       // Recommendation might be a song with a null preview_url, or it might be
       // the current song, or it might have already been listened to; if so,
       // recommend another one
-      console.log("songHistory.has(currentRecommendation.id): " + songHistory.has(currentRecommendation.id))
       while (!currentRecommendation.preview_url
         || isSameSong(trackObject, currentRecommendation)
         || songHistory.has(currentRecommendation.id)
       ) {
         console.log("entering whileloop. \ncurrentTrack's id", trackObject.id)
-        // console.log("currentTrack's preview_url", trackObject.preview_url)
-        console.log("currentRecommendation.id", currentRecommendation.id)
+        console.log("songHistory.has(currentRecommendation.id)", songHistory.has(currentRecommendation.id))
+
         const result = await getRecommendation({
           limit: 3,
           seed_tracks: `${currentRecommendation.id}`,
           // seed_artists: `${currentRecommendation.artists[0].id}`
         })
         currentRecommendation = result.tracks[0]
+
         console.log("got a new recommendation with id", currentRecommendation.id)
         console.log("new recommendation's preview url", currentRecommendation.preview_url)
-        console.log("songHistory.has(currentRecommendation.id): " + songHistory.has(currentRecommendation.id))
 
       }
 
       setRecommendedSong(result.tracks[0])
       setSongHistory(songHistory.add(result.tracks[0].id))
       console.log("songHistory", songHistory)
-
     } catch (error) {
-      console.log("caught error here: " + error)
+      console.log("caught error in Visualization.performRecommendationQuery: " + error)
       setError(defaultErrorText)
     }
   }
 
   return (
     <div className={classes.root}>
-      <canvas ref={canvasRef} id="canvas" width="300" height="300" className={classes.canvas}></canvas>
-      <audio ref={audioRef} id="audio" crossOrigin="anonymous" controls className={classes.audio}></audio>
+      <canvas ref={canvasRef} id="canvas" width="300" height="300" className={classes.canvas} />
+      <audio ref={audioRef} id="audio" crossOrigin="anonymous" controls className={classes.audio} />
       <div className={classes.titleBar}>
         <StartButton href="/search" text="< new search"/>
         <Typography className={classes.title}>
           Visualization:<br></br>
         </Typography>
-        <RecommendationButton className={classes.recommendationButton} handleClick={performRecommendationQuery}/>
+        <RecommendationButton className={classes.recommendationButton} handleClick={performRecommendationQuery} />
       </div>
       <Typography className={classes.subtitle}>
         "{trackObject.name}" by {trackObject.artists[0].name}

@@ -45,8 +45,9 @@ describe('search button', () => {
       ReactDOM.render(
         <MuiThemeProvider theme={theme}>
           <Search />
-        </MuiThemeProvider>
-      , div)
+        </MuiThemeProvider>,
+        div
+      )
     })
   })
 
@@ -87,8 +88,9 @@ const setupAndQuerySearchForm = async () => {
     ReactDOM.render(
       <MuiThemeProvider theme={theme}>
         <Search />
-      </MuiThemeProvider>
-    , div)
+      </MuiThemeProvider>,
+      div
+    )
   })
 
   const searchInput = div.querySelector('input')
@@ -202,7 +204,7 @@ describe('normal API calls', () => {
   it('should trigger a song search when the search button is clicked', () => {
     expect(api.searchSongs.firstCall.args[0]).toEqual({
       q: 'hello',
-      type: 'track'
+      type: 'track',
     })
     expect(api.searchSongs.called).toBe(true)
   })
@@ -243,7 +245,7 @@ describe('API calls that return no search results', () => {
   it('should trigger a song search when the search button is clicked', () => {
     expect(api.searchSongs.firstCall.args[0]).toEqual({
       q: 'hello',
-      type: 'track'
+      type: 'track',
     })
   })
 

@@ -10,7 +10,7 @@ import { theme } from '../App'
 import UploadVisualization from './UploadVisualization'
 import * as visualizationUtilities from './visualizationUtilities'
 
-const sampleURL = "https://p.scdn.co/mp3-preview/1c0da00b5c95a1a6c9dfc05b14a1a628a6e0ad73?cid=159ac88b1c534ed7ae41602f1e558a49"
+const sampleURL = 'https://p.scdn.co/mp3-preview/1c0da00b5c95a1a6c9dfc05b14a1a628a6e0ad73?cid=159ac88b1c534ed7ae41602f1e558a49'
 
 let component
 beforeEach(() => {
@@ -29,8 +29,9 @@ describe('initial state', () => {
       ReactDOM.render(
         <MuiThemeProvider theme={theme}>
           <UploadVisualization />
-        </MuiThemeProvider>
-      , div)
+        </MuiThemeProvider>,
+        div
+      )
     })
   })
 
@@ -66,8 +67,9 @@ describe('clicking on the Upload File button', () => {
       ReactDOM.render(
         <MuiThemeProvider theme={theme}>
           <UploadVisualization />
-        </MuiThemeProvider>
-      , div)
+        </MuiThemeProvider>,
+        div
+      )
     })
     const uploadButton = div.querySelector('#upload-file')
     ReactTestUtils.act(() => {
@@ -98,8 +100,9 @@ describe('clicking on the Load URL button', () => {
       ReactDOM.render(
         <MuiThemeProvider theme={theme}>
           <UploadVisualization />
-        </MuiThemeProvider>
-      , div)
+        </MuiThemeProvider>,
+        div
+      )
     })
     const loadUrlButton = div.querySelector('#load-url')
     ReactTestUtils.act(() => {
@@ -152,8 +155,9 @@ describe('loading a URL', () => {
       ReactDOM.render(
         <MuiThemeProvider theme={theme}>
           <UploadVisualization />
-        </MuiThemeProvider>
-      , div)
+        </MuiThemeProvider>,
+        div
+      )
     })
     const loadUrlButton = div.querySelector('#load-url')
     ReactTestUtils.act(() => {

@@ -13,19 +13,19 @@ const styles = theme => ({
   title: {
     color: theme.palette.light.pink,
     fontSize: '3rem',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   searchForm: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   searchBar: {
     display: 'flex',
     flexDirection: 'row',
     width: '100%',
     alignItems: 'center',
-    marginTop: '-15px'
+    marginTop: '-15px',
   },
   searchField: {
     width: '50%',
@@ -35,8 +35,8 @@ const styles = theme => ({
     '&:focus': {
       outline: 'none',
       border: `2px solid ${theme.palette.dark.pink}`,
-      color: theme.palette.dark.pink
-    }
+      color: theme.palette.dark.pink,
+    },
   },
   buttonEnabled: {
     color: theme.palette.white,
@@ -48,9 +48,9 @@ const styles = theme => ({
     border: 'none',
     margin: 15,
     '&:hover': {
-       background: theme.palette.white,
-       color: theme.palette.dark.pink
-    }
+      background: theme.palette.white,
+      color: theme.palette.dark.pink,
+    },
   },
   buttonDisabled: {
     color: theme.palette.white,
@@ -61,7 +61,7 @@ const styles = theme => ({
     borderRadius: '30px',
     border: 'none',
     margin: 15,
-    opacity: '0.3'
+    opacity: '0.3',
   },
   resultsContainer: {
     maxHeight: '65vh',
@@ -81,12 +81,11 @@ const styles = theme => ({
     },
     '&::-webkit-scrollbar-thumb': {
       backgroundColor: theme.palette.white,
-    }
-  }
+    },
+  },
 })
 
-const SearchForm = (props) => {
-
+const SearchForm = props => {
   const { classes } = props
   const defaultText = 'search for a song'
 
@@ -102,7 +101,7 @@ const SearchForm = (props) => {
     setShowDefaultText(false)
   }
   const handleFocusOut = event => {
-    if (query === "") {
+    if (query === '') {
       setShowDefaultText(true)
     }
   }
@@ -113,20 +112,15 @@ const SearchForm = (props) => {
     setError(null)
 
     try {
-      console.log("search query", query)
-
       const result = await searchSongs({
         q: query,
-        type: 'track'
+        type: 'track',
       })
 
-      console.log("search result", result)
-
       setSongs(result.tracks.items)
-      console.log("GOT HERE")
 
       setFormSubmitted(true)
-    } catch (error) {
+    } catch (e) {
       setError(defaultErrorText)
     }
   }
@@ -137,7 +131,7 @@ const SearchForm = (props) => {
         search
       </Typography>
       <Grid container justify="center" className={classes.searchBar}>
-        <input name="query" type="text" value={showDefaultText ? defaultText : query} onChange={handleQueryChange} className={classes.searchField} onFocus={handleFocus} onBlur={handleFocusOut}/>
+        <input name="query" type="text" value={showDefaultText ? defaultText : query} onChange={handleQueryChange} className={classes.searchField} onFocus={handleFocus} onBlur={handleFocusOut} />
         <button type="submit" disabled={!query} className={query ? classes.buttonEnabled : classes.buttonDisabled}>
           <Typography>
             search tracks
@@ -146,11 +140,11 @@ const SearchForm = (props) => {
       </Grid>
       {error && (
         <div id="error">
-          <ErrorDialog error={error} errorSubtitle={"Try refreshing the page and starting a new search."}/>
+          <ErrorDialog error={error} errorSubtitle="Try refreshing the page and starting a new search." />
         </div>
       )}
       <Grid container className={classes.resultsContainer}>
-        <SearchResults results={songs} submitted={formSubmitted}/>
+        <SearchResults results={songs} submitted={formSubmitted} />
       </Grid>
     </form>
   )

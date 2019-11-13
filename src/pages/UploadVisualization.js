@@ -40,7 +40,7 @@ const UploadVisualization = props => {
       setAudioNode,
       existingAnalyser,
       setAnalyser,
-      setError
+      setError,
     })
   }
 
@@ -55,7 +55,7 @@ const UploadVisualization = props => {
       setAudioNode,
       existingAnalyser,
       setAnalyser,
-      setError
+      setError,
     })
   }
 
@@ -64,46 +64,46 @@ const UploadVisualization = props => {
       <div className={classes.titleBar}>
         <Fab href="/" className={classes.button}>
           <Typography>
-            {"< back to home"}
+            {'< back to home'}
           </Typography>
         </Fab>
         <Typography className={classes.title}>
           Load a Song to Visualize
         </Typography>
-        <button onClick={handleReload} className={classes.button}>
+        <button type="button" onClick={handleReload} className={classes.button}>
           <Typography>
             reset
           </Typography>
         </button>
       </div>
-      <canvas ref={canvasRef} id="canvas" width="300" height="300" className={classes.canvas}></canvas>
-      <audio ref={audioRef} id="audio" controls className={classes.audio} crossOrigin="anonymous"></audio>
-      {!uploadFileSelected && !loadUrlSelected &&
+      <canvas ref={canvasRef} id="canvas" width="300" height="300" className={classes.canvas} />
+      <audio ref={audioRef} id="audio" controls className={classes.audio} crossOrigin="anonymous" />
+      {!uploadFileSelected && !loadUrlSelected && (
         <div className={classes.buttonBar}>
-          <button id="upload-file" onClick={() => setUploadFileSelected(true)} className={classes.loadOptionButton}>
+          <button type="button" id="upload-file" onClick={() => setUploadFileSelected(true)} className={classes.loadOptionButton}>
             <Typography>
               upload a file from your computer
             </Typography>
           </button>
-          <button id="load-url" onClick={() => setLoadUrlSelected(true)} className={classes.loadOptionButton}>
+          <button type="button" id="load-url" onClick={() => setLoadUrlSelected(true)} className={classes.loadOptionButton}>
             <Typography>
               enter the URL of an audio file
             </Typography>
           </button>
         </div>
-      }
+      )}
       {uploadFileSelected && (
-        <input ref={fileRef} type="file" id="file-input" accept="audio/*,video/*,image/*" className={classes.fileInput} onChange={handleFileChange}/>
+        <input ref={fileRef} type="file" id="file-input" accept="audio/*,video/*,image/*" className={classes.fileInput} onChange={handleFileChange} />
       )}
       {loadUrlSelected && (
         <>
           <input type="text" id="text-input" value={url} onChange={event => setUrl(event.target.value)} className={classes.urlInput} />
-          <button id="load-button" onClick={handleLoadButtonClick} disabled={!url} className={classes.urlButton}>Load</button>
+          <button type="button" id="load-button" onClick={handleLoadButtonClick} disabled={!url} className={classes.urlButton}>Load</button>
         </>
       )}
       {error && (
         <div id="error">
-          <ErrorDialog error={error} errorSubtitle={"Try refreshing the page or starting a new search."}/>
+          <ErrorDialog error={error} errorSubtitle="Try refreshing the page or starting a new search." />
         </div>
       )}
     </div>
