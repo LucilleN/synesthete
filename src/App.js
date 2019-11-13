@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import { withStyles } from '@material-ui/core/styles'
+import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles'
 
 import Homepage from './pages/Homepage'
 import About from './pages/About'
@@ -18,7 +17,7 @@ export const theme = createMuiTheme({
   palette: {
     primary: {
       main: '#c23063', // magenta
-      dark: '#180142' // dark purple
+      dark: '#180142', // dark purple
     },
     type: 'dark',
     dark: {
@@ -30,13 +29,13 @@ export const theme = createMuiTheme({
     },
     light: {
       pink: '#db91aa',
-      purple: '#ac91db'
+      purple: '#ac91db',
     },
     white: '#FFFFFF',
   },
   typography: {
-    fontFamily: ['Dosis', 'Roboto', 'Open Sans', '"Helvetica Neue"', 'Arial', 'sans-serif'].join(',')
-  }
+    fontFamily: ['Dosis', 'Roboto', 'Open Sans', '"Helvetica Neue"', 'Arial', 'sans-serif'].join(','),
+  },
 })
 
 export const defaultErrorText = 'Sorry, but something went wrong.'
@@ -46,8 +45,8 @@ const styles = () => ({
     width: '100vw',
     height: '100%',
     minHeight: '100vh',
-    background: `linear-gradient(0deg, ${theme.palette.dark.pink} 0%, ${theme.palette.dark.purple} 80%)`
-  }
+    background: `linear-gradient(0deg, ${theme.palette.dark.pink} 0%, ${theme.palette.dark.purple} 80%)`,
+  },
 })
 
 const routes = (
@@ -66,8 +65,7 @@ const routes = (
   </Router>
 )
 
-const App = (props) => {
-
+const App = props => {
   useEffect(() => apiHost('https://api.spotify.com/v1/'))
 
   const { classes } = props
