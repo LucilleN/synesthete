@@ -25,8 +25,9 @@ describe('initial state', () => {
       ReactDOM.render(
         <MuiThemeProvider theme={theme}>
           <PageNotFound />
-        </MuiThemeProvider>
-      , div)
+        </MuiThemeProvider>,
+        div
+      )
     })
   })
 

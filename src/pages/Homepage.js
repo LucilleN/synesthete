@@ -11,13 +11,13 @@ const styles = theme => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: '100%'
+    height: '100%',
   },
   title: {
     fontSize: '6rem',
     fontWeight: 800,
     color: theme.palette.white,
-    marginTop: '-10px'
+    marginTop: '-10px',
   },
   subTitle: {
     fontSize: '3rem',
@@ -25,20 +25,20 @@ const styles = theme => ({
     color: theme.palette.white,
     opacity: '0.4',
     marginTop: -40,
-    marginBottom: 10
+    marginBottom: 10,
   },
   section: {
     textAlign: 'center',
     alignItems: 'center',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   sectionHeading: {
     fontSize: '2rem',
     fontWeight: 600,
     color: theme.palette.white,
     opacity: '0.7',
-    marginBottom: 5
+    marginBottom: 5,
   },
   paragraph: {
     fontSize: '1rem',
@@ -47,12 +47,12 @@ const styles = theme => ({
     opacity: '0.6',
     textAlign: 'center',
     width: '50%',
-    marginBottom: 10
+    marginBottom: 10,
   },
   buttonRow: {
     display: 'flex',
-    flexDirection: 'row'
-  }
+    flexDirection: 'row',
+  },
 })
 
 const Homepage = props => {
@@ -71,11 +71,14 @@ const Homepage = props => {
         </Typography>
         <Typography className={classes.paragraph}>
           Synesthesia is a neurological phenomenon that allows the senses to overlap.
-          Chromesthetes have sound-color synesthesia, which means that they naturally hear music as colors.
-          This makes listening to music an especially vibrant experience, and helps a lot of artists create music.
+          Chromesthetes have sound-color synesthesia, which means that they naturally hear music
+          as colors.
+          This makes listening to music an especially vibrant experience, and helps a lot of
+          artists create music.
         </Typography>
         <Typography className={classes.paragraph}>
-          Synesthete aims to simulate the experience of chromesthesia by pairing music with colors in realtime.
+          Synesthete aims to simulate the experience of chromesthesia by pairing music with colors
+          in realtime.
         </Typography>
       </div>
       <div className={classes.section}>
@@ -83,12 +86,13 @@ const Homepage = props => {
           what to do
         </Typography>
         <Typography className={classes.paragraph}>
-          Either search for a song to watch its chromesthesia visualization for a 30-second sample, or upload your own audio file to see it get visualized!
+          Either search for a song to watch its chromesthesia visualization for a 30-second
+          sample, or upload your own audio file to see it get visualized!
         </Typography>
       </div>
       <div className={classes.buttonRow}>
-        <StartButton href="/search" text="search song samples"/>
-        <StartButton href="/upload" text="upload a file"/>
+        <StartButton href="/search" text="search song samples" />
+        <StartButton href="/upload" text="upload a file" />
       </div>
     </div>
   )

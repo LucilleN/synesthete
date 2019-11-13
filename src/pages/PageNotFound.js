@@ -11,15 +11,15 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   title: {
     color: theme.palette.light.pink,
     fontSize: '5rem',
     textAlign: 'center',
     marginTop: '30vh',
-    opacity: 0.8
-  }
+    opacity: 0.8,
+  },
 })
 
 const PageNotFound = props => {
@@ -29,7 +29,7 @@ const PageNotFound = props => {
       <Typography className={classes.title} id="title">
         page not found
       </Typography>
-      <StartButton href={"/"} text={"back to home"} />
+      <StartButton href="/" text="back to home" />
     </div>
   )
 }
