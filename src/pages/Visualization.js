@@ -221,9 +221,9 @@ const Visualization = props => {
         console.log("currentTrack's preview_url", trackObject.preview_url)
         console.log("currentRecommendation.id", currentRecommendation.id)
         const result = await getRecommendation({
-          limit: 1,
+          limit: 3,
           seed_tracks: `${currentRecommendation.id}`,
-          seed_artists: `${currentRecommendation.artists[0].id}`
+          // seed_artists: `${currentRecommendation.artists[0].id}`
         })
         currentRecommendation = result.tracks[0]
         console.log("got a new recommendation with id", currentRecommendation.id)
