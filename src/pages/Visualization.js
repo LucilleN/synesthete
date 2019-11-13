@@ -148,6 +148,8 @@ const Visualization = props => {
   const [audioFeatures, setAudioFeatures] = useState(null)
   const [recommendedSong, setRecommendedSong] = useState(null)
 
+  const [songHistory, setSongHistory] = useState(new Set([trackObject.id]))
+
   const [existingAudioNode, setAudioNode] = useState(null)
   const [existingAnalyser, setAnalyser] = useState(null)
   const [existingContext, setContext] = useState(null)
@@ -204,6 +206,7 @@ const Visualization = props => {
         target_acousticness: `${audioFeatures.acousticness}`,
         target_key: `${audioFeatures.key}`
       })
+
       currentRecommendation = result.tracks[0]
 
       const isSameSong = (track1, track2) => {
@@ -214,9 +217,14 @@ const Visualization = props => {
         )
       }
 
-      // Recommendation might be a song with a null preview_url; if so, recommend another one
-      // Recommendation might also be the current song itself; if so, recommend another
-      while (!currentRecommendation.preview_url || isSameSong(trackObject, currentRecommendation)) {
+      // Recommendation might be a song with a null preview_url, or it might be
+      // the current song, or it might have already been listened to; if so,
+      // recommend another one
+      console.log("songHistory.has(currentRecommendation.id): " + songHistory.has(currentRecommendation.id))
+      while (!currentRecommendation.preview_url
+        || isSameSong(trackObject, currentRecommendation
+        || songHistory.has(currentRecommendation.id))
+      ) {
         console.log("currentTrack's id", trackObject.id)
         console.log("currentTrack's preview_url", trackObject.preview_url)
         console.log("currentRecommendation.id", currentRecommendation.id)
@@ -231,6 +239,8 @@ const Visualization = props => {
       }
 
       setRecommendedSong(result.tracks[0])
+      setSongHistory(songHistory.add(result.tracks[0].id))
+      console.log("songHistory", songHistory)
 
     } catch (error) {
       setError(defaultErrorText)
