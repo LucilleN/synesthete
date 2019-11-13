@@ -95,7 +95,7 @@ export const loadMusic = ({
   const barsPerColorSection = 6
   const totalNumberOfBars = barsPerColorSection * colors.length
   const barSpacing = (canvasWidth - (totalNumberOfBars-1) * barWidth) / totalNumberOfBars
-  const offset = (audioFeatures) ? audioFeatures.key : 0
+  const offset = (audioFeatures && audioFeatures.key) ? audioFeatures.key : 0
 
   let barHeight
   let x = 0

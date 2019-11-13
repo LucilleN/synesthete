@@ -191,12 +191,17 @@ const Visualization = props => {
   }, [canLoadMusic])
 
   const performRecommendationQuery = async event => {
+
     event.preventDefault()
     setError(null)
 
     let currentRecommendation
 
+    console.log("in performRecommendationQuery")
+
     try {
+      console.log("in performRecommendationQuery TRY")
+
       const result = await getRecommendation({
         limit: 1,
         seed_tracks: `${trackObject.id}`,
@@ -210,10 +215,11 @@ const Visualization = props => {
       currentRecommendation = result.tracks[0]
 
       const isSameSong = (track1, track2) => {
+        console.log("isSameSong: " + (track1.id === track2.id))
         return (
-          track1.id === track2.id &&
-          track1.artists[0].id === track2.artists[0].id &&
-          track1.title === track2.title
+          track1.id === track2.id //&&
+          // track1.artists[0].id === track2.artists[0].id &&
+          // track1.title === track2.title
         )
       }
 
@@ -222,11 +228,11 @@ const Visualization = props => {
       // recommend another one
       console.log("songHistory.has(currentRecommendation.id): " + songHistory.has(currentRecommendation.id))
       while (!currentRecommendation.preview_url
-        || isSameSong(trackObject, currentRecommendation
-        || songHistory.has(currentRecommendation.id))
+        || isSameSong(trackObject, currentRecommendation)
+        || songHistory.has(currentRecommendation.id)
       ) {
-        console.log("currentTrack's id", trackObject.id)
-        console.log("currentTrack's preview_url", trackObject.preview_url)
+        console.log("entering whileloop. \ncurrentTrack's id", trackObject.id)
+        // console.log("currentTrack's preview_url", trackObject.preview_url)
         console.log("currentRecommendation.id", currentRecommendation.id)
         const result = await getRecommendation({
           limit: 3,
@@ -236,6 +242,8 @@ const Visualization = props => {
         currentRecommendation = result.tracks[0]
         console.log("got a new recommendation with id", currentRecommendation.id)
         console.log("new recommendation's preview url", currentRecommendation.preview_url)
+        console.log("songHistory.has(currentRecommendation.id): " + songHistory.has(currentRecommendation.id))
+
       }
 
       setRecommendedSong(result.tracks[0])
@@ -243,6 +251,7 @@ const Visualization = props => {
       console.log("songHistory", songHistory)
 
     } catch (error) {
+      console.log("caught error here: " + error)
       setError(defaultErrorText)
     }
   }
@@ -270,7 +279,7 @@ const Visualization = props => {
       )}
       {error && (
         <div id="error">
-          <ErrorDialog error={error} errorSubtitle={"The Visualizer doesn't work when it's been loaded externally. Try refreshing the page or starting a new search."}/>
+          <ErrorDialog error={error} errorSubtitle={"The Visualizer doesn't work when it's been loaded externally. Try refreshing the page, clicking on the \"get a visually similar song\" button, or starting a new search."}/>
         </div>
       )}
     </div>
