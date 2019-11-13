@@ -1,7 +1,6 @@
 const apiHost = () => { } // No-op in our mock version.
 
-const getAudioFeatures = () => {
-  return Promise.resolve({
+const getAudioFeatures = () => Promise.resolve({
     "danceability": 0.441,
     "energy": 0.379,
     "key": 2,
@@ -20,7 +19,7 @@ const getAudioFeatures = () => {
     "analysis_url": "https://api.spotify.com/v1/audio-analysis/0QZ5yyl6B6utIWkxeBDxQN",
     "duration_ms": 208227,
     "time_signature": 3
-})}
+})
 
 const getRecommendation = () => Promise.resolve({
   "tracks" : [ {
@@ -1501,5 +1500,5 @@ export {
   apiHost,
   searchSongs,
   getAudioFeatures,
-  getRecommendation
+  getRecommendation,
 }
