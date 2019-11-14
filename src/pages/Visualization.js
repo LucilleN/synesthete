@@ -223,7 +223,6 @@ const Visualization = props => {
         const result = await getRecommendation({
           limit: 3,
           seed_tracks: `${currentRecommendation.id}`,
-          // seed_artists: `${currentRecommendation.artists[0].id}`
         })
         currentRecommendation = result.tracks[0]
       }

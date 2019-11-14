@@ -125,7 +125,7 @@ export const loadMusic = ({
   }
 
   try {
-    const audioPlay = audio.play().catch(() => {
+    audio.play().catch(() => {
       setError(defaultErrorText)
     })
   } catch (error) {
