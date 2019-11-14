@@ -45,6 +45,7 @@ exports[`clicking on the Load URL button should show the text input element 1`] 
     <button
       className="UploadVisualization-button-15"
       onClick={[Function]}
+      type="button"
     >
       <p
         className="MuiTypography-root MuiTypography-body1"
@@ -72,6 +73,7 @@ exports[`clicking on the Load URL button should show the text input element 1`] 
       className="UploadVisualization-loadOptionButton-13"
       id="upload-file"
       onClick={[Function]}
+      type="button"
     >
       <p
         className="MuiTypography-root MuiTypography-body1"
@@ -83,6 +85,7 @@ exports[`clicking on the Load URL button should show the text input element 1`] 
       className="UploadVisualization-loadOptionButton-13"
       id="load-url"
       onClick={[Function]}
+      type="button"
     >
       <p
         className="MuiTypography-root MuiTypography-body1"
@@ -136,6 +139,7 @@ exports[`initial state should display a title and buttons to reset and navigate 
     <button
       className="UploadVisualization-button-15"
       onClick={[Function]}
+      type="button"
     >
       <p
         className="MuiTypography-root MuiTypography-body1"
@@ -163,6 +167,7 @@ exports[`initial state should display a title and buttons to reset and navigate 
       className="UploadVisualization-loadOptionButton-13"
       id="upload-file"
       onClick={[Function]}
+      type="button"
     >
       <p
         className="MuiTypography-root MuiTypography-body1"
@@ -174,6 +179,7 @@ exports[`initial state should display a title and buttons to reset and navigate 
       className="UploadVisualization-loadOptionButton-13"
       id="load-url"
       onClick={[Function]}
+      type="button"
     >
       <p
         className="MuiTypography-root MuiTypography-body1"
@@ -227,6 +233,7 @@ exports[`initial state should not display the file input or the text input 1`] =
     <button
       className="UploadVisualization-button-15"
       onClick={[Function]}
+      type="button"
     >
       <p
         className="MuiTypography-root MuiTypography-body1"
@@ -254,6 +261,7 @@ exports[`initial state should not display the file input or the text input 1`] =
       className="UploadVisualization-loadOptionButton-13"
       id="upload-file"
       onClick={[Function]}
+      type="button"
     >
       <p
         className="MuiTypography-root MuiTypography-body1"
@@ -265,6 +273,7 @@ exports[`initial state should not display the file input or the text input 1`] =
       className="UploadVisualization-loadOptionButton-13"
       id="load-url"
       onClick={[Function]}
+      type="button"
     >
       <p
         className="MuiTypography-root MuiTypography-body1"
@@ -321,6 +330,7 @@ exports[`initial state should start with two buttons for load options 1`] = `
     <button
       className="UploadVisualization-button-15"
       onClick={[Function]}
+      type="button"
     >
       <p
         className="MuiTypography-root MuiTypography-body1"
@@ -348,6 +358,7 @@ exports[`initial state should start with two buttons for load options 1`] = `
       className="UploadVisualization-loadOptionButton-13"
       id="upload-file"
       onClick={[Function]}
+      type="button"
     >
       <p
         className="MuiTypography-root MuiTypography-body1"
@@ -359,6 +370,7 @@ exports[`initial state should start with two buttons for load options 1`] = `
       className="UploadVisualization-loadOptionButton-13"
       id="load-url"
       onClick={[Function]}
+      type="button"
     >
       <p
         className="MuiTypography-root MuiTypography-body1"
@@ -415,6 +427,7 @@ exports[`loading a URL should trigger the music to load when the load button is 
     <button
       className="UploadVisualization-button-15"
       onClick={[Function]}
+      type="button"
     >
       <p
         className="MuiTypography-root MuiTypography-body1"
@@ -442,6 +455,7 @@ exports[`loading a URL should trigger the music to load when the load button is 
       className="UploadVisualization-loadOptionButton-13"
       id="upload-file"
       onClick={[Function]}
+      type="button"
     >
       <p
         className="MuiTypography-root MuiTypography-body1"
@@ -453,6 +467,7 @@ exports[`loading a URL should trigger the music to load when the load button is 
       className="UploadVisualization-loadOptionButton-13"
       id="load-url"
       onClick={[Function]}
+      type="button"
     >
       <p
         className="MuiTypography-root MuiTypography-body1"
