@@ -196,11 +196,7 @@ const Visualization = props => {
 
     let currentRecommendation
 
-    console.log('in performRecommendationQuery')
-
     try {
-      console.log('in performRecommendationQuery TRY')
-
       const result = await getRecommendation({
         limit: 1,
         seed_tracks: `${trackObject.id}`,
@@ -214,7 +210,6 @@ const Visualization = props => {
       currentRecommendation = result.tracks[0]
 
       const isSameSong = (track1, track2) => {
-        console.log('isSameSong: ' + (track1.id === track2.id))
         return track1.id === track2.id
       }
 
@@ -225,26 +220,18 @@ const Visualization = props => {
         || isSameSong(trackObject, currentRecommendation)
         || songHistory.has(currentRecommendation.id)
       ) {
-        console.log("entering whileloop. \ncurrentTrack's id", trackObject.id)
-        console.log("songHistory.has(currentRecommendation.id)", songHistory.has(currentRecommendation.id))
-
         const result = await getRecommendation({
           limit: 3,
           seed_tracks: `${currentRecommendation.id}`,
           // seed_artists: `${currentRecommendation.artists[0].id}`
         })
         currentRecommendation = result.tracks[0]
-
-        console.log("got a new recommendation with id", currentRecommendation.id)
-        console.log("new recommendation's preview url", currentRecommendation.preview_url)
-
       }
 
-      setRecommendedSong(result.tracks[0])
+      setRecommendedSong(currentRecommendation)
       setSongHistory(songHistory.add(result.tracks[0].id))
-      console.log("songHistory", songHistory)
     } catch (error) {
-      console.log("caught error in Visualization.performRecommendationQuery: " + error)
+      console.log('caught error in Visualization.performRecommendationQuery: ', error)
       setError(defaultErrorText)
     }
   }
