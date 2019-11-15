@@ -181,6 +181,8 @@ describe('initial state', () => {
   })
 
   it('should render an audio element', () => {
+    console.log("TESTING FOR INITIAL AUDIO ELEMENT")
+
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
@@ -190,8 +192,13 @@ describe('loading music', () => {
   let div
   let visualizationUtilitiesStub
   beforeEach(async () => {
+    console.log("in beforeEach")
     sinon.stub(visualizationUtilities, 'loadMusic')
+    // sinon.stub(visualizationUtilities, 'performAudioFeaturesQuery')
     sinon.stub(api, 'getAudioFeatures')
+    // sinon.stub(api, 'getAccessToken')
+    // sinon.stub(api, 'getRecommendation')
+    // sinon.stub(api, 'searchSongs')
 
     api.getAudioFeatures.returns(Promise.resolve(audioFeatures))
 
@@ -208,7 +215,12 @@ describe('loading music', () => {
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(div)
     visualizationUtilities.loadMusic.restore()
+    // visualizationUtilities.performAudioFeaturesQuery.restore()
     api.getAudioFeatures.restore()
+    // api.getAccessToken.restore()
+    // api.getRecommendation.restore()
+    // api.searchSongs.restore()
+
   })
 
   it('still renders a canvas', () => {
@@ -228,15 +240,36 @@ describe('loading music', () => {
         counter += 1
         process.nextTick(nextEffect)
       } else {
-        console.log("visualizationUtilities", visualizationUtilities)
-        console.log("visualizationUtilities.loadMusic", visualizationUtilities.loadMusic)
-        console.log("visualizationUtilities.loadMusic.called", visualizationUtilities.loadMusic.called)
+        // console.log("visualizationUtilities", visualizationUtilities)
+        // console.log("visualizationUtilities.loadMusic", visualizationUtilities.loadMusic)
+        // console.log("visualizationUtilities.loadMusic.called", visualizationUtilities.loadMusic.called)
         expect(visualizationUtilities.loadMusic.called).toBe(true)
         done()
       }
     }
-
     process.nextTick(nextEffect)
+
+
+    // sinon.stub(visualizationUtilities, 'loadMusic')
+    // sinon.stub(api, 'getAudioFeatures')
+    // sinon.stub(api, 'getAccessToken')
+    //
+    // api.getAudioFeatures.returns(Promise.resolve(audioFeatures))
+    //
+    // div = document.createElement('div')
+    // await ReactTestUtils.act(async () => {
+    //   await ReactDOM.render(
+    //     <MuiThemeProvider theme={theme}>
+    //       <Visualization location={{ state: { trackObject: track } }}/>
+    //     </MuiThemeProvider>
+    //   , div)
+    // })
+
+
+    // expect(visualizationUtilities.loadMusic.called).toBe(true)
+
+
+
   })
 })
 
@@ -244,7 +277,14 @@ describe('the recommendation button', () => {
   let div
   beforeEach(async () => {
     sinon.stub(visualizationUtilities, 'loadMusic')
+    // sinon.stub(visualizationUtilities, 'performAudioFeaturesQuery')
     sinon.stub(api, 'getRecommendation')
+    // sinon.stub(api, 'getAccessToken')
+    // sinon.stub(api, 'getAudioFeatures')
+    // sinon.stub(api, 'searchSongs')
+
+    // api.getAudioFeatures.returns(Promise.resolve(audioFeatures))
+
 
     api.getRecommendation.returns(Promise.resolve(recommendation))
 
@@ -268,10 +308,16 @@ describe('the recommendation button', () => {
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(div)
     visualizationUtilities.loadMusic.restore()
+    // visualizationUtilities.performAudioFeaturesQuery.restore()
     api.getRecommendation.restore()
+    // api.getAccessToken.restore()
+    // api.getAudioFeatures.restore()
+    // api.searchSongs.restore()
+
+
   })
 
-  it('should call the getRecommendation function when clicked', () => {
+  it('should call the getRecommendation function when clicked', async () => {
     // let counter = 0
     // const nextEffect = () => {
     //   if (counter <2) {
@@ -289,6 +335,28 @@ describe('the recommendation button', () => {
     //   expect(api.getRecommendation.called).toBe(true)
     //   done()
     // })
+
+    // sinon.stub(visualizationUtilities, 'loadMusic')
+    // sinon.stub(api, 'getRecommendation')
+    //
+    // api.getRecommendation.returns(Promise.resolve(recommendation))
+    //
+    // div = document.createElement('div')
+    // await ReactTestUtils.act(async () => {
+    //   await ReactDOM.render(
+    //     <Router>
+    //       <MuiThemeProvider theme={theme}>
+    //         <Visualization location={{ state: { trackObject: track } }}/>
+    //       </MuiThemeProvider>
+    //     </Router>
+    //   , div)
+    // })
+    // const recommendationButton = div.querySelector("#recommendation-button")
+    // await ReactTestUtils.act(async() => {
+    //   await ReactTestUtils.Simulate.click(recommendationButton)
+    // })
+
+
     expect(api.getRecommendation.called).toBe(true)
 
   })

@@ -103,4 +103,5 @@ export {
   searchSongs,
   getAudioFeatures,
   getRecommendation,
+  getAccessToken,
 }
