@@ -17,7 +17,7 @@ beforeEach(() => {
   component = TestRenderer.create(
     <MuiThemeProvider theme={theme}>
       <UploadVisualization />
-    </MuiThemeProvider>
+    </MuiThemeProvider>,
   )
 })
 
@@ -30,7 +30,7 @@ describe('initial state', () => {
         <MuiThemeProvider theme={theme}>
           <UploadVisualization />
         </MuiThemeProvider>,
-        div
+        div,
       )
     })
   })
@@ -68,7 +68,7 @@ describe('clicking on the Upload File button', () => {
         <MuiThemeProvider theme={theme}>
           <UploadVisualization />
         </MuiThemeProvider>,
-        div
+        div,
       )
     })
     const uploadButton = div.querySelector('#upload-file')
@@ -101,7 +101,7 @@ describe('clicking on the Load URL button', () => {
         <MuiThemeProvider theme={theme}>
           <UploadVisualization />
         </MuiThemeProvider>,
-        div
+        div,
       )
     })
     const loadUrlButton = div.querySelector('#load-url')
@@ -156,7 +156,7 @@ describe('loading a URL', () => {
         <MuiThemeProvider theme={theme}>
           <UploadVisualization />
         </MuiThemeProvider>,
-        div
+        div,
       )
     })
     const loadUrlButton = div.querySelector('#load-url')

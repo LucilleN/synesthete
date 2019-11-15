@@ -13,7 +13,7 @@ beforeEach(() => {
   component = TestRenderer.create(
     <MuiThemeProvider theme={theme}>
       <PageNotFound />
-    </MuiThemeProvider>
+    </MuiThemeProvider>,
   )
 })
 
@@ -26,7 +26,7 @@ describe('initial state', () => {
         <MuiThemeProvider theme={theme}>
           <PageNotFound />
         </MuiThemeProvider>,
-        div
+        div,
       )
     })
   })

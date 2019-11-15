@@ -19,9 +19,8 @@ export const loadMusic = ({
   existingAnalyser,
   setAnalyser,
   setError,
-  audioFeatures
+  audioFeatures,
 }) => {
-
   const audio = audioRef.current
   if (!audio) {
     return
@@ -36,19 +35,18 @@ export const loadMusic = ({
     } catch (error) {
       setError(defaultErrorText)
     }
-  }
-  else {
+  } else {
     audio.src = srcUrl
   }
 
   const canvas = canvasRef.current
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
-  const ctx = canvas.getContext("2d")
+  const ctx = canvas.getContext('2d')
 
   const context = (existingContext) ? existingContext : new AudioContext()
   if (existingContext) {
-    context.resume() // this one line fixed everything lol
+    context.resume() // fixes DOMExceptions on reload
   }
   const audioNode = (existingAudioNode) ? existingAudioNode : context.createMediaElementSource(audio)
   const analyser = (existingAnalyser) ? existingAnalyser : context.createAnalyser()
@@ -94,7 +92,7 @@ export const loadMusic = ({
   const barHeightMax = 500
   const barsPerColorSection = 6
   const totalNumberOfBars = barsPerColorSection * colors.length
-  const barSpacing = (canvasWidth - (totalNumberOfBars-1) * barWidth) / totalNumberOfBars
+  const barSpacing = (canvasWidth - (totalNumberOfBars - 1) * barWidth) / totalNumberOfBars
   const offset = (audioFeatures && audioFeatures.key) ? audioFeatures.key : 0
 
   let barHeight
@@ -108,14 +106,14 @@ export const loadMusic = ({
     analyser.getByteFrequencyData(dataArray)
 
     // Clears canvas with black and use opacity 0.1 to create fade effect
-    ctx.fillStyle = "rgba(0,0,0,0.1)"
+    ctx.fillStyle = 'rgba(0,0,0,0.1)'
     ctx.fillRect(0, 0, canvasWidth, canvasHeight)
 
-    for (let barIndex = 0; barIndex < totalNumberOfBars; barIndex++) {
+    for (let barIndex = 0; barIndex < totalNumberOfBars; barIndex += 1) {
       barHeight = (dataArray[barIndex] * 2)
 
-      let [r, g, b] = getColorOfSoundBars(Math.floor(barIndex/barsPerColorSection), offset)
-      let a = (barHeight / barHeightMax) ** 3.5
+      const [r, g, b] = getColorOfSoundBars(Math.floor(barIndex / barsPerColorSection), offset)
+      const a = (barHeight / barHeightMax) ** 4
 
       ctx.fillStyle = `rgba(${r},${g},${b},${a})`
       ctx.fillRect(x, (canvasHeight - barHeight), barWidth, barHeight)
@@ -148,16 +146,13 @@ export const performAudioFeaturesQuery = async ({
   setError,
   songID,
   setAudioFeatures,
-  defaultErrorText
+  defaultErrorText,
 }) => {
-
   setError(null)
 
   try {
     const result = await getAudioFeatures(songID)
-
     setAudioFeatures(result)
-
   } catch (error) {
     setError(defaultErrorText)
   }

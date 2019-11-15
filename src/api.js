@@ -1,4 +1,4 @@
-let api = 'https://misconfigured-app.com/' // what is this lol
+let api = 'https://misconfigured-app.com/'
 
 const HTTP_OK = 200
 
@@ -21,10 +21,10 @@ const statusCheck = successStatuses => response => {
 
 const okCheck = statusCheck([HTTP_OK])
 
-// original api url:
+// original API url:
 // const authorizationUrl = 'https://accounts.spotify.com/api/token'
 
-// Using the relay server, replace api url with this instead:
+// Using the relay server, replaced API url with this instead:
 const corsAuthorizationUrl = 'http://localhost:3000/api/token'
 const authorizationKey = 'Basic MTU5YWM4OGIxYzUzNGVkN2FlNDE2MDJmMWU1NThhNDk6YmUxOTFmMTg3ZGZlNDgzMjg3MDAxZDNhNWZlYTEyNTM='
 const authorizationHeaders = {
@@ -48,8 +48,6 @@ const getAccessToken = async () => {
     body: authSearchParams,
   }).then(okCheck, emitNativeError)
     .then(verifiedResponse => verifiedResponse.json())
-
-  console.log('Got here in getAccessToken')
 
   tokenIsValid = true
   setTimeout(() => {
@@ -80,7 +78,6 @@ const query = async (resource, params) => {
   const optionalParams = (params) ? `?${new URLSearchParams(params)}` : ''
 
   const headers = await getHeaders()
-  console.log('making a regular api call; headers: ', headers)
 
   try {
     const response = await fetch(`${urlFor(resource)}${optionalParams}`, {

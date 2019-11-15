@@ -130,11 +130,6 @@ const Visualization = props => {
   const { classes } = props
   const { trackObject } = props.location.state
 
-  if (!trackObject) {
-    console.log('No track object')
-    setError(defaultErrorText)
-  }
-
   // May need this in the future to allow users to access a song's visualization just by
   // clicking on a saved link rather than going through the search every time, but this
   // would require another API call to get the trackObject based on the songID, so I
@@ -155,6 +150,10 @@ const Visualization = props => {
   const [existingContext, setContext] = useState(null)
 
   const [canLoadMusic, setCanLoadMusic] = useState(false)
+
+  if (!trackObject) {
+    setError('No track object found')
+  }
 
   useEffect(() => {
     if (trackObject) {
@@ -209,9 +208,7 @@ const Visualization = props => {
 
       currentRecommendation = result.tracks[0]
 
-      const isSameSong = (track1, track2) => {
-        return track1.id === track2.id
-      }
+      const isSameSong = (track1, track2) => track1.id === track2.id
 
       // Recommendation might be a song with a null preview_url, or it might be
       // the current song, or it might have already been listened to; if so,
@@ -220,17 +217,20 @@ const Visualization = props => {
         || isSameSong(trackObject, currentRecommendation)
         || songHistory.has(currentRecommendation.id)
       ) {
-        const result = await getRecommendation({
+        const newResult = await getRecommendation({
           limit: 3,
           seed_tracks: `${currentRecommendation.id}`,
+          target_key: `${audioFeatures.key}`,
+          target_energy: `${audioFeatures.energy}`,
+          target_acousticness: `${audioFeatures.acousticness}`,
+          target_loudness: `${audioFeatures.loudness}`,
         })
-        currentRecommendation = result.tracks[0]
+        currentRecommendation = newResult.tracks[0]
       }
 
       setRecommendedSong(currentRecommendation)
       setSongHistory(songHistory.add(result.tracks[0].id))
-    } catch (error) {
-      console.log('caught error in Visualization.performRecommendationQuery: ', error)
+    } catch (e) {
       setError(defaultErrorText)
     }
   }
@@ -240,25 +240,30 @@ const Visualization = props => {
       <canvas ref={canvasRef} id="canvas" width="300" height="300" className={classes.canvas} />
       <audio ref={audioRef} id="audio" crossOrigin="anonymous" controls className={classes.audio} />
       <div className={classes.titleBar}>
-        <StartButton href="/search" text="< new search"/>
+        <StartButton href="/search" text="< new search" />
         <Typography className={classes.title}>
-          Visualization:<br></br>
+          Visualization:
+          <br />
         </Typography>
-        <RecommendationButton className={classes.recommendationButton} handleClick={performRecommendationQuery} />
+        <RecommendationButton
+          className={classes.recommendationButton}
+          handleClick={performRecommendationQuery}
+        />
       </div>
       <Typography className={classes.subtitle}>
         "{trackObject.name}" by {trackObject.artists[0].name}
       </Typography>
       {recommendedSong && (
-        <Redirect to={{
+        <Redirect
+          to={{
             pathname: `/visualization/${recommendedSong.id}`,
-            state: { trackObject: recommendedSong }
+            state: { trackObject: recommendedSong },
           }}
         />
       )}
       {error && (
         <div id="error">
-          <ErrorDialog error={error} errorSubtitle={"The Visualizer doesn't work when it's been loaded externally. Try refreshing the page, clicking on the \"get a visually similar song\" button, or starting a new search."}/>
+          <ErrorDialog error={error} errorSubtitle={"The Visualizer doesn't work when it's been loaded externally. Try refreshing the page, clicking on the \"get a visually similar song\" button, or starting a new search."} />
         </div>
       )}
     </div>

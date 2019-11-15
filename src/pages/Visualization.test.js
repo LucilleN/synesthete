@@ -159,7 +159,7 @@ beforeEach(async () => {
     component = TestRenderer.create(
       <MuiThemeProvider theme={theme}>
         <Visualization location={{ state: { trackObject: track } }} />
-      </MuiThemeProvider>
+      </MuiThemeProvider>,
     )
   })
 })
@@ -202,7 +202,7 @@ describe('loading music', () => {
         <MuiThemeProvider theme={theme}>
           <Visualization location={{ state: { trackObject: track } }} />
         </MuiThemeProvider>,
-        div
+        div,
       )
     })
   })
@@ -265,7 +265,7 @@ describe('the recommendation button', () => {
       )
     })
     const recommendationButton = div.querySelector('#recommendation-button')
-    await ReactTestUtils.act(async() => {
+    await ReactTestUtils.act(async () => {
       await ReactTestUtils.Simulate.click(recommendationButton)
     })
   })

@@ -16,7 +16,7 @@ beforeEach(() => {
   component = TestRenderer.create(
     <MuiThemeProvider theme={theme}>
       <Search />
-    </MuiThemeProvider>
+    </MuiThemeProvider>,
   )
 })
 
@@ -46,7 +46,7 @@ describe('search button', () => {
         <MuiThemeProvider theme={theme}>
           <Search />
         </MuiThemeProvider>,
-        div
+        div,
       )
     })
   })
@@ -89,7 +89,7 @@ const setupAndQuerySearchForm = async () => {
       <MuiThemeProvider theme={theme}>
         <Search />
       </MuiThemeProvider>,
-      div
+      div,
     )
   })
 
@@ -190,7 +190,7 @@ describe('normal API calls', () => {
         "offset" : 0,
         "previous" : null,
         "total" : 204
-      }
+      },
     }))
 
     div = await setupAndQuerySearchForm()
@@ -231,7 +231,7 @@ describe('API calls that return no search results', () => {
         "offset" : 0,
         "previous" : null,
         "total" : 0
-      }
+      },
     }))
 
     div = await setupAndQuerySearchForm()

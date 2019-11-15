@@ -11,7 +11,7 @@ beforeEach(() => {
   component = TestRenderer.create(
     <MuiThemeProvider theme={theme}>
       <About />
-    </MuiThemeProvider>
+    </MuiThemeProvider>,
   )
 })
 
