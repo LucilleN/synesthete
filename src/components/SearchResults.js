@@ -9,7 +9,7 @@ const styles = theme => ({
   searchResults: {
     display: 'flex',
     flexWrap: 'wrap',
-    marginTop: '1rem'
+    marginTop: '1rem',
   },
   noResults: {
     display: 'flex',
@@ -17,19 +17,18 @@ const styles = theme => ({
     alignItems: 'center',
     textAlign: 'center',
     justifyContent: 'center',
-    width: '100%'
+    width: '100%',
   },
   message: {
     textAlign: 'center',
     fontSize: '2rem',
     color: theme.palette.dark.pink,
     opacity: 0.6,
-    width: '30%'
-  }
+    width: '30%',
+  },
 })
 
 const SearchResults = props => {
-
   const { classes, results, submitted } = props
 
   if (!submitted) {
@@ -40,9 +39,7 @@ const SearchResults = props => {
         </Typography>
       </div>
     )
-  }
-
-  else if (submitted && results.length === 0) {
+  } else if (submitted && results.length === 0) {
     return (
       <div className={classes.noResults} id="noResults">
         <Typography className={classes.message}>
@@ -50,9 +47,7 @@ const SearchResults = props => {
         </Typography>
       </div>
     )
-  }
-
-  else {
+  } else {
     return (
       <div className={classes.searchResults} id="searchResults">
         <Grid container id="resultsContainer">

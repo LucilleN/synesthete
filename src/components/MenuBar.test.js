@@ -5,7 +5,7 @@ import ReactTestUtils from 'react-dom/test-utils'
 
 import { MuiThemeProvider } from '@material-ui/core/styles'
 
-import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import { theme } from '../App'
 import MenuBar from './MenuBar'
@@ -17,7 +17,7 @@ beforeEach(() => {
       <MuiThemeProvider theme={theme}>
         <MenuBar />
       </MuiThemeProvider>
-    </Router>
+    </Router>,
   )
 })
 
@@ -44,8 +44,9 @@ describe('clicking on the logo and on each of the buttons', () => {
           <MuiThemeProvider theme={theme}>
             <MenuBar />
           </MuiThemeProvider>
-        </Router>
-      , div)
+        </Router>,
+        div,
+      )
     })
     const logo = div.querySelector('#logo')
     const home = div.querySelector('#home')
@@ -58,7 +59,7 @@ describe('clicking on the logo and on each of the buttons', () => {
   afterEach(() => ReactDOM.unmountComponentAtNode(div))
 
   it('should still render a menu bar after the redirect', () => {
-    clickableItems.forEach((clickableItem) => {
+    clickableItems.forEach(clickableItem => {
       ReactTestUtils.act(() => {
         ReactTestUtils.Simulate.click(clickableItem)
       })

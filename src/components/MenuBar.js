@@ -11,36 +11,35 @@ const styles = theme => ({
     background: theme.palette.dark.pink,
     height: '60px',
     textAlign: 'center',
-    zIndex: 10
+    zIndex: 10,
   },
   button: {
     height: '100%',
     '&:hover': {
-       background: theme.palette.light.pink,
-    }
+      background: theme.palette.light.pink,
+    },
   },
   text: {
     fontSize: '1.625rem',
     padding: 10,
     fontWeight: 'bold',
     '&:hover': {
-       color: theme.palette.dark.purple
-    }
+      color: theme.palette.dark.purple,
+    },
   },
   link: {
     textDecoration: 'none',
-    color: theme.palette.light.pink
+    color: theme.palette.light.pink,
   },
   logo: {
     color: theme.palette.white,
     display: 'flex',
     fontSize: '2.25rem',
     paddingLeft: 20,
-  }
+  },
 })
 
 const MenuBar = props => {
-
   const { classes } = props
 
   return (

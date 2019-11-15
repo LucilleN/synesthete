@@ -5,7 +5,7 @@ import ReactTestUtils from 'react-dom/test-utils'
 
 import { MuiThemeProvider } from '@material-ui/core/styles'
 
-import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import { theme } from '../App'
 import SearchResultRow from './SearchResultRow'
@@ -84,8 +84,8 @@ let component
 beforeEach(() => {
   component = TestRenderer.create(
     <MuiThemeProvider theme={theme}>
-      <SearchResultRow song={track}/>
-    </MuiThemeProvider>
+      <SearchResultRow song={track} />
+    </MuiThemeProvider>,
   )
 })
 
@@ -104,10 +104,11 @@ describe('when it is clicked', () => {
       ReactDOM.render(
         <Router>
           <MuiThemeProvider theme={theme}>
-            <SearchResultRow song={track}/>
+            <SearchResultRow song={track} />
           </MuiThemeProvider>
-        </Router>
-      , div)
+        </Router>,
+        div,
+      )
     })
     const searchResultRow = div.querySelector('#search-result-row')
     ReactTestUtils.act(() => {
@@ -121,5 +122,4 @@ describe('when it is clicked', () => {
     const searchResultRow = div.querySelector('#search-result-row')
     expect(searchResultRow).toBeNull()
   })
-
 })

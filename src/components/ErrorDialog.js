@@ -9,11 +9,11 @@ import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   title: {
-    color: theme.palette.dark.pink
-  }
+    color: theme.palette.dark.pink,
+  },
 })
 
-const ErrorDialog = (props) => {
+const ErrorDialog = props => {
   const { error, errorSubtitle, classes } = props
 
   const [open, setOpen] = useState(true)

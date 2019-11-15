@@ -19,13 +19,13 @@ const styles = theme => ({
     textAlign: 'center',
     testTransform: 'none',
     '&:hover': {
-       background: theme.palette.white,
-       color: theme.palette.dark.purple
-    }
+      background: theme.palette.white,
+      color: theme.palette.dark.purple,
+    },
   },
   text: {
-    textTransform: 'none'
-  }
+    textTransform: 'none',
+  },
 })
 
 const StartButton = props => {

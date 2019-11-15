@@ -19,13 +19,13 @@ const styles = theme => ({
     textAlign: 'center',
     testTransform: 'none',
     '&:hover': {
-       background: theme.palette.white,
-       color: theme.palette.dark.pink
-    }
+      background: theme.palette.white,
+      color: theme.palette.dark.pink,
+    },
   },
   text: {
-    textTransform: 'none'
-  }
+    textTransform: 'none',
+  },
 })
 
 const RecommendationButton = props => {

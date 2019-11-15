@@ -15,19 +15,18 @@ const styles = theme => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     '&:hover': {
-       background: theme.palette.white,
-    }
+      background: theme.palette.white,
+    },
   },
   text: {
     color: theme.palette.dark.purple,
     '&:hover': {
-       color: theme.palette.dark.purple
-    }
-  }
+      color: theme.palette.dark.purple,
+    },
+  },
 })
 
 const SearchResultRow = props => {
-
   const { classes, song } = props
 
   const [clicked, setClicked] = useState(false)
@@ -43,21 +42,20 @@ const SearchResultRow = props => {
           "{song.name}," Artist: {song.artists[0].name}
         </Typography>
         <Typography>
-          {">>> Visualize This Sample >>>"}
+          {'>>> Visualize This Sample >>>'}
         </Typography>
       </Grid>
     )
-  }
-  else {
+  } else {
     return (
-      <Redirect to={{
+      <Redirect
+        to={{
           pathname: `/visualization/${song.id}`,
-          state: { trackObject: song }
+          state: { trackObject: song },
         }}
       />
     )
   }
-
 }
 
 export default withStyles(styles)(SearchResultRow)
