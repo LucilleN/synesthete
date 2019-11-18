@@ -1,5 +1,7 @@
 const apiHost = () => { } // No-op in our mock version.
 
+const getAccessToken = () => Promise.resolve('fake')
+
 const getAudioFeatures = () => Promise.resolve({
     "danceability": 0.441,
     "energy": 0.379,
@@ -1501,4 +1503,5 @@ export {
   searchSongs,
   getAudioFeatures,
   getRecommendation,
+  getAccessToken,
 }
