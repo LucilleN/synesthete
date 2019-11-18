@@ -13,6 +13,7 @@ import Visualization from './Visualization'
 import * as visualizationUtilities from './visualizationUtilities'
 import * as api from '../api'
 
+// eslint-disable quotes
 const track = {
   "album" : {
     "album_type" : "album",
@@ -190,9 +191,9 @@ describe('loading music', () => {
   let div
   beforeEach(async () => {
     sinon.stub(visualizationUtilities, 'loadMusic')
-    sinon.stub(visualizationUtilities, 'performAudioFeaturesQuery')
+    // sinon.stub(visualizationUtilities, 'performAudioFeaturesQuery')
     sinon.stub(api, 'getAudioFeatures')
-    sinon.stub(api, 'getAccessToken')
+    // sinon.stub(api, 'getAccessToken')
 
     api.getAudioFeatures.returns(Promise.resolve(audioFeatures))
 
@@ -210,9 +211,9 @@ describe('loading music', () => {
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(div)
     visualizationUtilities.loadMusic.restore()
-    visualizationUtilities.performAudioFeaturesQuery.restore()
+    // visualizationUtilities.performAudioFeaturesQuery.restore()
     api.getAudioFeatures.restore()
-    api.getAccessToken.restore()
+    // api.getAccessToken.restore()
   })
 
   it('still renders a canvas', () => {
@@ -245,9 +246,9 @@ describe('the recommendation button', () => {
   let div
   beforeEach(async () => {
     sinon.stub(visualizationUtilities, 'loadMusic')
-    sinon.stub(visualizationUtilities, 'performAudioFeaturesQuery')
+    // sinon.stub(visualizationUtilities, 'performAudioFeaturesQuery')
     sinon.stub(api, 'getRecommendation')
-    sinon.stub(api, 'getAccessToken')
+    // sinon.stub(api, 'getAccessToken')
     sinon.stub(api, 'getAudioFeatures')
 
     api.getAudioFeatures.returns(Promise.resolve(audioFeatures))
@@ -273,9 +274,9 @@ describe('the recommendation button', () => {
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(div)
     visualizationUtilities.loadMusic.restore()
-    visualizationUtilities.performAudioFeaturesQuery.restore()
+    // visualizationUtilities.performAudioFeaturesQuery.restore()
     api.getRecommendation.restore()
-    api.getAccessToken.restore()
+    // api.getAccessToken.restore()
     api.getAudioFeatures.restore()
   })
 
