@@ -38,6 +38,7 @@
       "!**/build/**",
       "!**/src/index.js",
       "!**/src/realApi.js",
+      "!**/src/api-real.js",
       "!**/src/registerServiceWorker.js"
     ]
   },
