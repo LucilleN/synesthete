@@ -155,17 +155,35 @@ const recommendation = {
 }
 
 let component
-beforeEach(async () => {
-  await TestRenderer.act(async () => {
-    component = TestRenderer.create(
-      <MuiThemeProvider theme={theme}>
-        <Visualization location={{ state: { trackObject: track } }} />
-      </MuiThemeProvider>,
-    )
-  })
-})
 
 describe('initial state', () => {
+  let div
+  beforeEach(async () => {
+    sinon.stub(visualizationUtilities, 'loadMusic')
+    // sinon.stub(visualizationUtilities, 'performAudioFeaturesQuery')
+    sinon.stub(api, 'getAudioFeatures')
+    // sinon.stub(api, 'getAccessToken')
+
+    api.getAudioFeatures.returns(Promise.resolve(audioFeatures))
+
+    div = document.createElement('div')
+    await TestRenderer.act(async () => {
+      component = TestRenderer.create(
+        <MuiThemeProvider theme={theme}>
+          <Visualization location={{ state: { trackObject: track } }} />
+        </MuiThemeProvider>,
+      )
+    })
+  })
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(div)
+    visualizationUtilities.loadMusic.restore()
+    // visualizationUtilities.performAudioFeaturesQuery.restore()
+    api.getAudioFeatures.restore()
+    // api.getAccessToken.restore()
+  })
+
   it('should have a button to navigate back to search and a button to get a recommendation', () => {
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
