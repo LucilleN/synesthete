@@ -39,6 +39,8 @@
       "!**/src/index.js",
       "!**/src/realApi.js",
       "!**/src/api-real.js",
+      "!**/src/api-mock.js",
+      "!**/src/pages/visualizationUtilities.js",
       "!**/src/registerServiceWorker.js"
     ]
   },
